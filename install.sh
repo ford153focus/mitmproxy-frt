@@ -1,4 +1,4 @@
-choco install visualstudio2022buildtools
+google-chrome 'https://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml' # windows only : grab compiled lxml here
 python -m pip install -r /path/to/requirements.txt
 
 python -m pip install --user pipx

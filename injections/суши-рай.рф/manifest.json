@@ -1,0 +1,13 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/суши-рай.рф/js/sort.js"
+            ],
+            "matches": [
+                "https://xn----8sbwg7ado4b.xn--p1ai/catalog/*/"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/telepizza-russia.ru/js/script.js"
+            ],
+            "matches": [
+                "https://telepizza-russia.ru/catalog/*"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

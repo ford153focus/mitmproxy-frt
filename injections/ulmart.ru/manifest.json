@@ -1,0 +1,15 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/ulmart.ru/js/filter.js",
+                "content_scripts/ulmart.ru/js/loader.js",
+                "content_scripts/ulmart.ru/js/param_setter.js"
+            ],
+            "matches": [
+                "*://discount.ulmart.ru/*"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

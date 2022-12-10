@@ -1,0 +1,14 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/wikia.com/js/adblock.js"
+            ],
+            "matches": [
+                "http://*.wikia.com/*",
+                "https://*.wikia.com/*"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+#monkey15 {
+    /*position: relative;*/
+    /*left: -3cm;*/
+}
+
+#monkey15 li {
+    display: inline-block;
+}
+
+#monkey15 li.separator {
+    width: 1cm;
+}
+
+#monkey15 li a {
+    background-color: #ccc;
+    padding: 1.5mm;
+    border-radius: 3mm;
+    cursor: pointer;
+}

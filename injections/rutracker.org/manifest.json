@@ -1,0 +1,13 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/rutracker.org/js/results_filter.js"
+            ],
+            "matches": [
+                "https://rutracker.org/forum/tracker.php*"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

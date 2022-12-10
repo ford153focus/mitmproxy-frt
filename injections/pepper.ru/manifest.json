@@ -1,0 +1,13 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/pepper.ru/js/filter_and_sort.js"
+            ],
+            "matches": [
+                "https://www.pepper.ru/groups/*"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

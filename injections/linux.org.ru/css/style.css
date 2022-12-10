@@ -1,0 +1,21 @@
+textarea#msg {
+    padding: 1mm;
+    width: 95% !important;
+}
+
+input#title {
+    width: 95% !important;
+}
+
+ul.msg_toolbar {
+    display: block;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+ul.msg_toolbar li {
+    display: inline-block;
+    font: bold 12px 'Open Sans', Tahoma, Arial, sans-serif;
+    margin: 0 !important;
+    padding: 0;
+}

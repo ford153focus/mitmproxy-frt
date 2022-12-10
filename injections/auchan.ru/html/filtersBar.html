@@ -1,0 +1,27 @@
+<ul id="monkey15">
+    <li><a onclick="Monkey15.sort();">Sort</a></li>
+    <li class="separator"></li>
+    <li id="m15-discount-from">
+        <span class="label">%: &gt;</span>
+        <span class="value">0</span>
+        <label>
+            <input type="range" min="0" max="100" value="0" step="5" onchange="Monkey15.filter();">
+        </label>
+    </li>
+    <li class="separator"></li>
+    <li id="m15-price-from">
+        <span class="label">$: &gt;</span>
+        <span class="value">0</span>
+        <label>
+            <input type="range" min="0" max="550" value="0" step="50" onchange="Monkey15.filter();">
+        </label>
+    </li>
+    <li class="separator"></li>
+    <li id="m15-price-to">
+        <span class="label">$: &lt;</span>
+        <span class="value">550</span>
+        <label>
+            <input type="range" min="0" max="550" value="550" step="50" onchange="Monkey15.filter();">
+        </label>
+    </li>
+</ul>

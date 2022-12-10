@@ -1,0 +1,12 @@
+.hide-this-ad {
+    cursor: pointer;
+    position: relative;
+    left: 1010px;
+    top: -220px;
+}
+
+button#remove_broken {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}

@@ -1,0 +1,13 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/motor.ru/js/adblock.js"
+            ],
+            "matches": [
+                "https://motor.ru/*"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/perekrestok.ru/js/sort.js"
+            ],
+            "matches": [
+                "https://www.perekrestok.ru/catalog/*",
+                "https://www.perekrestok.ru/promos/*"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

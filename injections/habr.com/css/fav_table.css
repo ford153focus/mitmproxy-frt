@@ -1,0 +1,38 @@
+#fav_table td, #fav_table th {
+  min-width: 15ch !important;
+  text-align: center !important;
+}
+#fav_table td a, #fav_table th a {
+  color: #6f7577 !important;
+}
+#fav_table td.author a.avatar img {
+  width: 1.5cm;
+}
+#fav_table td.author a.alias {
+  font-weight: bold;
+  font-size: smaller;
+}
+#fav_table td.author a.real_name {
+  font-style: italic;
+  font-size: xx-small;
+}
+#fav_table td.date {
+  font-size: xx-small;
+}
+#fav_table td.title p.intro_text {
+  font-size: xx-small;
+}
+#fav_table td.hubs ul {
+  list-style: none inside;
+  font-size: x-small;
+}
+#fav_table td.stats {
+  font-size: x-small;
+}
+
+.layout__cell {
+  min-width: auto !important;
+  max-width: initial !important;
+}
+
+/*# sourceMappingURL=fav_table.css.map */

@@ -1,0 +1,14 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/soundcloud.com/js/expand_all.js"
+            ],
+            "matches": [
+                "https://soundcloud.com/*/sets",
+                "https://soundcloud.com/*/albums"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

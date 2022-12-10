@@ -1,0 +1,23 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/lenta.com/js/sort.js"
+            ],
+            "matches": [
+                "https://lenta.com/catalog/*",
+                "https://lenta.com/search/?searchText=*"
+            ],
+            "run_at": "document_idle"
+        },
+        {
+            "js": [
+                "content_scripts/lenta.com/js/print_cart.js"
+            ],
+            "matches": [
+                "https://lenta.com/order/cart/"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

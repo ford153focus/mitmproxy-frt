@@ -1,0 +1,48 @@
+{
+    content_scripts: [
+        {
+            css: [
+                "content_scripts/linux.org.ru/css/style.css"
+            ],
+            js: [
+                "content_scripts/linux.org.ru/js/shared_lib.js"
+            ],
+            matches: [
+                "https://www.linux.org.ru/*"
+            ],
+            run_at: "document_idle"
+        },
+        {
+            js: [
+                "content_scripts/linux.org.ru/js/favs_utils.js"
+            ],
+            matches: [
+                "https://www.linux.org.ru/people/*/tracked",
+                "https://www.linux.org.ru/people/*/favs"
+            ],
+            run_at: "document_idle"
+        },
+        {
+            js: [
+                "content_scripts/linux.org.ru/js/tracker_utils.js"
+            ],
+            matches: [
+                "https://www.linux.org.ru/tracker/"
+            ],
+            run_at: "document_idle"
+        },
+        {
+            js: [
+                "content_scripts/linux.org.ru/js/msg_toolbar.js",
+                "content_scripts/linux.org.ru/js/topic_utils.js",
+            ],
+            matches: [
+                "https://www.linux.org.ru/forum/*/*",
+                "https://www.linux.org.ru/gallery/*/*",
+                "https://www.linux.org.ru/news/*/*",
+                "https://www.linux.org.ru/polls/polls/*"
+            ],
+            run_at: "document_idle"
+        }
+    ]
+}

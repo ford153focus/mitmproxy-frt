@@ -1,0 +1,22 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/hh.ru/js/filter.js"
+            ],
+            "matches": [
+                "https://spb.hh.ru/search/vacancy*"
+            ],
+            "run_at": "document_idle"
+        },
+        {
+            "js": [
+                "content_scripts/hh.ru/js/expander.js"
+            ],
+            "matches": [
+                "https://spb.hh.ru/employer/*"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

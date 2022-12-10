@@ -1,0 +1,13 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/tomsguide.com/js/adblock.js"
+            ],
+            "matches": [
+                "https://www.tomsguide.com/*"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

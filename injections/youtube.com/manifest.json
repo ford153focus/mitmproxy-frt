@@ -1,0 +1,16 @@
+{
+    "content_scripts": [
+        {
+            "css": [
+                "content_scripts/youtube.com/css/styles.css"
+            ],
+            "js": [
+                "content_scripts/youtube.com/js/sort.js"
+            ],
+            "matches": [
+                "https://www.youtube.com/channel/*/videos"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

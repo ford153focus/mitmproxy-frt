@@ -1,0 +1,53 @@
+#fav_table {
+    td, th {
+        min-width: 15ch !important;
+        text-align: center !important;
+
+        a {
+            color: #6f7577 !important;
+        }
+    }
+
+    td.author {
+        a.avatar img {
+            width: 1.5cm;
+        }
+
+        a.alias {
+            font-weight: bold;
+            font-size: smaller;
+        }
+
+        a.real_name {
+            font-style: italic;
+            font-size: xx-small;
+        }
+    }
+
+    td.date {
+        font-size: xx-small;
+    }
+
+    td.title {
+        p.intro_text {
+            font-size: xx-small;
+        }
+    }
+
+    td.hubs {
+        ul {
+            list-style: none inside;
+            font-size: x-small;
+        }
+    }
+
+
+    td.stats {
+        font-size: x-small;
+    }
+}
+
+.layout__cell {
+    min-width: auto !important;
+    max-width: initial !important;
+}

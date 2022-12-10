@@ -1,0 +1,7 @@
+div#right-space {
+    display: none !important;
+}
+
+div#workspace {
+    right: 0 !important;
+}

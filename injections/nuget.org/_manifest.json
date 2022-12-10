@@ -1,0 +1,13 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/nuget.org/js/sort.js"
+            ],
+            "matches": [
+                "https://www.nuget.org/packages?*"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

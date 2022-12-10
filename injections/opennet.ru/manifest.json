@@ -1,0 +1,13 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/opennet.ru/js/no_comments.js"
+            ],
+            "matches": [
+                "*://www.opennet.ru/opennews/art.shtml?num=*"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

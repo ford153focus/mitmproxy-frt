@@ -1,0 +1,20 @@
+#comments {
+    /*display: none;*/
+    width: 1px;
+    height: 1px;
+}
+
+#comments-switcher {
+    border-radius: 0 8px 8px 0 !important;
+    border: 1px solid black !important;
+    color: black !important;
+    cursor: pointer !important;
+    font-size: 5mm !important;
+    height: auto !important;
+    left: -3px !important;
+    margin: 0 !important;
+    padding: 1mm !important;
+    position: fixed !important;
+    top: 50% !important;
+    width: auto !important;
+}

@@ -1,0 +1,22 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/phoronix.com/js/adblock.js"
+            ],
+            "matches": [
+                "https://www.phoronix.com/*"
+            ],
+            "run_at": "document_idle"
+        },
+        {
+            "js": [
+                "content_scripts/phoronix.com/js/hotkeys.js"
+            ],
+            "matches": [
+                "https://www.phoronix.com/scan.php?page=article&*"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+  "content_scripts": [
+    {
+      "css": [
+        "content_scripts/joyreactor.cc/css/comment_text_tools.css",
+        "content_scripts/joyreactor.cc/css/rate4comments.css"
+      ],
+      "js": [
+        "content_scripts/joyreactor.cc/js/rate4comments.js",
+        "content_scripts/joyreactor.cc/js/comment_text_tools.js",
+        "content_scripts/joyreactor.cc/js/play_shortcut.js",
+        "content_scripts/joyreactor.cc/js/unhide_comments.js"
+      ],
+      "matches": [
+        "*://joyreactor.cc/*",
+        "*://*.reactor.cc/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+      "web_accessible_resources/joyreactor.cc/comment_text_tools.html"
+  ]
+}

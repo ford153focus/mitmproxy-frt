@@ -1,0 +1,23 @@
+{
+    "content_scripts": [
+        {
+            "js": [
+                "content_scripts/okeydostavka.ru/js/Sorter.js"
+            ],
+            "matches": [
+                "https://www.okeydostavka.ru/*/miaso-ptitsa-kolbasy-16551-20/*",
+                "https://www.okeydostavka.ru/*/molochnye-produkty-syry-iaitso-16100-20/*",
+                "https://www.okeydostavka.ru/*/konditerskie-izdeliia-khleb-16052-20/*",
+                "https://www.okeydostavka.ru/*/ovoshchi-frukty-griby-iagody-16568-20/*",
+                "https://www.okeydostavka.ru/*/bakaleia-i-konservatsiia-15063-20/*",
+                "https://www.okeydostavka.ru/*/%D0%B0%D0%BB%D0%BA%D0%BE%D0%B3%D0%BE%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BD%D0%B0%D0%BF%D0%B8%D1%82%D0%BA%D0%B8/*",
+                "https://www.okeydostavka.ru/*/ryba-moreprodukty-i-ikra-16572-20/*",
+                "https://www.okeydostavka.ru/*/zamorozka-gotovaia-kulinariia-15104-20/*",
+                "https://www.okeydostavka.ru/*/goriachie-i-kholodnye-napitki-16562-20/*",
+                "https://www.okeydostavka.ru/*/rastitel-nye-masla-sousy-i-pripravy-16598-20/*",
+                "https://www.okeydostavka.ru/*/tovary-dlia-zhivotnykh-16622-20/*"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

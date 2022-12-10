@@ -6,6 +6,7 @@ class Catalog {
     static async loadMore() {
         const loadMoreInterval = setInterval(() => {
             let addMoreButton = document.querySelector('button.add-more-btn');
+
             if (addMoreButton === null) {
                 clearInterval(loadMoreInterval);
                 Catalog.removeMinorDiscounts();
@@ -14,10 +15,9 @@ class Catalog {
                 Catalog.drawCartButton();
                 return;
             }
+
             addMoreButton.click();
         }, 1530);
-
-
     }
 
     static removeMinorDiscounts() {

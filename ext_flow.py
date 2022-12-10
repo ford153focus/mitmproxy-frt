@@ -10,9 +10,10 @@ class ExtFlow:
     def commit_changes(self) -> None:
         self.origin.response.content = self.soup.prettify().encode('UTF-8')
 
-    def inject_script(self, path, local=True) -> None:
+    def inject_script(self, path, local=True, defer=True, asynchronous=False) -> None:
         script_tag = self.soup.new_tag("script")
-        script_tag.attrs["defer"] = "defer"
+        if asynchronous: script_tag.attrs["async"] = "async"
+        if defer: script_tag.attrs["defer"] = "defer"
         if local: path = f"https://example.com/___frt/{path}"
         script_tag.attrs["src"] = path
         self.soup.html.head.append(script_tag)
@@ -42,4 +43,4 @@ class ExtFlow:
 
         if self.is_html():
             self.soup = BeautifulSoup(flow.response.content, 'lxml')
-            self.inject_script("injections/___all_urls/js/utils.js")
+            self.inject_script("injections/_all_urls/js/utils.js", defer=False, asynchronous=True)

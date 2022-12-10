@@ -1,6 +1,6 @@
-document.getElementById('sort-menu').insertAdjacentHTML('beforeend', '<a id="sort-by-duration">по продолжительности</a>');
+if (!window.___frt) window.___frt = {};
 
-document.getElementById('sort-menu').addEventListener('click', () => {
+window.___frt.sortByDuration = () => {
     //noinspection CssInvalidHtmlTagReference
     let items = document.querySelectorAll('ytd-grid-video-renderer');
 
@@ -26,4 +26,4 @@ document.getElementById('sort-menu').addEventListener('click', () => {
         .map((item) => {
             items[0].parentElement.appendChild(item);
         });
-});
+};

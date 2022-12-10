@@ -106,7 +106,79 @@ class Starter:
                 self.ext_flow.inject_script("injections/dixy.ru/js/catalog.js")
                 self.ext_flow.commit_changes()
 
+        if flow.request.host.endswith("fandom.com"):
+            if not self.ext_flow.is_html(): return
+            if flow.request.host.startswith("genshin-impact"):
+                if flow.request.path == "/wiki/Event":
+                    self.ext_flow.inject_script("injections/fandom.com/genshin-impact/event_list.js")
+                    self.ext_flow.commit_changes()
+                if flow.request.path == "/wiki/World_Quest/List":
+                    self.ext_flow.inject_script("injections/fandom.com/genshin-impact/quest_list.js")
+                    self.ext_flow.commit_changes()
+
+        if flow.request.host.endswith("fastpic.org"):
+            if not self.ext_flow.is_html(): return
+            self.ext_flow.inject_script("injections/fastpic.org/adblock.js")
+            self.ext_flow.commit_changes()
+
+        if flow.request.host.endswith("hh.ru"):
+            if not self.ext_flow.is_html(): return
+            if flow.request.path == "/applicant/resumes/edit/experience":
+                self.ext_flow.inject_script("injections/hh.ru/js/fix_height.js")
+                self.ext_flow.commit_changes()
+
+        if flow.request.host.endswith("lenta.com"):
+            if not self.ext_flow.is_html(): return
+            if flow.request.path.startswith("/catalog") or flow.request.path.startswith("/search"):
+                self.ext_flow.inject_script("injections/lenta.com/js/sort.js")
+                self.ext_flow.commit_changes()
+            if flow.request.path.startswith("/order/cart"):
+                self.ext_flow.inject_script("injections/lenta.com/js/print_cart.js")
+                self.ext_flow.commit_changes()
+
+        if flow.request.host.endswith("motor.ru"):
+            if self.ext_flow.is_html():
+                self.ext_flow.inject_script("injections/motor.ru/js/adblock.js")
+                self.ext_flow.commit_changes()
+
+        if flow.request.pretty_url.startswith("https://www.opennet.ru/opennews/art.shtml?num="):
+            if self.ext_flow.is_html():
+                self.ext_flow.inject_script("injections/opennet.ru/js/no_comments.js")
+                self.ext_flow.commit_changes()
+
         if flow.request.pretty_url == 'https://openwrt.org/toh/views/toh_extended_all':
             if self.ext_flow.is_html():
                 OpenWRT.response(self.ext_flow)
                 self.ext_flow.commit_changes()
+
+        if flow.request.pretty_url.startswith("https://pixlr.com/editor/"):
+            if self.ext_flow.is_html():
+                self.ext_flow.inject_script("injections/pixlr.com/js/adblock.js")
+                self.ext_flow.inject_stylesheet("injections/pixlr.com/css/styles.css")
+                self.ext_flow.commit_changes()
+
+        if flow.request.host.endswith("twitch.tv"):
+            if self.ext_flow.is_html():
+                self.ext_flow.inject_script("injections/twitch.tv/js/script.js")
+                self.ext_flow.inject_stylesheet("injections/twitch.tv/css/directory.css")
+                self.ext_flow.commit_changes()
+
+        if flow.request.host.endswith("wikia.com"):
+            if self.ext_flow.is_html():
+                for el in self.ext_flow.soup.select("#INCONTENT_WRAPPER"): el.decompose()
+                for el in self.ext_flow.soup.select("#WikiaFooter"): el.decompose()
+                for el in self.ext_flow.soup.select("#WikiaRailWrapper"): el.decompose()
+                for el in self.ext_flow.soup.select("div[id^='google_ads_iframe_']"): el.decompose()
+                self.ext_flow.commit_changes()
+
+        if flow.request.host.endswith("yandex.com"):
+            if flow.request.host == "market.yandex.ru":
+                if self.ext_flow.is_html():
+                    self.ext_flow.inject_script("injections/market.yandex.ru/js/script.js")
+                    self.ext_flow.commit_changes()
+
+        if flow.request.host.endswith("youtube.com"):
+            if flow.request.path.endswith("/videos"):
+                if self.ext_flow.is_html():
+                    self.ext_flow.inject_script("injections/youtube.com/js/sort.js")
+                    self.ext_flow.commit_changes()

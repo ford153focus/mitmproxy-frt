@@ -1,4 +1,5 @@
 from concurrent.futures import ThreadPoolExecutor
+
 import bs4
 
 from ext_flow import ExtFlow
@@ -7,20 +8,17 @@ from ext_flow import ExtFlow
 class OpenWRT:
     @staticmethod
     def hide_ripe(row: bs4.Tag) -> None:
+        cell_nums = [6, 8, 12, 14, 15, 21]
+
         targets = []
 
-        targets.append(row.select_one(f"td:nth-child(6)"))
-        targets.append(row.select_one(f"th:nth-child(6)"))
-
-        targets.append(row.select_one(f"td:nth-child(8)"))
-        targets.append(row.select_one(f"th:nth-child(8)"))
-
-        targets.append(row.select_one(f"td:nth-child(12)"))
-        targets.append(row.select_one(f"th:nth-child(12)"))
+        for num in cell_nums:
+            targets.append(row.select_one(f"td:nth-child({num})"))
+            targets.append(row.select_one(f"th:nth-child({num})"))
 
         for target in targets:
-            if target is None: continue
-            target.decompose()
+            if target is not None:
+                target.decompose()
 
     @staticmethod
     def filter(row: bs4.Tag) -> None:
@@ -43,24 +41,31 @@ class OpenWRT:
                 row.decompose()
 
         # delete devices with unknown gbit ports amount
-        # 3+ gbit ports is required
+        # 4+ gbit ports is required
         target = row.find('td', {'class': 'ethernet_gbit_ports'})
         if target is not None:
             if not target.text.isdigit():
                 row.decompose()
-            elif int(target.text) < 3:
+            elif int(target.text) < 4:
                 row.decompose()
 
         # delete devices with unknown usb ports amount
-        target = row.find('td', {'class': 'usb_ports'})
-        if target is not None:
-            if target.text.strip() == "":
-                row.decompose()
+        # target = row.find('td', {'class': 'usb_ports'})
+        # if target is not None:
+        #     if target.text.strip() == "-":
+        #         row.decompose()
 
         # no broadcom
         target = row.find('td', {'class': 'cpu'})
         if target is not None:
             if target.text.lower().find('broadcom') > -1:
+                row.decompose()
+
+        # Wi-Fi routers only
+        target = row.find('td', {'class': 'device_type'})
+        if target is not None:
+            text = target.text.lower().strip()
+            if text.find('wifi') == -1 or text.find('router') == -1:
                 row.decompose()
 
     @staticmethod
@@ -70,3 +75,5 @@ class OpenWRT:
         with ThreadPoolExecutor() as executor:
             executor.map(OpenWRT.filter, rows, timeout=30)
             executor.map(OpenWRT.hide_ripe, rows, timeout=30)
+
+        ext_flow.inject_script("injections/openwrt.org/sort.js")

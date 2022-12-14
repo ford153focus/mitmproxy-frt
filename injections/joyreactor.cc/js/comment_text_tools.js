@@ -28,27 +28,19 @@ class FrtJrCtt {
     }
 
     constructor() {
-        let cttElement = document.querySelector('ul.comment_text_tools');
-        this.markup = cttElement.outerHTML;
-        cttElement.remove();
+        this.markup = _frt.fetchSync('https://example.com/___frt/injections/joyreactor.cc/html/comment_text_tools.html');
     }
 }
 
 setTimeout(async () => {
-    if (!window.___frt) {
-        window.___frt = {};
-    }
-    if (!window.___frt.jr) {
-        window.___frt.jr = {};
-    }
-
-    window.___frt.jr.ctt = new FrtJrCtt();
+    if (!window.___frt) window.___frt = {};
+    window.___frt.ctt = new FrtJrCtt();
 }, 5);
 
 setInterval(async () => {
     for (let textarea of document.querySelectorAll('textarea.comment_text')) {
         if (textarea.previousElementSibling.classList.contains('comment_text_tools')) continue; //if toolbar already present...
-        textarea.insertAdjacentHTML('beforebegin', window.___frt.jr.ctt.markup); //insert toolbar markup
+        textarea.insertAdjacentHTML('beforebegin', window.___frt.ctt.markup); //insert toolbar markup
         textarea.onkeyup = FrtJrCtt.fixHeight;
     }
 }, 1530);

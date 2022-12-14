@@ -2,28 +2,19 @@
 
 class ReactorUtils {
     /**
-     * @usage window.___frt.jr.utils.rateAllComments('ford153focus', 'minus')
-     * @usage window.___frt.jr.utils.rateAllComments('ford153focus', 'plus')
+     * @usage window.___frt.utils.rateAllComments('ford153focus', 'minus')
+     * @usage window.___frt.utils.rateAllComments('ford153focus', 'plus')
      */
-    rateAllComments(target, direction) {
-        /** @var {NodeList} comments */
-        let comments = document.querySelectorAll('div[id^="comment_txt_"]'); // all comments on page
-
-        // get comments of target
-        /** @var {HTMLElement[]} targetComments */
-        let targetComments = Array.from(comments).filter((comment) => {
-            return comment.querySelector('a[href^="/user/"]')?.innerText === target;
-        });
-
-        let i = 0;
-
-        let interval1 = setInterval(() => {
-            console.log(targetComments[i].querySelector('div[id^="comment_txt_"] > *').innerText); // print to console text of comment
-            targetComments[i].querySelector(`.vote-${direction}`)?.click();
-            i++; // bump counter
-            if (i === targetComments.length) clearInterval(interval1); // if it was last comment - exit from cycle
-        }, 1234);
+    static rateAllComments(target, direction) {
+        let i = 1;
+        const comments = document.querySelectorAll('div[id^="comment_txt_"]');
+        for (const comment of comments) {
+            if (comment.querySelector('a[href^="/user/"]')?.innerText !== target) continue; // check username
+            setTimeout(() => {
+                console.log(comment.querySelector('div[id^="comment_txt_"] > *').innerText); // print to console text of comment
+                comment.querySelector(`.vote-${direction}`)?.click();
+            }, 333*i); // delayed voting to avoid ddos protection trigger
+            i++;
+        }
     }
 }
-
-if (!window.___frt) window.___frt = new ReactorUtils();

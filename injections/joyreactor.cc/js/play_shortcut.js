@@ -1,6 +1,6 @@
 // noinspection UnusedCatchParameterJS
 
-class FrtJrPlayShortCut {
+class PlayShortcut {
     /** @member {HTMLElement} */
     post;
 
@@ -70,6 +70,8 @@ class FrtJrPlayShortCut {
     }
 
     constructor() {
+        window._frt.injectScriptFile('https://www.youtube.com/iframe_api');
+
         /** Catch all key presses */
         document.onkeyup = this.keyPressListener;
 
@@ -85,8 +87,5 @@ class FrtJrPlayShortCut {
     }
 }
 
-window._frt.injectScriptFile('https://www.youtube.com/iframe_api');
-
 if (!window.___frt) window.___frt = {};
-if (!window.___frt.jr) window.___frt.jr = {};
-window.___frt.jr.playShortCut = new FrtJrPlayShortCut();
+window.___frt.playShortcut = new PlayShortcut();

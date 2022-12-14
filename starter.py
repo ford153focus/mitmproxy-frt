@@ -1,3 +1,5 @@
+import fnmatch
+
 from mitmproxy import http
 
 from ext_flow import ExtFlow
@@ -29,7 +31,11 @@ class Starter:
                 flow.response = http.Response.make(
                     200,  # (optional) status code
                     file_content.encode(),  # (optional) content
-                    {"Content-Type": content_type},  # (optional) headers
+                    {
+                        "Content-Type": content_type,
+                        "Access-Control-Allow-Origin": "*",
+                        "cross-origin-resource-policy": "cross-origin",
+                    },  # (optional) headers
                 )
 
         if flow.request.host in self.black_list_hosts:
@@ -119,6 +125,30 @@ class Starter:
         if flow.request.host.endswith("fastpic.org"):
             if not self.ext_flow.is_html(): return
             self.ext_flow.inject_script("injections/fastpic.org/adblock.js")
+            self.ext_flow.commit_changes()
+
+        if flow.request.host.endswith("reactor.cc"):
+            if not self.ext_flow.is_html(): return
+            self.ext_flow.inject_font_awesome()
+
+            self.ext_flow.inject_stylesheet("injections/joyreactor.cc/css/comment_text_tools.css")
+            self.ext_flow.inject_stylesheet("injections/joyreactor.cc/css/rate4comments.css")
+
+            self.ext_flow.inject_script("injections/joyreactor.cc/js/comment_text_tools.js")
+            self.ext_flow.inject_script("injections/joyreactor.cc/js/play_shortcut.js")
+            self.ext_flow.inject_script("injections/joyreactor.cc/js/rate4comments.js")
+            self.ext_flow.inject_script("injections/joyreactor.cc/js/script.js")
+            self.ext_flow.inject_script("injections/joyreactor.cc/js/unhide_comments.js")
+            self.ext_flow.commit_changes()
+
+        if flow.request.host.endswith("habr.com"):
+            if not self.ext_flow.is_html(): return
+            if flow.request.path.endswith("/favorites/") or flow.request.path.endswith("/favorites/posts/"):
+                self.ext_flow.inject_stylesheet("injections/habr.com/css/fav_table.css")
+                self.ext_flow.inject_script("injections/habr.com/js/fav_table.js")
+                self.ext_flow.inject_hypertext("injections/habr.com/html/fav_table.html")
+            if fnmatch.fnmatch(flow.request.path, "/*/post/*/") or fnmatch.fnmatch(flow.request.path, "/*/blog/*/"):
+                self.ext_flow.inject_script("injections/habr.com/js/no_comments.js")
             self.ext_flow.commit_changes()
 
         if flow.request.host.endswith("hh.ru"):

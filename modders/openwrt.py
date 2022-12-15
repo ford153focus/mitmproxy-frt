@@ -76,4 +76,4 @@ class OpenWRT:
             executor.map(OpenWRT.filter, rows, timeout=30)
             executor.map(OpenWRT.hide_ripe, rows, timeout=30)
 
-        ext_flow.inject_script("injections/openwrt.org/sort.js")
+        ext_flow.inject_script("injections/openwrt.org/js/sort.js")

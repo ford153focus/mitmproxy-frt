@@ -10,4 +10,5 @@ certutil -addstore root mitmproxy-ca-cert.cer
 curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts > hosts.txt
 
 cd ___project
-mitmproxy --scripts main.py --listen-host 0.0.0.0 --listen-port 15080
+mitmproxy --scripts main.py --listen-host 0.0.0.0 --listen-port 51080 # prod
+python3 run.py # dev

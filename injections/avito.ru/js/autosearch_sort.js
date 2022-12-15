@@ -1,5 +1,4 @@
-let items = document.querySelectorAll('[data-marker="favorite-search"]');
-items = Array.from(items);
+let items = document.querySelectorAll('[data-marker="favorite-search"]').frtToArray();
 
 items
     .sort((item1, item2) => {

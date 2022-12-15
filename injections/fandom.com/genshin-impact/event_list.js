@@ -8,10 +8,12 @@ for (let row of table.querySelectorAll('tr'))
         {
             row.style.backgroundColor = 'darkred';
         }
+
         if (cell.innerText === 'In-Game, Battle Pass')
         {
             row.style.backgroundColor = 'darkred';
         }
+        
         if (cell.innerText === 'In-Game, Test Run')
         {
             row.style.backgroundColor = 'darkorange';

@@ -61,12 +61,11 @@ class PlayShortcut {
     }
 
     keyPressListener(event) {
-        if (event.code === 'KeyP') {
-            let obj = window.___frt.jr.playShortCut; // coz 'this' is linked to document here
-            obj.post = document.querySelector('.postContainer .article.post-normal.active');
-            let status = obj.post.getAttribute('data-playing');
-            status === 'false' ? obj.play() : obj.stop();
-        }
+        if (event.code !== 'KeyP') return;
+        let obj = window.___frt.jr.playShortCut; // coz 'this' is linked to document here
+        obj.post = document.querySelector('.postContainer .article.post-normal.active');
+        let status = obj.post.getAttribute('data-playing');
+        status === 'false' ? obj.play() : obj.stop();
     }
 
     constructor() {

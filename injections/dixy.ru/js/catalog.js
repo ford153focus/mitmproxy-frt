@@ -1,7 +1,9 @@
 String.prototype.frtRemoveSpaces = function () {
-    return this.trim()
-               .frtFixSpaces()
-               .replaceAll(' ', '');
+    let t1 = this.trim();
+    let t2 = t1.frtFixSpaces();
+    let t3 = t2.replaceAll(' ', '');
+
+    return t3;
 };
 
 class DixyCatalogItem {

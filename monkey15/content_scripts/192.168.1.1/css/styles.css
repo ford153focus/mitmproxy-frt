@@ -1,0 +1,7 @@
+form[action='/cgi-bin/luci/admin/network/dhcp'] div.td[data-name='ip'] {
+    min-width: 123px;
+}
+
+form[action='/cgi-bin/luci/admin/network/dhcp'] div.td[data-name='mac'] {
+    min-width: 300px;
+}

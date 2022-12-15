@@ -1,0 +1,24 @@
+{
+    "name": "monkey15",
+    "version": "1.0.0",
+    "license": "LGPL-3.0-or-later",
+    "description": "Make the web better",
+    "repository": {
+        "url": "https://github.com/ford153focus/monkey15"
+    },
+    "dependencies": {
+        "urlpattern-polyfill": "^6.0.2"
+    },
+    "devDependencies": {
+        "@types/chrome": "^0.0.203",
+        "@types/dom4": "^2.0.2",
+        "@types/firefox": "^0.0.31",
+        "@types/firefox-webext-browser": "^94.0.1",
+        "@types/node": "^18.11.9",
+        "@types/websql": "^0.0.27",
+        "eslint": "^8.28.0",
+        "json5": "^2.2.1",
+        "scss": "^0.2.4",
+        "web-ext": "^7.4.0"
+    }
+}

@@ -39,11 +39,10 @@ class Starter:
                 )
 
         if flow.request.host in self.black_list_hosts:
-            flow.response = http.Response.make(
-                200,  # (optional) status code
-                b"",  # (optional) content
-                {"Content-Type": "text/plain; charset=utf-8"},  # (optional) headers
-            )
+            ExtFlow.empty_answer(flow)
+
+        if flow.request.host.endswith("nitropay.com"):
+            ExtFlow.empty_answer(flow)
 
     def response(self, flow: http.HTTPFlow) -> None:
         if flow.response.status_code != 200: return  # process HTTP 200 only
@@ -127,7 +126,6 @@ class Starter:
             self.ext_flow.inject_script("injections/fastpic.org/adblock.js")
             self.ext_flow.commit_changes()
         
-        # genshin.honeyhunterworld.com
         if flow.request.host == "genshin.honeyhunterworld.com":
             if not self.ext_flow.is_html(): return
             self.ext_flow.soup.find('div', {'id': 'genshin-video-player'}).decompose()

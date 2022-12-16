@@ -126,6 +126,12 @@ class Starter:
             if not self.ext_flow.is_html(): return
             self.ext_flow.inject_script("injections/fastpic.org/adblock.js")
             self.ext_flow.commit_changes()
+        
+        # genshin.honeyhunterworld.com
+        if flow.request.host == "genshin.honeyhunterworld.com":
+            if not self.ext_flow.is_html(): return
+            self.ext_flow.soup.find('div', {'id': 'genshin-video-player'}).decompose()
+            self.ext_flow.commit_changes()
 
         if flow.request.host.endswith("habr.com"):
             if not self.ext_flow.is_html(): return

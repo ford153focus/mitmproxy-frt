@@ -120,6 +120,9 @@ class Starter:
                 if flow.request.path == "/wiki/World_Quest/List":
                     self.ext_flow.inject_script("injections/fandom.com/genshin-impact/quest_list.js")
                     self.ext_flow.commit_changes()
+                if flow.request.path == "/wiki/Hidden_Exploration_Objective":
+                    self.ext_flow.inject_script("injections/fandom.com/genshin-impact/hidden_exploration_objective.js")
+                    self.ext_flow.commit_changes()
 
         if flow.request.host.endswith("fastpic.org"):
             if not self.ext_flow.is_html(): return

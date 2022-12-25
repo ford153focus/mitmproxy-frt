@@ -7,14 +7,21 @@ from modders.openwrt import OpenWRT
 
 
 class Starter:
-    black_list_hosts = []
+    hosts_black_list = []
+    hosts_black_list_2 = []
+    hosts_white_list = []
     ext_flow: ExtFlow = None
 
     def __init__(self):
-        for line in open('hosts.txt').read().split('\n'):
+        for line in open('hosts_black_list.txt').read().split('\n'):
+            if line.startswith('#'): continue
             if not line.startswith('0.0.0.0 '): continue
             rule = line.split(' ')
-            self.black_list_hosts.append(rule[1])
+            self.hosts_black_list.append(rule[1])
+        for line in open('hosts_black_list_2.txt').read().split('\n'):
+            self.hosts_black_list_2.append(line)
+        for line in open('hosts_white_list.txt').read().split('\n'):
+            self.hosts_white_list.append(line)
 
     def request(self, flow: http.HTTPFlow) -> None:
         if flow.request.host == 'example.com':
@@ -38,11 +45,12 @@ class Starter:
                     },  # (optional) headers
                 )
 
-        if flow.request.host in self.black_list_hosts:
-            ExtFlow.empty_answer(flow)
+        if flow.request.host in self.hosts_black_list:
+            if any(flow.request.host.endswith(line) for line in self.hosts_white_list) == False:
+                ExtFlow.empty_answer(flow)
 
-        if flow.request.host.endswith("nitropay.com"):
-            ExtFlow.empty_answer(flow)
+        if any(flow.request.host.endswith(line) for line in self.hosts_black_list_2):
+                ExtFlow.empty_answer(flow)
 
     def response(self, flow: http.HTTPFlow) -> None:
         if flow.response.status_code != 200: return  # process HTTP 200 only

@@ -10,7 +10,7 @@ class ExtFlow:
     @staticmethod
     def empty_answer(flow) -> None:
         flow.response = http.Response.make(
-            200,  # (optional) status code
+            403,  # (optional) status code
             b"",  # (optional) content
             {"Content-Type": "text/plain; charset=utf-8"},  # (optional) headers
         )

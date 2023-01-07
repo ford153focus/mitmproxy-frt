@@ -116,11 +116,13 @@ class AvitoFilterUtility {
     }
 }
 
-(() => {
+setTimeout(() => {
     let button = document.createElement('button');
     button.type = 'button';
     button.id = 'remove_broken';
     button.innerText = 'Remove broken';
-    button.onclick = () => { window._frt.avito = new AvitoFilterUtility(); };
+    button.onclick = () => { window.___frt.filter = new AvitoFilterUtility(); };
     document.body.insertAdjacentElement('beforeend', button);
-})();
+}, 531);
+
+if (!window.___frt) window.___frt = {};

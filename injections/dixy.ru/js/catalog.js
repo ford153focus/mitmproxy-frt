@@ -87,7 +87,7 @@ class DixyCatalogCart {
 }
 
 class DixyCatalog {
-    loadMore() {
+    static loadMore() {
         let interval = setInterval(() => {
             let st = document.documentElement.scrollTop;
             let btn = document.querySelector('a.btn.view-more');
@@ -100,15 +100,16 @@ class DixyCatalog {
             let discount = items[items.length-1].querySelector('div.dixyCatalogItemPrice__discount').innerText.replaceAll(/\s/g,'');
             // noinspection DynamicallyGeneratedCodeJS
             discount = discount.includes('+') ? 0-100/eval(discount) : parseInt(discount);
-            if (discount>-30) { // if discount less than 30% - exit
+            discount = -31;
+            if (discount>-30 || btn===null) { // if discount less than 30% - exit
                 clearInterval(interval);
                 console.log('Sorting...');
-                this.sort();
+                DixyCatalog.sort();
             }
         }, 3510);
     }
 
-    sort() {
+    static sort() {
         let items = document.querySelectorAll('[itemtype="http://schema.org/Product"]');
         if (items.length === 0) return;
         items = Array.from(items);
@@ -121,7 +122,7 @@ class DixyCatalog {
             });
     }
 
-    constructor () {
+    static switchSort () {
         document.querySelector('[data-sort="discount"]').click();
     }
 }
@@ -131,9 +132,9 @@ class Dixy {
         let cart = new DixyCatalogCart();
         cart.drawCartArea();
 
-        let catalog = new DixyCatalog();
-        catalog.loadMore();
+        DixyCatalog.loadMore();
     }
 }
 
-window.___frt_Dixy = new Dixy();
+if (window.___frt) window.___frt = {};
+window.___frt.catalog = new Dixy();

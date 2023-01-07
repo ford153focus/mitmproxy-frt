@@ -14,7 +14,7 @@ class DailyDigitalDigest:
     @staticmethod
     def ad_block(flow: http.HTTPFlow) -> None:
         if Utils.is_html(flow) is False: return
-        soup = BeautifulSoup(flow.response.content, 'html.parser')
+        soup = BeautifulSoup(flow.response.content, 'lxml')
 
         if soup.find(id="left-sidebar") is not None: soup.find(id="left-sidebar").clear()
         if soup.find(id="right-sidebar") is not None: soup.find(id="right-sidebar").clear()
@@ -37,7 +37,7 @@ class DailyDigitalDigest:
     @staticmethod
     def no_comment(flow: http.HTTPFlow) -> None:
         if Utils.is_html(flow) is False: return
-        soup = BeautifulSoup(flow.response.content, 'html.parser')
+        soup = BeautifulSoup(flow.response.content, 'lxml')
 
         if soup.find(id="mc-container") is not None: soup.find(id="mc-container").decompose()
         for block in soup.select('.commentlinkblock'): block.decompose()

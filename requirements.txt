@@ -1,3 +1,5 @@
 beautifulsoup4
 mitmproxy
 lxml
+mysql-connector-python
+python-dotenv

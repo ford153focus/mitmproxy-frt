@@ -1,19 +1,18 @@
 div#sorting-panel {
-    position: fixed;
-    left: -1px;
-    top: 50%;
-    border: 1px solid black;
-    border-radius: 0 5px 5px 0;
-    font-size: 5mm;
-    padding: 2mm;
+    color: black;
 }
 
 div#filter-panel {
-    position: fixed;
-    left: -1px;
-    top: calc(50% + 2cm);
+    color: black;
+}
+
+span.tGrid-cell.width--all-12 {
+    text-align: right;
+}
+
+span.tGrid-cell.width--all-12 > div {
+    display: inline-block;
     border: 1px solid black;
-    border-radius: 0 5px 5px 0;
-    font-size: 5mm;
     padding: 2mm;
+    margin: 3mm 3mm 0 0;
 }

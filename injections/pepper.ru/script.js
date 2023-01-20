@@ -1,7 +1,20 @@
 class PepperUtils {
     constructor() {
+        this.injectPanel();
         this.itemsFilter();
         this.itemsSort();
+    }
+
+    injectPanel() {
+        let url = 'https://example.com/___frt/injections/pepper.ru/sorting-panel.html';
+
+        fetch(url).then(async (response) => {
+            let hyperText = await response.text();
+
+            document
+                .querySelector('.subNav .tGrid-cell.width--all-12')
+                .insertAdjacentHTML('beforeend', hyperText);
+        });
     }
 
     getItems() {

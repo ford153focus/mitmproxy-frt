@@ -3,7 +3,7 @@ from utils import Utils
 
 class Auchan:
     async def response(self, flow: http.HTTPFlow) -> None:
-        if Utils.get_host(flow)[0:1] != ['ru', 'auchan']: return # 2nd lvl domain
+        if Utils.get_host(flow)[0:2] != ['ru', 'auchan']: return # 2nd lvl domain
         
         if flow.response.status_code != 200: return  # process HTTP 200 only
         if len(flow.response.content) == 0: return  # skip empty responses

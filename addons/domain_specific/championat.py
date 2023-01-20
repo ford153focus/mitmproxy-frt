@@ -1,7 +1,7 @@
 from mitmproxy import http
 from utils import Utils
 
-class Сhampionat:
+class Championat:
     async def response(self, flow: http.HTTPFlow) -> None:
         if not flow.request.host.endswith("championat.com"): return # host end
         

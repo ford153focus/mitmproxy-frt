@@ -1,3 +1,4 @@
+import bs4
 from mitmproxy import http
 from utils import Utils
 
@@ -8,6 +9,11 @@ class Fandom:
         if flow.response.status_code != 200: return  # process HTTP 200 only
         if len(flow.response.content) == 0: return  # skip empty responses
         if not Utils.is_html(flow): return # proccess html only
+
+        soup = bs4.BeautifulSoup(flow.response.content, 'lxml')
+        container = soup.select_one(".top-ads-container")
+        container.decompose()
+        flow.response.content = soup.prettify().encode(encoding='utf-8')
 
         if flow.request.host.startswith("genshin-impact"):
             if flow.request.path == "/wiki/Event":

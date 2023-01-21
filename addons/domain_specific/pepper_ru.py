@@ -9,7 +9,9 @@ class Pepper:
         if len(flow.response.content) == 0: return  # skip empty responses
         if not Utils.is_html(flow): return # proccess html only
 
-        Utils.inject(
+        await Utils.inject_font_awesome(flow)
+
+        await Utils.inject(
 			flow,
 			{
                 "scripts": [

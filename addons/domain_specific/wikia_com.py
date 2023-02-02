@@ -1,6 +1,7 @@
 from mitmproxy import http
 from utils import Utils
 from bs4 import BeautifulSoup
+import htmlmin
 
 class Wikia:
     async def response(self, flow: http.HTTPFlow) -> None:
@@ -17,4 +18,4 @@ class Wikia:
         for el in soup.select("#WikiaRailWrapper"): el.decompose()
         for el in soup.select("div[id^='google_ads_iframe_']"): el.decompose()
 
-        flow.response.content = soup.prettify().encode(encoding='utf-8')
+        flow.response.content = htmlmin.minify(soup.prettify(), remove_empty_space=True).encode(encoding='utf-8')

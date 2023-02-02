@@ -2,6 +2,7 @@ from urllib.parse import urlparse
 from mitmproxy import http
 from utils import Utils
 from bs4 import BeautifulSoup
+import htmlmin
 
 class DailyDigitalDigest:
     @staticmethod
@@ -25,7 +26,7 @@ class DailyDigitalDigest:
 
         for ad in soup.select('.nomargins.ad'): ad.clear()
 
-        flow.response.content = soup.prettify().encode('UTF-8')
+        flow.response.content = htmlmin.minify(soup.prettify(), remove_empty_space=True).encode(encoding='utf-8')
 
     @staticmethod
     def no_comment(flow: http.HTTPFlow) -> None:
@@ -36,7 +37,8 @@ class DailyDigitalDigest:
         for block in soup.select('.commentlinkblock'): block.decompose()
         for block in soup.select('.comment-warn'): block.decompose()
 
-        flow.response.content = soup.prettify().encode('UTF-8')
+        flow.response.content = htmlmin.minify(soup.prettify(), remove_empty_space=True).encode(encoding='utf-8')
+
 
     async def response(self, flow: http.HTTPFlow) -> None:
         if flow.request.host != '3dnews.ru': return # strict host
@@ -45,7 +47,7 @@ class DailyDigitalDigest:
         if len(flow.response.content) == 0: return  # skip empty responses
         if not Utils.is_html(flow): return # proccess html only
 
-        Utils.inject(
+        await Utils.inject(
 			flow,
 			{
                 "scripts": [

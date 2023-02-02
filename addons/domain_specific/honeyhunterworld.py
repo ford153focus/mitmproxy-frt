@@ -1,6 +1,7 @@
 from mitmproxy import http
 from utils import Utils
 from bs4 import BeautifulSoup
+import htmlmin
 
 class HoneyHunterWorld:
     async def response(self, flow: http.HTTPFlow) -> None:
@@ -13,4 +14,4 @@ class HoneyHunterWorld:
         if flow.request.host == "genshin.honeyhunterworld.com":
             soup = BeautifulSoup(flow.response.content, 'lxml')
             soup.find('div', {'id': 'genshin-video-player'}).decompose()
-            flow.response.content = soup.prettify().encode(encoding='utf-8')
+            flow.response.content = htmlmin.minify(soup.prettify(), remove_empty_space=True).encode(encoding='utf-8')

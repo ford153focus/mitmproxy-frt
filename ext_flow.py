@@ -2,6 +2,7 @@ from typing import List
 from bs4 import BeautifulSoup
 from mitmproxy import http
 from urllib.parse import urlparse
+import htmlmin
 
 class ExtFlow:
     origin: http.HTTPFlow = None
@@ -13,13 +14,13 @@ class ExtFlow:
     @staticmethod
     def empty_answer(flow: http.HTTPFlow) -> None:
         flow.response = http.Response.make(
-            403,  # (optional) status code
-            b"Forbidden",  # (optional) content
+            204,  # (optional) status code
+            "",  # (optional) content
             {"Content-Type": "text/plain; charset=utf-8"},  # (optional) headers
         )
 
     def commit_changes(self) -> None:
-        self.origin.response.content = self.soup.prettify().encode('UTF-8')
+        self.origin.response.content = htmlmin.minify(self.soup.prettify(), remove_empty_space=True).encode(encoding='utf-8')
 
     def inject_hypertext(self, path) -> None:
         content = open(path, encoding="utf8", mode="r").read()

@@ -1,6 +1,7 @@
 from mitmproxy import http
 from concurrent.futures import ThreadPoolExecutor
 import bs4
+import htmlmin
 
 from utils import Utils
 
@@ -81,9 +82,9 @@ class OpenWRT:
             executor.map(OpenWRT.filter, rows, timeout=30)
             executor.map(OpenWRT.hide_ripe, rows, timeout=30)
 
-        flow.response.content = soup.prettify().encode(encoding='utf-8')
+        flow.response.content = htmlmin.minify(soup.prettify(), remove_empty_space=True).encode(encoding='utf-8')
 
-        Utils.inject(
+        await Utils.inject(
 			flow,
 			{
                 "scripts": [

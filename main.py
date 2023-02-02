@@ -6,6 +6,7 @@ Run as follows: mitmproxy -s main.py
 
 from addons.all_domains.utils_injector import Injector
 from addons.all_domains.black_list import BlackList
+from addons.all_domains.headers import HeadersAddon
 
 from addons.domain_specific.auchan_ru import Auchan
 from addons.domain_specific.auto_ru import AutoRu
@@ -35,6 +36,7 @@ from addons.domain_specific.yandex import Yandex
 addons = [
     Injector(),
     BlackList(),
+    HeadersAddon(),
 
     Auchan(),
     AutoRu(),

@@ -25,11 +25,8 @@ function showHiddenCommentsViaFetch() {
 }
 
 // eslint-disable-next-line no-unused-vars
-function showHiddenComments() {
-    let commentShowLinks = document.querySelectorAll('a.comment_show');
-    commentShowLinks = Array.from(commentShowLinks);
-    commentShowLinks = commentShowLinks.filter(link => link.style.display!=='none');
-
+function showHiddenComments1() {
+    let commentShowLinks = [...document.querySelectorAll('a.comment_show')];
     let counter = 0;
 
     let interval = setInterval(() => {
@@ -39,9 +36,24 @@ function showHiddenComments() {
         }
 
         commentShowLinks[counter].click();
-        commentShowLinks[counter].remove();
         counter++;
-    }, 333);
+    }, 531);
 }
 
-setInterval(showHiddenCommentsViaFetch, 5310);
+function showHiddenComments2() {
+    let commentShowLinks = [...document.querySelectorAll('.comment .comment-hidden button.ant-btn.ant-btn-link')];
+    let counter = 0;
+
+    let interval = setInterval(() => {
+        if(counter===commentShowLinks.length) {
+            clearInterval(interval);
+            return;
+        }
+
+        commentShowLinks[counter].click();
+        counter++;
+    }, 531);
+}
+
+setInterval(showHiddenComments1, 3510);
+setInterval(showHiddenComments2, 3510);

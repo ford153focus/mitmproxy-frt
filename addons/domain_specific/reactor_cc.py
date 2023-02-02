@@ -11,7 +11,7 @@ class Reactor:
 
         Utils.inject_font_awesome(flow)
 
-        Utils.inject(
+        await Utils.inject(
 			flow,
 			{
                 "scripts": [

@@ -9,7 +9,7 @@ class Championat:
         if len(flow.response.content) == 0: return  # skip empty responses
         if not Utils.is_html(flow): return # proccess html only
 
-        Utils.inject(
+        await Utils.inject(
 			flow,
 			{
                 "scripts": [
@@ -20,7 +20,7 @@ class Championat:
         )
 
         if flow.request.path.find("/article-") > -1 or flow.request.path.find("/news-") > -1:
-            Utils.inject(
+            await Utils.inject(
                 flow,
                 {
                     "scripts": [

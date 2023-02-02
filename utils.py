@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from mitmproxy import http
 from urllib.parse import urlparse
 from typing import List
-
+import htmlmin
 
 class Utils:
     def get_host(flow: http.HTTPFlow) -> List[str]:
@@ -21,7 +21,7 @@ class Utils:
         return f"https://example.com/___frt/{path}"
 
     @staticmethod
-    def inject(flow: http.HTTPFlow, targets) -> None:
+    async def inject(flow: http.HTTPFlow, targets) -> None:
         soup = BeautifulSoup(flow.response.content, 'lxml')
 
         if 'styles' in targets:
@@ -53,11 +53,12 @@ class Utils:
                     if soup.html.select_one('head') is not None:
                         soup.html.head.append(tag)
 
-        flow.response.content = soup.prettify().encode(encoding='utf-8')
+        flow.response.content = htmlmin.minify(soup.prettify(), remove_empty_space=True).encode(encoding='utf-8')
+
 
     @staticmethod
-    def inject_bootstrap(flow: http.HTTPFlow) -> None:
-        Utils.inject(
+    async def inject_bootstrap(flow: http.HTTPFlow) -> None:
+        await Utils.inject(
             flow,
             {
                 "scripts": [
@@ -66,20 +67,23 @@ class Utils:
                 "styles": [
                     {"path": "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"},
                 ],
-            })
+            }
+        )
 
     @staticmethod
-    def inject_font_awesome(flow: http.HTTPFlow) -> None:
-        Utils.inject(
+    async def inject_font_awesome(flow: http.HTTPFlow) -> None:
+        await Utils.inject(
             flow,
             {
                 "styles": [
                     {"path": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"},
                 ],
-            })
+            }
+        )
 
     @staticmethod
     def is_html(flow: http.HTTPFlow) -> bool:
+        if 'content-type' not in flow.response.headers: return False
         content_type = flow.response.headers.get('content-type')
         return content_type.startswith('text/html')
 

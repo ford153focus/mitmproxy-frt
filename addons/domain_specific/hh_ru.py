@@ -10,7 +10,7 @@ class HeadHunter:
         if not Utils.is_html(flow): return # proccess html only
 
         if flow.request.path == "/applicant/resumes/edit/experience":
-            Utils.inject(
+            await Utils.inject(
                 flow,
                 {
                     "scripts": [

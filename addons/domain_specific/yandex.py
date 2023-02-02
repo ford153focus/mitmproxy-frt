@@ -11,7 +11,7 @@ class Yandex:
 
         if Utils.get_host(flow)[2] == "market":
             if Utils.get_path()[0].startswith('product--karta-pamiati-') or Utils.get_path()[0].startswith('product--tverdotelnyi-nakopitel-'):
-                Utils.inject(
+                await Utils.inject(
                     flow,
                     {
                         "scripts": [

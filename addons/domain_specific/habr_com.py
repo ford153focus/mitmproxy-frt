@@ -10,7 +10,7 @@ class Habr:
         if len(flow.response.content) == 0: return  # skip empty responses
         if not Utils.is_html(flow): return # proccess html only
 
-        Utils.inject(
+        await Utils.inject(
 			flow,
 			{
                 "scripts": [
@@ -24,7 +24,7 @@ class Habr:
 
         if flow.request.host.endswith("habr.com"):
             if flow.request.path.endswith("/favorites/") or flow.request.path.endswith("/favorites/posts/"):
-                Utils.inject(
+                await Utils.inject(
                     flow,
                     {
                         "scripts": [
@@ -40,7 +40,7 @@ class Habr:
                 )
             
             if fnmatch.fnmatch(flow.request.path, "/*/post/*/") or fnmatch.fnmatch(flow.request.path, "/*/blog/*/"):
-                Utils.inject(
+                await Utils.inject(
                     flow,
                     {
                         "scripts": [

@@ -10,7 +10,7 @@ class Lenta:
         if not Utils.is_html(flow): return # proccess html only
 
         if flow.request.path.startswith("/catalog") or flow.request.path.startswith("/search"):
-            Utils.inject(
+            await Utils.inject(
                 flow,
                 {
                     "scripts": [
@@ -20,7 +20,7 @@ class Lenta:
             )
         
         if flow.request.path.startswith("/order/cart"):
-            Utils.inject(
+            await Utils.inject(
                 flow,
                 {
                     "scripts": [

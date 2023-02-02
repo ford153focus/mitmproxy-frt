@@ -7,36 +7,38 @@ String.prototype.frtRemoveSpaces = function () {
 };
 
 class DixyCatalogItem {
-    static getPricePerKg(item) {
-        let nonKiloUnits = ['г', 'мг', 'мл', 'г/мл'];
-
-        // get price
+    static getPrice(item) {
         let priceTxt = item.querySelector('.dixyCatalogItemPrice__new').innerText.frtRemoveSpaces();
         let price = parseInt(priceTxt);
+        return price;
+    }
 
-        // get weight
-        let title = item.querySelector('[itemprop="description"]'); // full string with weight is in description
-        if (!title) {title = item.querySelector('[itemprop="name"]');} // but sometimes description is not exists
-        title = title.innerText;
+    static getWeight(item) {
+        let description = item.querySelector('[itemprop="description"]'); // ususally description contains full title with weight
+        let name = item.querySelector('[itemprop="name"]'); // but sometimes description is not exists
+        let title = description !== null ? description.innerText : name.innerText;
         title = title.trim().toLowerCase().frtFixSpaces().replace(',', '.'); // prepare string
 
-        let matches = title.match(/(\d+,?\.?\/?-?\+?\d*)\s?([а-я/]*)$/);
+        let matches;
 
-        if (matches === null) {
-            console.error('failed to get weight: ', title);
-            return 1;
-        }
+        matches = title.match(/(\d+)\s*(г|мл|мг)/i)
+        if (matches !== null) return parseFloat(matches[1])/1000;
 
-        let weightValue = parseFloat(matches[1]); // parse weight value
-        let weightUnit = matches[2]; // parse weight unit
+        matches = title.match(/(\d*\.?\d+)\s*(кг|л)/i)
+        if (matches !== null) return parseFloat(matches[1]);
 
-        if (isNaN(weightValue)) {
-            weightValue = 1;
-            console.error('failed to get weight value: ', title);
-        }
-        if (nonKiloUnits.includes(weightUnit)) weightValue /= 1000; // if weight is not in kilos - decrease weight value
+        /** 
+         * 1 tea packet is 2 gramm usually, so there is 500 packets in 1 kilo 
+         */
+        matches = title.match(/чай.+(\d+)\s*шт/i)
+        if (matches !== null) return parseFloat(matches[1])/500;
 
-        return price / weightValue;
+        console.warn('failed to get weight: ', title);
+        return 1;
+    }
+
+    static getPricePerKg(item) {
+        return DixyCatalogItem.getPrice(item) / DixyCatalogItem.getWeight(item);
     }
 }
 
@@ -89,6 +91,7 @@ class DixyCatalogCart {
 class DixyCatalog {
     static loadMore() {
         let interval = setInterval(() => {
+            window.___frt.loading = 1;
             let st = document.documentElement.scrollTop;
             let btn = document.querySelector('a.btn.view-more');
             if (btn) btn.click();
@@ -103,6 +106,7 @@ class DixyCatalog {
             discount = -31;
             if (discount>-30 || btn===null) { // if discount less than 30% - exit
                 clearInterval(interval);
+                window.___frt.loading = 0;
                 console.log('Sorting...');
                 DixyCatalog.sort();
             }
@@ -125,6 +129,26 @@ class DixyCatalog {
     static switchSort () {
         document.querySelector('[data-sort="discount"]').click();
     }
+
+    static setObserver() {
+        if (window.___frt.observer) return;
+
+        const config = {
+            attributes: true, 
+            childList: true, 
+            subtree: true 
+        };
+
+        window.___frt.observer = new MutationObserver(DixyCatalog.observerCallback);
+        window.___frt.observer.observe(document.body, config);
+    }
+
+    static observerCallback() {
+        if (document.querySelector('a.btn.view-more') === null) return;
+        if (window.___frt.loading === 1) return;
+        
+        DixyCatalog.loadMore();
+    }
 }
 
 class Dixy {
@@ -132,9 +156,13 @@ class Dixy {
         let cart = new DixyCatalogCart();
         cart.drawCartArea();
 
+        DixyCatalog.switchSort();
         DixyCatalog.loadMore();
+        
+        window.___frt.loading === 1;
+        DixyCatalog.setObserver();
     }
 }
 
-if (window.___frt) window.___frt = {};
+if (!window.___frt) window.___frt = {};
 window.___frt.catalog = new Dixy();

@@ -10,7 +10,7 @@ class Yandex:
         if not Utils.is_html(flow): return # proccess html only
 
         if Utils.get_host(flow)[2] == "market":
-            if Utils.get_path()[0].startswith('product--karta-pamiati-') or Utils.get_path()[0].startswith('product--tverdotelnyi-nakopitel-'):
+            if Utils.get_path(flow)[0].startswith('product--karta-pamiati-') or Utils.get_path(flow)[0].startswith('product--tverdotelnyi-nakopitel-'):
                 await Utils.inject(
                     flow,
                     {

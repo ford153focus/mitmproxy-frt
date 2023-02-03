@@ -2,7 +2,7 @@
     "content_scripts": [
         {
             "js": [
-                "web_accessible_resources/all_urls/js/utils.js",
+                "web_accessible_resources/_all_urls/js/utils.js",
                 "content_scripts/___all_urls/js/injector.js"
             ],
             "matches": [

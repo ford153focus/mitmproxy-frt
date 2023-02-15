@@ -95,6 +95,11 @@ class FrtUtils {
         this.loadStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css');
     }
 
+    loadNotifier() {
+        if (typeof jQuery === 'undefined') this.injectScriptFile('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js');
+        setTimeout(() => { window._frt.injectScriptFile('https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js'); }, 300); // need setTimeout to wait jquery load
+    }
+
     /**
      * Async sleep implementation in JS
      * @param {number} milliseconds Sleep length
@@ -184,6 +189,24 @@ class FrtUtils {
         }
 
         return this.queryParams;
+    }
+
+    notify(text) {
+        if (window.jQuery.notify) {
+            window.jQuery.notify(
+                text,
+                {
+                    position: "bottom right"
+                }
+            );
+        } else {
+            alert(text);
+            console.info(text);
+        }
+    }
+
+    constructor() {
+        this.loadNotifier();
     }
 }
 

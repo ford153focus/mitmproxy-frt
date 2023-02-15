@@ -1,12 +1,14 @@
-if (!window.__frt) window.__frt = {};
+if (!window.___frt) window.___frt = {};
 
-window.__frt.c = class {
+window.___frt.Kufar = class {
     ad_block () {
-        [...document.querySelectorAll("[class^='styles_banner']")].map(el => el.remove());
-        [...document.querySelectorAll("[class^='styles_poleposition']")].map(el => el.remove());
-        [...document.querySelectorAll("[class^='styles_bannerContainer']")].map(el => el.remove());
-        [...document.querySelectorAll("[class^='styles_recently-viewed']")].map(el => el.remove());
-        [...document.querySelectorAll("[alt='placeholder']")].map(el => el.parentElement.parentElement.parentElement.remove());
+        for (let el of document.querySelectorAll("[class^='styles_banner']")) el.remove();
+        for (let el of document.querySelectorAll("[class^='styles_poleposition']")) el.remove();
+        for (let el of document.querySelectorAll("[class^='styles_bannerContainer']")) el.remove();
+        for (let el of document.querySelectorAll("[class^='styles_recently-viewed']")) el.remove();
+        for (let el of document.querySelectorAll("[alt='placeholder']")) el.parentElement.parentElement.parentElement.remove();
+
+        for (let el of document.querySelectorAll("img[alt='vip']")) el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
 
         document.querySelector('[class^="styles_buttons-right__container"] button')?.click();
     }
@@ -21,7 +23,6 @@ window.__frt.c = class {
 
         clone.onclick = () => {
             this.add_ban(window.location.pathname);
-            alert('забанено');
         };
 
         wr_button.insertAdjacentElement('afterEnd', clone);
@@ -43,7 +44,6 @@ window.__frt.c = class {
             let url = new URL(href);
             let path = url.pathname;
             this.add_ban(path);
-            window.t1 = e;
         }
 
         for (const el of document.querySelectorAll('[class^="styles_cards"] section [class^="styles_content"]')) {
@@ -71,10 +71,10 @@ window.__frt.c = class {
         let bans = this.get_bans();
         bans.push(path);
         this.set_bans(bans);
-        alert('забанено');
+        window._frt.notify('забанено');
     }
 
-    mark_banned() {
+    hide_banned() {
         setInterval(() => {
             let bans = this.get_bans();
 
@@ -105,23 +105,23 @@ window.__frt.c = class {
             'зап.ч',
         ];
 
-        for (const el of headings) {
+        for (const el of headings)
             for (let word of black_list)
-            if (el.innerText.toLocaleLowerCase().includes(word)) {
-                el.parentElement.parentElement.parentElement.style.backgroundColor = 'red';
-            }
-        }
+                if (el.innerText.toLocaleLowerCase().includes(word))
+                    el.parentElement.parentElement.parentElement.style.backgroundColor = 'red';
     }
 
     constructor() {
-        this.ad_block();
+        setTimeout(() => {
+            this.ad_block();
 
-        this.inject_ban_button_on_details_page();
-        this.inject_ban_button_to_listing();
+            this.inject_ban_button_on_details_page();
+            this.inject_ban_button_to_listing();
 
-        this.mark_banned();
-        this.mark_broken();
+            this.hide_banned();
+            this.mark_broken();
+        }, 333);
     }
 }
 
-window.__frt.o = new window.__frt.c();
+window.___frt.kufar = new window.___frt.Kufar();

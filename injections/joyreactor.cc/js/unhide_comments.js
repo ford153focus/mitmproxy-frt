@@ -1,59 +1,50 @@
-// noinspection JSUnusedGlobalSymbols
-function showHiddenCommentsViaFetch() {
-    let commentShowLinks = document.querySelectorAll('a.comment_show');
-    commentShowLinks = Array.from(commentShowLinks);
-    commentShowLinks = commentShowLinks.filter(link => link.style.display!=='none');
+if (!window.___frt) window.___frt = {};
 
-    let counter = 0;
+window.___frt.HiddenCommentsUtils = class {
+    static selectors = {
+        'desktop' : 'a.comment_show',
+        'mobile'  : '.comment .comment-hidden button.ant-btn.ant-btn-link',
+    }
 
-    let interval = setInterval(() => {
-        if(counter===commentShowLinks.length) {
-            clearInterval(interval);
-            return;
+    static use_click = false;
+    static use_fetch = true;
+
+    static callback () {
+        let selectors = Object.values(this.selectors);
+
+        for (let selector of selectors) {
+            let counter = 1;
+
+            for (const el of document.querySelectorAll(selector)) {
+                let delay = 531*counter;
+
+                if (this.use_click) {
+                    setTimeout(() => { 
+                        el.click(); 
+                        el.remove();
+                    }, delay);
+                }
+
+                if (this.use_fetch) {
+                    setTimeout(() => {
+                        fetch(el.href).then(async (response) => {
+                            let template = document.createElement('span');
+                            template.innerHTML = await response.text();
+                            el.insertAdjacentElement('beforebegin', template);
+                            el.remove();
+                        });
+                    }, delay);
+                }
+
+                counter++;
+            }
         }
+    }
+};
 
-        let link = commentShowLinks[counter];
-        fetch(link.href).then(async (response) => {
-            let template = document.createElement( 'span' );
-            template.innerHTML = await response.text();
-            link.insertAdjacentElement('beforebegin', template);
-            link.remove();
-        });
-        counter++;
-    }, 333);
-
-}
-
-// eslint-disable-next-line no-unused-vars
-function showHiddenComments1() {
-    let commentShowLinks = [...document.querySelectorAll('a.comment_show')];
-    let counter = 0;
-
-    let interval = setInterval(() => {
-        if(counter===commentShowLinks.length) {
-            clearInterval(interval);
-            return;
-        }
-
-        commentShowLinks[counter].click();
-        counter++;
-    }, 531);
-}
-
-function showHiddenComments2() {
-    let commentShowLinks = [...document.querySelectorAll('.comment .comment-hidden button.ant-btn.ant-btn-link')];
-    let counter = 0;
-
-    let interval = setInterval(() => {
-        if(counter===commentShowLinks.length) {
-            clearInterval(interval);
-            return;
-        }
-
-        commentShowLinks[counter].click();
-        counter++;
-    }, 531);
-}
-
-setInterval(showHiddenComments1, 3510);
-setInterval(showHiddenComments2, 3510);
+(() => {
+    let observerCallback = window.___frt.HiddenCommentsUtils.callback.bind(window.___frt.HiddenCommentsUtils);
+    let observer = new MutationObserver(observerCallback);
+    let config = { attributes: true, childList: true, subtree: true };
+    observer.observe(document.body, config);
+})()

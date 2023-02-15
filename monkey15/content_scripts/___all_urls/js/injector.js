@@ -60,6 +60,12 @@ class InjectorUtils {
 }
 
 class Injectors {
+    static async kufar() {
+        if (!window.location.host.endsWith('kufar.by')) return;
+
+        InjectorUtils.injectScript({src: '/web_accessible_resources/kufar.by/js/script.js'});
+    }
+
     static async twitch() {
         if (window.location.host !== 'www.twitch.tv') return;
 
@@ -89,8 +95,8 @@ class Injectors {
     static async main() {
         // inject shared utils
         InjectorUtils.injectScript({
-            src: '/web_accessible_resources/_all_urls/js/utils.js', 
-            async: true, 
+            src: '/web_accessible_resources/_all_urls/js/utils.js',
+            async: true,
         });
 
         // call all other injectors

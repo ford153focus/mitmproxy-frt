@@ -229,47 +229,84 @@ NodeList.prototype.frtRemoveAll = function(method='remove') {
 */
 
 HTMLCollection.prototype.frtToArray = function() {
-    return Array.from(this);
+    try {
+        return Array.from(this);
+    } catch (error) {
+        console.warn(error);
+    }
 };
 
 HTMLElement.prototype.frtRemove = function(method='remove') {
-    if (method==='hide')    this.style.display = 'none';
-    if (method==='nullify') this.innerHTML = '';
-    if (method==='remove')  this.remove();
+    try {
+        if (method==='hide')    this.style.display = 'none';
+        if (method==='nullify') this.innerHTML = '';
+        if (method==='remove')  this.remove();
+    } catch (error) {
+        console.warn(error);
+    }
 };
 
 NodeList.prototype.frtToArray = function() {
-    return Array.from(this);
+    try {
+        return Array.from(this);
+    } catch (error) {
+        console.warn(error);
+    }
 };
 
 Array.prototype.frtRemoveDuplicates = function () {
-    let set = new Set(this);
-    return Array.from(set);
+    try {
+        let set = new Set(this);
+        let arr = Array.from(set);
+        return arr;
+    } catch (error) {
+        console.warn(error);
+    }
 };
 
 String.prototype.frtFixSpaces = function () {
-    return this.replaceAll('&nbsp;', ' ').replaceAll(' ', ' ');
+    try {
+        return this.replaceAll('&nbsp;', ' ').replaceAll(' ', ' ');
+    } catch (error) {
+        console.warn(error);
+    }
 };
 
 String.prototype.frtToInt = function () {
-    return parseInt(this);
+    try {
+        return parseInt(this);
+    } catch (error) {
+        console.warn(error);
+    }
 };
 
 String.prototype.frtToFloat = function () {
-    return parseFloat(this);
+    try {
+        return parseFloat(this);
+    } catch (error) {
+        console.warn(error);
+    }
 };
 
 String.prototype.frtHtmlEntitiesEncode = function () {
-    return this
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
+    try {
+        let str = this;
+        str = str.replace(/&/g, '&amp;');
+        str = str.replace(/</g, '&lt;');
+        str = str.replace(/>/g, '&gt;');
+        str = str.replace(/"/g, '&quot;');
+        return str;
+    } catch (error) {
+        console.warn(error);
+    }
 };
 
 String.prototype.frtHtmlEntitiesEncode2 = function () {
-    return Array
-        .from(this)
-        .map(c => '&#'+c.charCodeAt(0)+';')
-        .join('');
+    try {
+        let array = Array.from(this);
+        array = array.map(c => `&#${c.charCodeAt(0)};`);
+        return array.join('');
+    } catch (error) {
+        console.warn(error);
+    }
 };

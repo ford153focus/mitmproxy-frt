@@ -88,6 +88,17 @@ window.___frt.Kufar = class {
                     el.parentElement.style.display = 'none';
                 }
             }
+
+            for (const el of document.querySelectorAll('[data-name="kufar-similar-ads-block"] [class^="styles_card"] a')) {
+                let href = el?.href;
+                if (!href) continue;
+                let url = new URL(href);
+                let path = url.pathname;
+
+                if (bans.includes(path)) {
+                    el.parentElement.style.display = 'none';
+                }
+            }
         }, 5555);
     }
 

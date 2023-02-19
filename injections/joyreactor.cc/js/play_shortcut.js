@@ -1,6 +1,6 @@
 // noinspection UnusedCatchParameterJS
 
-class PlayShortcut {
+window.___frt.PlayShortcut = class {
     /** @member {HTMLElement} */
     post;
 
@@ -87,4 +87,4 @@ class PlayShortcut {
 }
 
 if (!window.___frt) window.___frt = {};
-window.___frt.playShortcut = new PlayShortcut();
+window.___frt.playShortcut = new window.___frt.PlayShortcut();

@@ -36,15 +36,15 @@ class InjectorUtils {
     }
 
     static async injectHypertext(url) {
-        let markupString = await window._frt.utils.getExtensionFileContent(url);
-        let elements = window._frt.utils.strToDom(markupString);
+        let markupString = await window._frt.getExtensionFileContent(url);
+        let elements = window._frt.strToDom(markupString);
         for (const element of elements) {
             document.body.appendChild(element.cloneNode(true));
         }
     }
 
-    static async injectHypertext2(url, target, position) {
-        let markupString = await window._frt.utils.getExtensionFileContent(url);
+    static async injectHypertext2(url, target=document.body, position='beforeend') {
+        let markupString = await window._frt.getExtensionFileContent(url);
         target.insertAdjacentHTML(position, markupString);
     }
 
@@ -64,6 +64,21 @@ class Injectors {
         if (!window.location.host.endsWith('kufar.by')) return;
 
         InjectorUtils.injectScript({src: '/web_accessible_resources/kufar.by/js/script.js'});
+    }
+
+    static async reactor() {
+        if (!window.location.host.endsWith('reactor.cc')) return;
+
+        await InjectorUtils.injectHypertext2('/web_accessible_resources/joyreactor.cc/html/comment_text_tools.html');
+
+        InjectorUtils.injectStyle({href: '/web_accessible_resources/joyreactor.cc/css/comment_text_tools.css'});
+        InjectorUtils.injectStyle({href: '/web_accessible_resources/joyreactor.cc/css/rate4comments.css'});
+
+        InjectorUtils.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/comment_text_tools.js'});
+        InjectorUtils.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/play_shortcut.js'});
+        InjectorUtils.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/rate4comments.js'});
+        InjectorUtils.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/script.js'});
+        InjectorUtils.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/unhide_comments.js'});
     }
 
     static async twitch() {

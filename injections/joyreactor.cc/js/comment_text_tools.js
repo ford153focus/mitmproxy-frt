@@ -1,11 +1,12 @@
-class FrtJrCtt {
+if (!window.___frt) window.___frt = {};
+
+window.___frt.TextAreaTools = class {
     markup;
 
-    static fixHeight(event) {
+    fixHeight(event) {
         let commentInput = event.target;
-        if (commentInput.scrollHeight !== commentInput.clientHeight) {
-            commentInput.style.height = `${commentInput.scrollHeight + 5}px`;
-        }
+        if (commentInput.scrollHeight === commentInput.clientHeight) return;
+        commentInput.style.height = `${commentInput.scrollHeight + 5}px`;
     }
 
     /**
@@ -28,19 +29,21 @@ class FrtJrCtt {
     }
 
     constructor() {
-        this.markup = _frt.fetchSync('https://example.com/___frt/injections/joyreactor.cc/html/comment_text_tools.html');
+        // this.markup = _frt.fetchSync('https://example.com/___frt/injections/joyreactor.cc/html/comment_text_tools.html');
+        // this.markup = _frt.getExtensionFileContentSync('/web_accessible_resources/joyreactor.cc/html/comment_text_tools.html');
+        this.markup = document.querySelector('ul.comment_text_tools').cloneNode(true);
     }
 }
 
 setTimeout(async () => {
-    if (!window.___frt) window.___frt = {};
-    window.___frt.ctt = new FrtJrCtt();
+    window.___frt.textAreaTools = new window.___frt.TextAreaTools();
 }, 5);
 
 setInterval(async () => {
     for (let textarea of document.querySelectorAll('textarea.comment_text')) {
         if (textarea.previousElementSibling.classList.contains('comment_text_tools')) continue; //if toolbar already present...
-        textarea.insertAdjacentHTML('beforebegin', window.___frt.ctt.markup); //insert toolbar markup
-        textarea.onkeyup = FrtJrCtt.fixHeight;
+        // textarea.insertAdjacentHTML('beforebegin', window.___frt.textAreaTools.markup); //insert toolbar markup
+        textarea.insertAdjacentElement('beforebegin', window.___frt.textAreaTools.markup); //insert toolbar markup
+        textarea.onkeyup = window.___frt.textAreaTools.fixHeight;
     }
 }, 1530);

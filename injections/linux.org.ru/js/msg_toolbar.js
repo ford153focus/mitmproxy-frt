@@ -8,7 +8,7 @@ function fixHeight(event) {
 setTimeout(async () => {
     window._frt.loadFontAwesome();
     await window._frt.injectExtensionScriptFile('/web_accessible_resources/linux.org.ru/msg_toolbar_2.js');
-    window._frt.cttMarkup = await window._frt.getExtensionFileContent('/web_accessible_resources/linux.org.ru/msg_toolbar.html');
+    window._frt.cttMarkup = await window._frt.getExtensionFileContent('/web_accessible_resources/linux.org.ru/html/msg_toolbar.html');
 }, 5);
 
 setInterval(async () => {

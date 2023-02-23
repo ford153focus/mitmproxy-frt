@@ -2,7 +2,7 @@ class FrtLorFavsUtils {
     static async drawTable() {
         let el = document.getElementById('bd');
         el.innerHTML = '';
-        await window._frt.injectHTML('/web_accessible_resources/linux.org.ru/favs_table.html', el, 'afterbegin');
+        await window._frt.injectHTML('/web_accessible_resources/linux.org.ru/html/favs_table.html', el, 'afterbegin');
         window._frt.loadFontAwesome();
     }
 

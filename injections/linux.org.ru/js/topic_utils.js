@@ -19,8 +19,8 @@ class LorTopicUtils {
         if (favButtons === null) return;
 
         /** Inject buttons markup */
-        await window._frt.injectHTML('/web_accessible_resources/linux.org.ru/topic_title_buttons.html', h1, 'afterbegin');
-        await window._frt.injectHTML('/web_accessible_resources/linux.org.ru/topic_side_buttons.html', favButtons, 'beforeend');
+        await window._frt.injectMarkupFileFromExtension('/web_accessible_resources/linux.org.ru/html/topic_title_buttons.html', h1, 'afterbegin');
+        await window._frt.injectMarkupFileFromExtension('/web_accessible_resources/linux.org.ru/html/topic_side_buttons.html', favButtons, 'beforeend');
 
         /** Set handlers */
         document.getElementById('ban-link').onclick = () => window._frt.lor.topic.buttonsHandler(0, 1);

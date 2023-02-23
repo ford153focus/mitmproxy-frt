@@ -9,5 +9,4 @@ function keyPressListener(event) {
     }
 }
 
-document.onkeypress = keyPressListener;
 document.onkeyup  = keyPressListener;

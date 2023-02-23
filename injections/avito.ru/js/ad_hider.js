@@ -32,10 +32,6 @@ class AvitoHideUtility {
         return storedItem===null ? [] : JSON.parse(storedItem); // return empty array if value not set
     }
 
-    /**
-     *
-     * @param {MouseEvent} event Click on hiding button
-     */
     static banAdvert(advertID) {
         let banList = AvitoHideUtility.getBanList();
         banList.push(advertID); // add to ban list

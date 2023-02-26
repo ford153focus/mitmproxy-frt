@@ -68,7 +68,7 @@ class Injectors {
 class Rules {
     static async kufar() {
         if (!window.location.host.endsWith('kufar.by')) return;
-        LibraryLoaders.notify();
+        LibraryLoaders.notyf();
         Injectors.injectScript({src: '/web_accessible_resources/kufar.by/js/script.js'});
     }
 
@@ -153,9 +153,19 @@ class LibraryLoaders {
         if (typeof jQuery !== 'undefined') return;
 
         Injectors.injectScript({
-            src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js',
+            src: '/web_accessible_resources/_libs/jquery.js',
             async: true,
-            is_cdn: true,
+        });
+    }
+
+    static notyf() {
+        Injectors.injectStyle({
+            href: '/web_accessible_resources/_libs/notyf/notyf.min.css',
+        });
+
+        Injectors.injectScript({
+            src: '/web_accessible_resources/_libs/notyf/notyf.min.js',
+            async: true,
         });
     }
 

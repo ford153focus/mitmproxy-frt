@@ -169,20 +169,9 @@ class FrtUtils {
         return this.queryParams;
     }
 
-    notify(text) {
-        if (typeof window.jQuery === 'undefined' ||
-            typeof window.jQuery.notify === 'undefined') {
-            alert(text);
-            console.info(text);
-            return;
-        }
-
-        window.jQuery.notify(
-            text,
-            {
-                position: "bottom right"
-            }
-        );
+    notify(text, type='success') {
+        if (typeof window.notyf === 'undefined') window.notyf = new Notyf();
+        notyf[type](text);
     }
 
     constructor() {
@@ -221,6 +210,14 @@ HTMLElement.prototype.frtRemove = function(method='remove') {
         if (method==='hide')    this.style.display = 'none';
         if (method==='nullify') this.innerHTML = '';
         if (method==='remove')  this.remove();
+    } catch (error) {
+        console.warn(error);
+    }
+};
+
+HTMLElement.prototype.frtHide = function() {
+    try {
+        this.style.display = 'none';
     } catch (error) {
         console.warn(error);
     }

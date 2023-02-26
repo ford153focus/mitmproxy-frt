@@ -1,5 +1,7 @@
 // noinspection UnusedCatchParameterJS
 
+if (!window.___frt) window.___frt = {};
+
 window.___frt.PlayShortcut = class {
     /** @member {HTMLElement} */
     post;

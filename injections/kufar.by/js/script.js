@@ -2,19 +2,19 @@ if (!window.___frt) window.___frt = {};
 
 window.___frt.Kufar = class {
     ad_block () {
-        for (let el of document.querySelectorAll("[class^='styles_banner']")) el.remove();
-        for (let el of document.querySelectorAll("[class^='styles_poleposition']")) el.remove();
-        for (let el of document.querySelectorAll("[class^='styles_bannerContainer']")) el.remove();
-        for (let el of document.querySelectorAll("[class^='styles_recently-viewed']")) el.remove();
-        for (let el of document.querySelectorAll("[alt='placeholder']")) el.parentElement.parentElement.parentElement.remove();
+        for (let el of document.querySelectorAll("[class^='styles_banner']")) el.frtHide();
+        for (let el of document.querySelectorAll("[class^='styles_poleposition']")) el.frtHide();
+        for (let el of document.querySelectorAll("[class^='styles_bannerContainer']")) el.frtHide();
+        for (let el of document.querySelectorAll("[class^='styles_recently-viewed']")) el.frtHide();
+        for (let el of document.querySelectorAll("[alt='placeholder']")) el.parentElement.parentElement.parentElement.frtHide();
 
-        for (let el of document.querySelectorAll("img[alt='vip']")) el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
+        for (let el of document.querySelectorAll("img[alt='vip']")) el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.frtHide();
 
         document.querySelector('[class^="styles_buttons-right__container"] button')?.click();
 
         for (let h3 of document.getElementsByTagName('h3')) {
             if (h3.innerText === 'Товары с доставкой от магазинов') {
-                h3.parentElement.remove();
+                h3.parentElement.frtHide();
             }
         }
     }

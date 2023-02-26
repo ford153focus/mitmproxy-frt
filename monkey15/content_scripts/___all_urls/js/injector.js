@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 // noinspection JSUnusedGlobalSymbols,FunctionNamingConventionJS
 
-class InjectorUtils {
+class Checkers {
     static checkHost(hostPattern) {
         let pattern = new URLPattern({ hostname: hostPattern });
         return pattern.test(window.location.href);
@@ -11,7 +11,9 @@ class InjectorUtils {
         let pattern = new URLPattern({ pathname: pathPattern });
         return pattern.test(window.location.href);
     }
+}
 
+class Injectors {
     static injectScript(attributes) {
         let tag = document.createElement('script');
 
@@ -19,7 +21,10 @@ class InjectorUtils {
             tag[attrName] = attrValue;
         }
 
-        tag.src = chrome.runtime.getURL(attributes.src);
+        if (typeof attributes['is_cdn'] === 'undefined') {
+            tag.src = chrome.runtime.getURL(attributes.src);
+        }
+
         document.head.appendChild(tag);
     }
 
@@ -31,21 +36,22 @@ class InjectorUtils {
             tag[attrName] = attrValue;
         }
 
-        tag.href = chrome.runtime.getURL(attributes.href);
+
+        if (typeof attributes['is_cdn'] === 'undefined') {
+            tag.href = chrome.runtime.getURL(attributes.href);
+        }
+
         document.head.appendChild(tag);
     }
 
-    static async injectHypertext(url) {
+    static async injectHypertext(url, target=document.body, position='beforeend') {
         let markupString = await window._frt.getExtensionFileContent(url);
-        let elements = window._frt.strToDom(markupString);
-        for (const element of elements) {
-            document.body.appendChild(element.cloneNode(true));
-        }
-    }
 
-    static async injectHypertext2(url, target=document.body, position='beforeend') {
-        let markupString = await window._frt.getExtensionFileContent(url);
-        target.insertAdjacentHTML(position, markupString);
+        let tag = document.createElement('div');
+        tag.style.display = 'none';
+        tag.innerHTML = markupString;
+
+        target.insertAdjacentElement(position, tag);
     }
 
     static injectExternalModule(url) {
@@ -59,33 +65,33 @@ class InjectorUtils {
     }
 }
 
-class Injectors {
+class Rules {
     static async kufar() {
         if (!window.location.host.endsWith('kufar.by')) return;
-
-        InjectorUtils.injectScript({src: '/web_accessible_resources/kufar.by/js/script.js'});
+        LibraryLoaders.notify();
+        Injectors.injectScript({src: '/web_accessible_resources/kufar.by/js/script.js'});
     }
 
     static async reactor() {
         if (!window.location.host.endsWith('reactor.cc')) return;
 
-        await InjectorUtils.injectHypertext2('/web_accessible_resources/joyreactor.cc/html/comment_text_tools.html');
+        await Injectors.injectHypertext('/web_accessible_resources/joyreactor.cc/html/comment_text_tools.html');
 
-        InjectorUtils.injectStyle({href: '/web_accessible_resources/joyreactor.cc/css/comment_text_tools.css'});
-        InjectorUtils.injectStyle({href: '/web_accessible_resources/joyreactor.cc/css/rate4comments.css'});
+        Injectors.injectStyle({href: '/web_accessible_resources/joyreactor.cc/css/comment_text_tools.css'});
+        Injectors.injectStyle({href: '/web_accessible_resources/joyreactor.cc/css/rate4comments.css'});
 
-        InjectorUtils.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/comment_text_tools.js'});
-        InjectorUtils.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/play_shortcut.js'});
-        InjectorUtils.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/rate4comments.js'});
-        InjectorUtils.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/script.js'});
-        InjectorUtils.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/unhide_comments.js'});
+        Injectors.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/comment_text_tools.js'});
+        Injectors.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/play_shortcut.js'});
+        Injectors.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/rate4comments.js'});
+        Injectors.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/script.js'});
+        Injectors.injectScript({src: '/web_accessible_resources/joyreactor.cc/js/unhide_comments.js'});
     }
 
     static async twitch() {
         if (window.location.host !== 'www.twitch.tv') return;
 
-        InjectorUtils.injectScript({src: '/web_accessible_resources/twitch.tv/js/script.js'});
-        InjectorUtils.injectStyle({href: '/web_accessible_resources/twitch.tv/css/directory.css'});
+        Injectors.injectScript({src: '/web_accessible_resources/twitch.tv/js/script.js'});
+        Injectors.injectStyle({href: '/web_accessible_resources/twitch.tv/css/directory.css'});
     }
 
     static async yandex_market() {
@@ -93,7 +99,7 @@ class Injectors {
 
         if (window.location.pathname.startsWith('/product--karta-pamiati-') ||
             window.location.pathname.startsWith('/product--tverdotelnyi-nakopitel-')) {
-            InjectorUtils.injectScript({src: '/web_accessible_resources/market.yandex.ru/js/price_per_gb.js'});
+            Injectors.injectScript({src: '/web_accessible_resources/market.yandex.ru/js/price_per_gb.js'});
         }
     }
 
@@ -102,28 +108,74 @@ class Injectors {
         if (!window.location.host.endsWith('wikia.com')) return;
         if (!window.location.href.startsWith('https://5ka.ru/special_offers')) return;
 
-        await InjectorUtils.injectHypertext('/web_accessible_resources/habr.com/html/fav_table.html');
-        InjectorUtils.injectStyle({href: '/web_accessible_resources/pixlr.com/css/styles.css'});
-        InjectorUtils.injectScript({src: '/web_accessible_resources/pixlr.com/js/adblock.js'});
+        await Injectors.injectHypertext('/web_accessible_resources/habr.com/html/fav_table.html');
+        Injectors.injectStyle({href: '/web_accessible_resources/pixlr.com/css/styles.css'});
+        Injectors.injectScript({src: '/web_accessible_resources/pixlr.com/js/adblock.js'});
     }
 
     static async main() {
         // inject shared utils
-        InjectorUtils.injectScript({
+        Injectors.injectScript({
             src: '/web_accessible_resources/_all_urls/js/utils.js',
             async: true,
         });
 
         // call all other injectors
-        let injectors = Object.getOwnPropertyNames(Injectors);
-        injectors = injectors.filter(prop => typeof Injectors[prop] === 'function');
+        let injectors = Object.getOwnPropertyNames(Rules);
+        injectors = injectors.filter(prop => typeof Rules[prop] === 'function');
         injectors = injectors.filter(prop => prop !== 'main').filter(prop => prop !== 'example');
-        for (const injector of injectors) Injectors[injector]();
+        for (const injector of injectors) Rules[injector]();
     }
+}
+
+class LibraryLoaders {
+    static bootStrap() {
+        Injectors.injectStyle({
+            href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css',
+            is_cdn: true,
+        });
+
+        Injectors.injectScript({
+            src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js',
+            async: true,
+            is_cdn: true,
+        });
+    }
+
+    static fontAwesome() {
+        Injectors.injectStyle({
+            href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
+            is_cdn: true,
+        });
+    }
+
+    static jQuery() {
+        if (typeof jQuery !== 'undefined') return;
+
+        Injectors.injectScript({
+            src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js',
+            async: true,
+            is_cdn: true,
+        });
+    }
+
+    static notify() {
+        this.jQuery();
+
+        setTimeout(() => {
+            Injectors.injectScript({
+                src: 'https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js',
+                async: true,
+                is_cdn: true,
+            });
+        }, 300); // need setTimeout to wait jquery load
+    }
+
+
 }
 
 window.onload = () => {
     setTimeout(async () => {
-        await Injectors.main();
+        await Rules.main();
     }, 1530);
 };

@@ -1,5 +1,5 @@
 // noinspection JSUnusedGlobalSymbols
-
+// eslint-disable-next-line no-unused-vars
 class ReactorUtils {
     /**
      * @usage window.___frt.utils.rateAllComments('ford153focus', 'minus')

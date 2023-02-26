@@ -11,6 +11,12 @@ window.___frt.Kufar = class {
         for (let el of document.querySelectorAll("img[alt='vip']")) el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
 
         document.querySelector('[class^="styles_buttons-right__container"] button')?.click();
+
+        for (let h3 of document.getElementsByTagName('h3')) {
+            if (h3.innerText === 'Товары с доставкой от магазинов') {
+                h3.parentElement.remove();
+            }
+        }
     }
 
     inject_ban_button_on_details_page () {

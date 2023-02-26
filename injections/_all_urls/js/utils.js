@@ -79,28 +79,6 @@ class FrtUtils {
     }
 
     /**
-     * Dynamically load Twitter's Bootstrap
-     * @returns {void}
-     */
-    loadBootstrap () {
-        this.loadStyleSheet('https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css');
-        this.loadScriptFile('https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js');
-    }
-
-    /**
-     * Dynamically load Font Awesome
-     * @returns {void}
-     */
-    loadFontAwesome() {
-        this.loadStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css');
-    }
-
-    loadNotifier() {
-        if (typeof jQuery === 'undefined') this.injectScriptFile('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js');
-        setTimeout(() => { window._frt.injectScriptFile('https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js'); }, 300); // need setTimeout to wait jquery load
-    }
-
-    /**
      * Async sleep implementation in JS
      * @param {number} milliseconds Sleep length
      */
@@ -192,21 +170,23 @@ class FrtUtils {
     }
 
     notify(text) {
-        if (window.jQuery.notify) {
-            window.jQuery.notify(
-                text,
-                {
-                    position: "bottom right"
-                }
-            );
-        } else {
+        if (typeof window.jQuery === 'undefined' ||
+            typeof window.jQuery.notify === 'undefined') {
             alert(text);
             console.info(text);
+            return;
         }
+
+        window.jQuery.notify(
+            text,
+            {
+                position: "bottom right"
+            }
+        );
     }
 
     constructor() {
-        this.loadNotifier();
+        //
     }
 }
 

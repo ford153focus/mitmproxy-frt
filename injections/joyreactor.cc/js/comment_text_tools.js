@@ -5,8 +5,11 @@ window.___frt.TextAreaTools = class {
 
     fixHeight(event) {
         let commentInput = event.target;
+
         if (commentInput.scrollHeight === commentInput.clientHeight) return;
-        commentInput.style.height = `${commentInput.scrollHeight + 5}px`;
+        if (commentInput.nodeName !== 'TEXTAREA') return;
+
+        commentInput.style.height = commentInput.scrollHeight+9+'px';
     }
 
     /**
@@ -32,6 +35,7 @@ window.___frt.TextAreaTools = class {
         // this.markup = _frt.fetchSync('https://example.com/___frt/injections/joyreactor.cc/html/comment_text_tools.html');
         // this.markup = _frt.getExtensionFileContentSync('/web_accessible_resources/joyreactor.cc/html/comment_text_tools.html');
         this.markup = document.querySelector('ul.comment_text_tools').cloneNode(true);
+        document.onkeyup = this.fixHeight;
     }
 }
 
@@ -41,9 +45,8 @@ setTimeout(async () => {
 
 setInterval(async () => {
     for (let textarea of document.querySelectorAll('textarea.comment_text')) {
-        if (textarea.previousElementSibling.classList.contains('comment_text_tools')) continue; //if toolbar already present...
-        // textarea.insertAdjacentHTML('beforebegin', window.___frt.textAreaTools.markup); //insert toolbar markup
+        if (textarea.getAttribute('ctt-injected') !== null) return; //if toolbar already present...
         textarea.insertAdjacentElement('beforebegin', window.___frt.textAreaTools.markup); //insert toolbar markup
-        textarea.onkeyup = window.___frt.textAreaTools.fixHeight;
+        textarea.setAttribute('ctt-injected', '1');
     }
 }, 1530);

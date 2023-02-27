@@ -4,7 +4,7 @@ from utils import Utils
 class Cian:
     async def response(self, flow: http.HTTPFlow) -> None:
         if not flow.request.host.endswith("cian.ru"): return # host end
-        
+
         if flow.response.status_code != 200: return  # process HTTP 200 only
         if len(flow.response.content) == 0: return  # skip empty responses
         if not Utils.is_html(flow): return # proccess html only
@@ -13,7 +13,7 @@ class Cian:
 			flow,
 			{
                 "scripts": [
-                    {"path": Utils.local_injector_url("injections/cian.ru/js/ban_nationalism.js")},
+                    {"path": Utils.local_injector_url("cian.ru/js/ban_nationalism.js")},
                 ],
             }
         )

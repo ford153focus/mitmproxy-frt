@@ -17,7 +17,7 @@ class Addon:
         if not flow.request.pretty_url.startswith('https://example.com/hello/'): return # url start
         if not flow.request.host.endswith("example.com"): return # host end
         if Utils.get_host(flow)[0:2] != ['com', 'example']: return # 2nd lvl domain
-        
+
         if flow.response.status_code != 200: return  # process HTTP 200 only
         if len(flow.response.content) == 0: return  # skip empty responses
         if not Utils.is_html(flow): return # proccess html only
@@ -26,10 +26,10 @@ class Addon:
 			flow,
 			{
                 "scripts": [
-                    {"path": Utils.local_injector_url("injections/example.com/js/script.js")},
+                    {"path": Utils.local_injector_url("example.com/js/script.js")},
                 ],
                 "styles": [
-                    {"path": Utils.local_injector_url("injections/example.com/css/style.css")},
+                    {"path": Utils.local_injector_url("example.com/css/style.css")},
                 ],
             }
         )

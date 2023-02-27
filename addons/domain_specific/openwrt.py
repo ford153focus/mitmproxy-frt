@@ -70,7 +70,7 @@ class OpenWRT:
 
     async def response(self, flow: http.HTTPFlow) -> None:
         if flow.request.pretty_url != 'https://openwrt.org/toh/views/toh_extended_all': return # strict url
-        
+
         if flow.response.status_code != 200: return  # process HTTP 200 only
         if len(flow.response.content) == 0: return  # skip empty responses
         if not Utils.is_html(flow): return # proccess html only
@@ -88,7 +88,7 @@ class OpenWRT:
 			flow,
 			{
                 "scripts": [
-                    {"path": Utils.local_injector_url("injections/openwrt.org/js/sort.js")},
+                    {"path": Utils.local_injector_url("openwrt.org/js/sort.js")},
                 ],
             }
         )

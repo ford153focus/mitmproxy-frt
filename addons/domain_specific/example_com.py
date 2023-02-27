@@ -7,7 +7,7 @@ class ExampleCom:
         if flow.request.host != 'example.com': return # strict host
         if not flow.request.path.startswith("/___frt/"): return
 
-        file_path = flow.request.path.replace("/___frt/", "./")
+        file_path = flow.request.path.replace("/___frt/", "./monkey15/web_accessible_resources/")
         if os.path.isfile(file_path) == False: return
         file_content = open(file_path, encoding="utf8").read()
 

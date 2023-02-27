@@ -13,7 +13,7 @@ class Dixy:
 			flow,
 			{
                 "scripts": [
-                    {"path": Utils.local_injector_url("injections/dixy.ru/js/catalog.js")},
+                    {"path": Utils.local_injector_url("dixy.ru/js/catalog.js")},
                 ],
             }
         )

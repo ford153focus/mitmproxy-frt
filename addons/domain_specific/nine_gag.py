@@ -12,7 +12,7 @@ class NineGag:
 			flow,
 			{
                 "scripts": [
-                    {"path": Utils.local_injector_url("injections/9gag.com/js/resize_answer_field.js")},
+                    {"path": Utils.local_injector_url("9gag.com/js/resize_answer_field.js")},
                 ],
             }
         )

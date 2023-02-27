@@ -4,7 +4,7 @@ from utils import Utils
 class Twitch:
     async def response(self, flow: http.HTTPFlow) -> None:
         if not flow.request.host.endswith("twitch.tv"): return # host end
-        
+
         if flow.response.status_code != 200: return  # process HTTP 200 only
         if len(flow.response.content) == 0: return  # skip empty responses
         if not Utils.is_html(flow): return # proccess html only
@@ -13,10 +13,10 @@ class Twitch:
 			flow,
 			{
                 "scripts": [
-                    {"path": Utils.local_injector_url("injections/twitch.tv/js/script.js")},
+                    {"path": Utils.local_injector_url("twitch.tv/js/script.js")},
                 ],
                 "styles": [
-                    {"path": Utils.local_injector_url("injections/twitch.tv/css/directory.css")},
+                    {"path": Utils.local_injector_url("twitch.tv/css/directory.css")},
                 ],
             }
         )

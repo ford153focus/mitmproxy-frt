@@ -4,7 +4,7 @@ from utils import Utils
 class Championat:
     async def response(self, flow: http.HTTPFlow) -> None:
         if not flow.request.host.endswith("championat.com"): return # host end
-        
+
         if flow.response.status_code != 200: return  # process HTTP 200 only
         if len(flow.response.content) == 0: return  # skip empty responses
         if not Utils.is_html(flow): return # proccess html only
@@ -13,8 +13,8 @@ class Championat:
 			flow,
 			{
                 "scripts": [
-                    {"path": Utils.local_injector_url("injections/championat.com/js/adblock.js")},
-                    {"path": Utils.local_injector_url("injections/championat.com/js/no_partners.js")},
+                    {"path": Utils.local_injector_url("championat.com/js/adblock.js")},
+                    {"path": Utils.local_injector_url("championat.com/js/no_partners.js")},
                 ],
             }
         )
@@ -24,10 +24,10 @@ class Championat:
                 flow,
                 {
                     "scripts": [
-                        {"path": Utils.local_injector_url("injections/championat.com/js/comments_switcher.js")},
+                        {"path": Utils.local_injector_url("championat.com/js/comments_switcher.js")},
                     ],
                     "styles": [
-                        {"path": Utils.local_injector_url("injections/championat.com/css/comments_switcher.css")},
+                        {"path": Utils.local_injector_url("championat.com/css/comments_switcher.css")},
                     ],
                 }
             )

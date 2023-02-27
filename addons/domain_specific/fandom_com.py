@@ -6,7 +6,7 @@ from utils import Utils
 class Fandom:
     async def response(self, flow: http.HTTPFlow) -> None:
         if not flow.request.host.endswith("fandom.com"): return # host end
-        
+
         if flow.response.status_code != 200: return  # process HTTP 200 only
         if len(flow.response.content) == 0: return  # skip empty responses
         if not Utils.is_html(flow): return # proccess html only
@@ -22,7 +22,7 @@ class Fandom:
                     flow,
                     {
                         "scripts": [
-                            {"path": Utils.local_injector_url("injections/fandom.com/genshin-impact/event_list.js")},
+                            {"path": Utils.local_injector_url("fandom.com/genshin-impact/event_list.js")},
                         ],
                     }
                 )
@@ -31,7 +31,7 @@ class Fandom:
                     flow,
                     {
                         "scripts": [
-                            {"path": Utils.local_injector_url("injections/fandom.com/genshin-impact/quest_list.js")},
+                            {"path": Utils.local_injector_url("fandom.com/genshin-impact/quest_list.js")},
                         ],
                     }
                 )
@@ -40,7 +40,7 @@ class Fandom:
                     flow,
                     {
                         "scripts": [
-                            {"path": Utils.local_injector_url("injections/fandom.com/genshin-impact/hidden_exploration_objective.js")},
+                            {"path": Utils.local_injector_url("fandom.com/genshin-impact/hidden_exploration_objective.js")},
                         ],
                     }
                 )

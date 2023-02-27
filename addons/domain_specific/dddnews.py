@@ -42,7 +42,7 @@ class DailyDigitalDigest:
 
     async def response(self, flow: http.HTTPFlow) -> None:
         if flow.request.host != '3dnews.ru': return # strict host
-        
+
         if flow.response.status_code != 200: return  # process HTTP 200 only
         if len(flow.response.content) == 0: return  # skip empty responses
         if not Utils.is_html(flow): return # proccess html only
@@ -51,8 +51,8 @@ class DailyDigitalDigest:
 			flow,
 			{
                 "scripts": [
-                    {"path": Utils.local_injector_url("injections/3dnews.ru/js/adblock.js")},
-                    {"path": Utils.local_injector_url("injections/3dnews.ru/js/no_comments.js")},
+                    {"path": Utils.local_injector_url("3dnews.ru/js/adblock.js")},
+                    {"path": Utils.local_injector_url("3dnews.ru/js/no_comments.js")},
                 ],
             }
         )

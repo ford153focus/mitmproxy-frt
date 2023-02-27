@@ -13,7 +13,7 @@ class Injector:
             flow,
             {
                 "scripts": [
-                    {"path": Utils.local_injector_url("injections/_all_urls/js/utils.js"), "async": True},
+                    {"path": Utils.local_injector_url("_all_urls/js/utils.js"), "async": True},
                 ],
             }
         )

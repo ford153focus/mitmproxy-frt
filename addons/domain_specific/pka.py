@@ -12,7 +12,7 @@ class Pyatyorochka:
 			flow,
 			{
                 "scripts": [
-                    {"path": Utils.local_injector_url("injections/5ka.ru/js/sort.js")},
+                    {"path": Utils.local_injector_url("5ka.ru/js/sort.js")},
                 ],
             }
         )

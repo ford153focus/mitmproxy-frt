@@ -1,2 +1,36 @@
-[...document.querySelectorAll('#as2 .thdr')]?.pop()?.remove();
-[...document.querySelectorAll('#as2 .ttxt')]?.pop()?.remove();
+setTimeout(() => {
+    document
+        .evaluate("//*[text()='Обсуждение']", document)
+        .iterateNext()
+        .parentElement.parentElement.parentElement.parentElement
+        .nextElementSibling
+        .remove();
+
+    document
+        .evaluate("//*[text()='Обсуждение']", document)
+        .iterateNext()
+        .parentElement.parentElement.parentElement.parentElement
+        .remove();
+
+    document
+        .evaluate("//*[text()=' Добавить комментарий']", document)
+        .iterateNext()
+        .parentElement.parentElement.parentElement.parentElement
+        .nextElementSibling
+        .remove();
+
+    document
+        .evaluate("//*[text()=' Добавить комментарий']", document)
+        .iterateNext()
+        .parentElement.parentElement.parentElement.parentElement
+        .remove();
+
+    document
+        .getElementById("lenta_nav2")
+        .previousElementSibling.previousElementSibling.previousElementSibling
+        .remove();
+
+    document
+        .getElementById("lenta_nav2")
+        .remove();
+}, 50);

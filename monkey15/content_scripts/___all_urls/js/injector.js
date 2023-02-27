@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 // noinspection JSUnusedGlobalSymbols,FunctionNamingConventionJS
 
 class Checkers {
@@ -70,6 +71,11 @@ class Rules {
         if (!window.location.host.endsWith('kufar.by')) return;
         LibraryLoaders.notyf();
         Injectors.injectScript({src: '/web_accessible_resources/kufar.by/js/script.js'});
+    }
+
+    static async opennet() {
+        if (window.location.host !== 'www.opennet.ru') return;
+        Injectors.injectScript({src: '/web_accessible_resources/opennet.ru/js/no_comments.js'});
     }
 
     static async reactor() {

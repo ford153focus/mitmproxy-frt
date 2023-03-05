@@ -1,5 +1,7 @@
-beautifulsoup4
-mitmproxy
+beautifulsoup4==4.11.2
+htmlmin~=0.1.12
 lxml
-mysql-connector-python
-python-dotenv
+mitmproxy~=9.0.1
+mysql-connector-python~=8.0.32
+python-dotenv==1.0.0
+requests==2.28.2

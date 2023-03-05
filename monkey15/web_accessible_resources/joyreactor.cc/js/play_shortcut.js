@@ -9,16 +9,25 @@ window.___frt.PlayShortcut = class {
     play() {
         /** GIF */
         try {
-            this.post.querySelector('video').play();
-            this.post.setAttribute('data-playing', 'true');
+            this.post
+                .querySelector('video')
+                .play()
+                .then(r => console.info(r));
+
+            this.post
+                .setAttribute('data-playing', 'true');
         } catch (error) {
             // ignored
         }
 
         /** COUB */
         try {
-            this.post.querySelector('iframe').contentWindow.postMessage('play', '*');
-            this.post.setAttribute('data-playing', 'true');
+            this.post
+                .querySelector('iframe')
+                .contentWindow.postMessage('play', '*');
+
+            this.post
+                .setAttribute('data-playing', 'true');
         } catch (error) {
             // ignored
         }
@@ -26,9 +35,22 @@ window.___frt.PlayShortcut = class {
         /** YT */
         try {
             let frame = this.post.querySelector('iframe.youtube-player');
-            frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), 'https://www.youtube.com');
-            frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), 'https://www.youtube.com');
-            this.post.setAttribute('data-playing', 'true');
+
+            frame
+                .contentWindow
+                .postMessage(
+                    JSON.stringify({ event: 'command', func: 'playVideo' }),
+                    'https://www.youtube.com'
+                );
+
+            frame.contentWindow
+                .postMessage(
+                JSON.stringify({ event: 'command', func: 'playVideo' }),
+                'https://www.youtube.com'
+            );
+
+            this.post
+                .setAttribute('data-playing', 'true');
         } catch (error) {
             // ignored
         }
@@ -64,14 +86,13 @@ window.___frt.PlayShortcut = class {
 
     keyPressListener(event) {
         if (event.code !== 'KeyP') return;
-        let obj = window.___frt.jr.playShortCut; // coz 'this' is linked to document here
-        obj.post = document.querySelector('.postContainer .article.post-normal.active');
-        let status = obj.post.getAttribute('data-playing');
-        status === 'false' ? obj.play() : obj.stop();
+        this.post = document.querySelector('.postContainer .article.post-normal.active');
+        let status = this.post.getAttribute('data-playing');
+        status === 'false' ? this.play() : this.stop();
     }
 
     constructor() {
-        window._frt.injectScriptFile('https://www.youtube.com/iframe_api');
+        window._frt.Injectors.injectScript({src: 'https://www.youtube.com/iframe_api'});
 
         /** Catch all key presses */
         document.onkeyup = this.keyPressListener;
@@ -88,5 +109,4 @@ window.___frt.PlayShortcut = class {
     }
 }
 
-if (!window.___frt) window.___frt = {};
 window.___frt.playShortcut = new window.___frt.PlayShortcut();

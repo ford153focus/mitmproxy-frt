@@ -3,7 +3,12 @@
         {
             "js": [
                 "web_accessible_resources/_all_urls/js/utils.js",
-                "content_scripts/___all_urls/js/injector.js"
+                "web_accessible_resources/_all_urls/js/extensions.js",
+                "web_accessible_resources/_all_urls/js/checkers.js",
+                "web_accessible_resources/_all_urls/js/injectors.js",
+                "web_accessible_resources/_all_urls/js/library_loaders.js",
+
+                "content_scripts/___all_urls/js/rules.js"
             ],
             "matches": [
                 "<all_urls>"

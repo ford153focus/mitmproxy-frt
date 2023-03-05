@@ -1,5 +1,7 @@
+if (!window._frt) window._frt = {};
+
 /* eslint-disable no-unused-vars */
-class Catalog {
+window.___frt.Catalog = class {
     settingsSwitcher() {}
 
     loadMore() {

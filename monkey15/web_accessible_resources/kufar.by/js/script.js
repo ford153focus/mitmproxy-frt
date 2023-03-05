@@ -31,7 +31,7 @@ window.___frt.Kufar = class {
             this.add_ban(window.location.pathname);
         };
 
-        wr_button.insertAdjacentElement('afterEnd', clone);
+        wr_button.insertAdjacentElement('afterend', clone);
     }
 
     inject_ban_button_to_listing () {
@@ -77,7 +77,7 @@ window.___frt.Kufar = class {
         let bans = this.get_bans();
         bans.push(path);
         this.set_bans(bans);
-        window._frt.notify('забанено');
+        window._frt.utils.notify('забанено');
     }
 
     hide_banned() {

@@ -132,8 +132,8 @@ window.___frt.cls = class {
     }
 
     constructor() {
-        window._frt.loadBootstrap();
-        window._frt.loadFontAwesome();
+        window._frt.LibraryLoaders.bootStrap();
+        window._frt.LibraryLoaders.fontAwesome();
 
         let table = document.getElementById('fav_table');
         let bookmarks = this.grabBookmarks();

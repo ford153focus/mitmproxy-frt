@@ -3,7 +3,7 @@ class TrackerUtils {
      * Hide banned topics on start
      */
     async hideTopics() {
-        let hiddenTopics = await window._frt.lor.shared.getAllBannedTopics();
+        let hiddenTopics = await window._frt.utilslor.shared.getAllBannedTopics();
 
         for (const row of document.querySelectorAll('table.message-table tbody tr')) {
             let href = row.getElementsByTagName('td')[1].getElementsByTagName('a')[0].href;
@@ -21,7 +21,7 @@ class TrackerUtils {
         let href = row.getElementsByTagName('td')[1].getElementsByTagName('a')[0].href;
         let url = new URL(href);
 
-        window._frt.lor.shared.saveBan(url.pathname);
+        window._frt.utilslor.shared.saveBan(url.pathname);
         row.remove();
     }
 
@@ -62,6 +62,6 @@ class TrackerUtils {
 }
 
 setTimeout(() => {
-    if (typeof window._frt.lor === 'undefined') window._frt.lor = {};
-    window._frt.lor.tracker = new TrackerUtils();
+    if (typeof window._frt.utilslor === 'undefined') window._frt.utilslor = {};
+    window._frt.utilslor.tracker = new TrackerUtils();
 }, 5);

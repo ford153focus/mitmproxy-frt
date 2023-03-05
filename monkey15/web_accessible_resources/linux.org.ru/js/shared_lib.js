@@ -14,7 +14,7 @@ class LorSharedUtils {
         let obsoletionDate = new Date();
         obsoletionDate.setMonth(obsoletionDate.getMonth() - 6);
         obsoletionDate = obsoletionDate.getTime() / 1000;
-        obsoletionDate = parseInt(obsoletionDate).toFixed(0);
+        obsoletionDate = parseInt(obsoletionDate.toString()).toFixed(0);
 
 
         hiddenTopics = JSON.parse(hiddenTopics);
@@ -57,7 +57,7 @@ class LorSharedUtils {
 
     async getAllTopicsInTracker() {
         const parser = new DOMParser();
-        let data = await window._frt.fetch('https://www.linux.org.ru/tracker/');
+        let data = await window._frt.Fetchers.fetch('https://www.linux.org.ru/tracker/');
         let htmlDoc = parser.parseFromString(data, 'text/html');
         let topics = Array.from(htmlDoc.querySelectorAll('table.message-table tbody tr'));
         topics = topics.map(tr => tr.getElementsByTagName('td')[1].querySelector('a').href);
@@ -79,6 +79,6 @@ class LorSharedUtils {
 }
 
 setTimeout(() => {
-    if (typeof window._frt.lor === 'undefined') window._frt.lor = {};
-    window._frt.lor.shared = new LorSharedUtils();
+    if (typeof window._frt.utilslor === 'undefined') window._frt.utilslor = {};
+    window._frt.utilslor.shared = new LorSharedUtils();
 }, 3);

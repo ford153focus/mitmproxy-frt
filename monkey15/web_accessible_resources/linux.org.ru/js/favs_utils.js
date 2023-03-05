@@ -2,8 +2,8 @@ class FrtLorFavsUtils {
     static async drawTable() {
         let el = document.getElementById('bd');
         el.innerHTML = '';
-        await window._frt.injectHTML('/web_accessible_resources/linux.org.ru/html/favs_table.html', el, 'afterbegin');
-        window._frt.loadFontAwesome();
+        await window._frt.Injectors.injectInternalHTML('/web_accessible_resources/linux.org.ru/html/favs_table.html', el, 'afterbegin');
+        window._frt.LibraryLoaders.fontAwesome();
     }
 
     static async fillTable() {
@@ -16,7 +16,7 @@ class FrtLorFavsUtils {
 
 
         while (!endReached) {
-            let data = await window._frt.fetch(`${window.location.href}?offset=${offset}`);
+            let data = await window._frt.Fetchers.fetch(`${window.location.href}?offset=${offset}`);
             let htmlDoc = parser.parseFromString(data, 'text/html');
             let articles = htmlDoc.querySelectorAll('#bd article');
 

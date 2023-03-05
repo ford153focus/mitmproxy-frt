@@ -32,11 +32,6 @@ window._frt.Injectors = class {
 
     static async injectInternalHTML(url, target= document.body, position= 'beforeend') {
         let markupString = await window._frt.Fetchers.getExtensionFileContent(url);
-
-        let tag = document.createElement('div');
-        tag.style.display = 'none';
-        tag.innerHTML = markupString;
-
-        target.insertAdjacentElement(position, tag);
+        target.insertAdjacentHTML(position, markupString);
     }
 }

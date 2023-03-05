@@ -28,7 +28,13 @@ class Rules {
 
     static async OpenWRT() {
         if (!window.location.href.startsWith('https://openwrt.org/toh/views/toh_available_')) return;
-        await _frt.Injectors.injectInternalHTML('/web_accessible_resources/openwrt.org/html/toolbar.html');
+
+        await _frt.Injectors.injectInternalHTML(
+            '/web_accessible_resources/openwrt.org/html/toolbar.html',
+            document.querySelector(".table-responsive"),
+            'beforebegin'
+        );
+
         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/openwrt.org/js/sort.js'});
     }
 

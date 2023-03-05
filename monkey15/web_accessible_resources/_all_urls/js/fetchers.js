@@ -9,7 +9,7 @@ window._frt.Fetchers = class {
      * @param {boolean} isJson requested data is (not) json
      * @returns {Promise<any>} decoded json-object
      */
-    async static fetch (url, isJson=false) {
+    static async fetch (url, isJson=false) {
         const response = await fetch(url);
         return isJson ? await response.json() : await response.text();
     }
@@ -28,7 +28,7 @@ window._frt.Fetchers = class {
     }
 
 
-    async static getExtensionFileContent (filePath) {
+    static async getExtensionFileContent (filePath) {
         let url = chrome.runtime.getURL(filePath);
         return await this.fetch(url);
     }

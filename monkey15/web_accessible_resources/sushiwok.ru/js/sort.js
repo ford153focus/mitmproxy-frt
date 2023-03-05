@@ -1,4 +1,4 @@
-let products = document.querySelectorAll('[itemtype="http://schema.org/Product"]');
+let products = document.querySelectorAll('[itemtype="https://schema.org/Product"]');
 
 [...products]
     .sort((product1, product2) => {

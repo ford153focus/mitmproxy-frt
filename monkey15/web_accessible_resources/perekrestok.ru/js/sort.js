@@ -89,14 +89,14 @@ class FrtCatalog {
  */
 document.querySelector('.xf-paginator__more').onclick = () => {
     setTimeout(() => {
-        sort();
+        FrtCatalog.sort();
     }, 4321);
 };
 
 /**
  * Initial sort
  */
-sort();
+FrtCatalog.sort();
 
 /**
  * Load more automatically
@@ -117,7 +117,7 @@ const loaderIntervalHandler = setInterval(() => {
     /**
      * stop on dear items
      */
-    if (getPrice(lastItem) > 333) {
+    if (FrtCatalogItem.getPrice(lastItem) > 333) {
         clearInterval(loaderIntervalHandler);
     }
 }, 1234);

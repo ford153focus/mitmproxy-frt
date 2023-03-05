@@ -3,7 +3,7 @@ function filterProcessedVacancies() {
         let vacancies = document.querySelectorAll(`[data-qa="vacancy-serp__vacancy_${keyword}"]`);
         for (const vacancy of vacancies) {
             if (vacancy.href.search(/\d+$/) > -1) {
-                vacancy.parentNode.parentNode.parentNode.remove();
+                vacancy.parentElement.parentElement.parentElement.remove();
             }
         }
     }

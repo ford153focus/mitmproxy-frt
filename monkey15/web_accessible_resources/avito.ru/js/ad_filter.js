@@ -1,6 +1,6 @@
 class AvitoFilterUtility {
     constructor() {
-        this.adverts = document.querySelectorAll('[itemtype="http://schema.org/Product"]');
+        this.adverts = document.querySelectorAll('[itemtype="https://schema.org/Product"]');
 
         this.path = window.location.pathname.split('/');
 
@@ -14,6 +14,7 @@ class AvitoFilterUtility {
     }
 
     filterByTitleAndDesc() {
+        /** @var {any[]} */
         let filters = [
             'запчасти',
             'не рабо',

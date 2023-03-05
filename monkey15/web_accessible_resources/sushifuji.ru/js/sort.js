@@ -14,8 +14,8 @@ let products = document.querySelectorAll('#menu_block .row .one_product_col');
         weight1 = weight1.endsWith('кг') ? parseFloat(weight1)*1000 : parseInt(weight1);
         weight2 = weight2.endsWith('кг') ? parseFloat(weight2)*1000 : parseInt(weight2);
 
-        let ratio1 = parseInt(price1)/parseInt(weight1);
-        let ratio2 = parseInt(price2)/parseInt(weight2);
+        let ratio1 = price1/weight1;
+        let ratio2 = price2/weight2;
 
         return ratio1 - ratio2;
     })

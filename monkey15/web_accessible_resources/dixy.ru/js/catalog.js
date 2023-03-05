@@ -1,16 +1,7 @@
-String.prototype.frtRemoveSpaces = function () {
-    let t1 = this.trim();
-    let t2 = t1.frtFixSpaces();
-    let t3 = t2.replaceAll(' ', '');
-
-    return t3;
-};
-
 class DixyCatalogItem {
     static getPrice(item) {
         let priceTxt = item.querySelector('.dixyCatalogItemPrice__new').innerText.frtRemoveSpaces();
-        let price = parseInt(priceTxt);
-        return price;
+        return parseInt(priceTxt);
     }
 
     static getWeight(item) {
@@ -27,8 +18,8 @@ class DixyCatalogItem {
         matches = title.match(/(\d*\.?\d+)\s*(кг|л)/i)
         if (matches !== null) return parseFloat(matches[1]);
 
-        /** 
-         * 1 tea packet is 2 gramm usually, so there is 500 packets in 1 kilo 
+        /**
+         * 1 tea packet is 2 gramm usually, so there is 500 packets in 1 kilo
          */
         matches = title.match(/чай.+(\d+)\s*шт/i)
         if (matches !== null) return parseFloat(matches[1])/500;
@@ -114,7 +105,7 @@ class DixyCatalog {
     }
 
     static sort() {
-        let items = document.querySelectorAll('[itemtype="http://schema.org/Product"]');
+        let items = document.querySelectorAll('[itemtype="https://schema.org/Product"]');
         if (items.length === 0) return;
         items = Array.from(items);
         items
@@ -134,9 +125,9 @@ class DixyCatalog {
         if (window.___frt.observer) return;
 
         const config = {
-            attributes: true, 
-            childList: true, 
-            subtree: true 
+            attributes: true,
+            childList: true,
+            subtree: true
         };
 
         window.___frt.observer = new MutationObserver(DixyCatalog.observerCallback);
@@ -146,7 +137,7 @@ class DixyCatalog {
     static observerCallback() {
         if (document.querySelector('a.btn.view-more') === null) return;
         if (window.___frt.loading === 1) return;
-        
+
         DixyCatalog.loadMore();
     }
 }
@@ -158,8 +149,8 @@ class Dixy {
 
         DixyCatalog.switchSort();
         DixyCatalog.loadMore();
-        
-        window.___frt.loading === 1;
+
+        window.___frt.loading = 1;
         DixyCatalog.setObserver();
     }
 }

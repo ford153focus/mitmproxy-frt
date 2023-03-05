@@ -11,8 +11,8 @@ let products = document.querySelectorAll('.catalog-list > .catalog-list__item');
         price1 = parseInt(price1);
         price2 = parseInt(price2);
 
-        let ratio1 = parseInt(price1)/parseInt(weight1);
-        let ratio2 = parseInt(price2)/parseInt(weight2);
+        let ratio1 = price1/weight1;
+        let ratio2 = price2/weight2;
 
         return ratio1 - ratio2;
     })

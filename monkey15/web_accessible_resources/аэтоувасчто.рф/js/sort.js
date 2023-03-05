@@ -14,8 +14,8 @@ let products = document.querySelectorAll('.gt-grid.gt-grid-3 > .gt-grid-col');
         weight1 = parseInt(weight1);
         weight2 = parseInt(weight2);
 
-        let ratio1 = parseInt(price1)/parseInt(weight1);
-        let ratio2 = parseInt(price2)/parseInt(weight2);
+        let ratio1 = price1/weight1;
+        let ratio2 = price2/weight2;
 
         return ratio1 - ratio2;
     })

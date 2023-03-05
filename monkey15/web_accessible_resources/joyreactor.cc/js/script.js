@@ -1,9 +1,9 @@
-// noinspection JSUnusedGlobalSymbols
-// eslint-disable-next-line no-unused-vars
-class ReactorUtils {
+if (!window.___frt) window.___frt = {};
+
+window.___frt.ReactorUtils = class {
     /**
-     * @usage window.___frt.utils.rateAllComments('ford153focus', 'minus')
-     * @usage window.___frt.utils.rateAllComments('ford153focus', 'plus')
+     * @usage window.___frt.ReactorUtils.rateAllComments('ford153focus', 'minus')
+     * @usage window.___frt.ReactorUtils.rateAllComments('ford153focus', 'plus')
      */
     static rateAllComments(target, direction) {
         let i = 1;
@@ -16,5 +16,13 @@ class ReactorUtils {
             }, 333*i); // delayed voting to avoid ddos protection trigger
             i++;
         }
+    }
+
+    static downVoteAll(target) {
+        this.rateAllComments(target, 'minus')
+    }
+
+    static upVoteAll(target) {
+        this.rateAllComments(target, 'plus')
     }
 }

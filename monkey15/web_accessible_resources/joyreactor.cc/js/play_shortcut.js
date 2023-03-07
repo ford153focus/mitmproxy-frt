@@ -45,9 +45,9 @@ window.___frt.PlayShortcut = class {
 
             frame.contentWindow
                 .postMessage(
-                JSON.stringify({ event: 'command', func: 'playVideo' }),
-                'https://www.youtube.com'
-            );
+                    JSON.stringify({ event: 'command', func: 'playVideo' }),
+                    'https://www.youtube.com'
+                );
 
             this.post
                 .setAttribute('data-playing', 'true');
@@ -95,7 +95,7 @@ window.___frt.PlayShortcut = class {
         window._frt.Injectors.injectScript({src: 'https://www.youtube.com/iframe_api'});
 
         /** Catch all key presses */
-        document.onkeyup = this.keyPressListener;
+        document.addEventListener('keyup', this.keyPressListener.bind(this));
 
         /** enable js api in YT players */
         for (const yt of document.querySelectorAll('.youtube-player')) {
@@ -107,6 +107,6 @@ window.___frt.PlayShortcut = class {
             post.setAttribute('data-playing', 'false');
         }
     }
-}
+};
 
 window.___frt.playShortcut = new window.___frt.PlayShortcut();

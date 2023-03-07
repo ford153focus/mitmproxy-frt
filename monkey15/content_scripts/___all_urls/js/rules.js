@@ -21,6 +21,11 @@ class Rules {
         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/kufar.by/js/script.js'});
     }
 
+    static async musicbrainz() {
+        if (!window.location.host.endsWith('musicbrainz.org')) return;
+        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/musicbrainz.org/js/marker.js'});
+    }
+
     static async OpenNet() {
         if (window.location.host !== 'www.opennet.ru') return;
         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/opennet.ru/js/no_comments.js'});
@@ -81,12 +86,22 @@ class Rules {
 
     static async main() {
         _frt.Injectors.injectInternalScript({
-            src: '/web_accessible_resources/_all_urls/js/utils.js',
+            src: '/web_accessible_resources/_all_urls/js/extensions.js',
             async: true,
         });
 
         _frt.Injectors.injectInternalScript({
-            src: '/web_accessible_resources/_all_urls/js/extensions.js',
+            src: '/web_accessible_resources/_all_urls/js/fetchers.js',
+            async: true,
+        });
+
+        _frt.Injectors.injectInternalScript({
+            src: '/web_accessible_resources/_all_urls/js/injectors.js',
+            async: true,
+        });
+
+        _frt.Injectors.injectInternalScript({
+            src: '/web_accessible_resources/_all_urls/js/utils.js',
             async: true,
         });
 

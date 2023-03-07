@@ -26,7 +26,7 @@ window._frt.Injectors = class {
     }
 
     static injectInternalStyleSheet(attributes) {
-        attributes.src = chrome.runtime.getURL(attributes.src);
+        attributes.href = chrome.runtime.getURL(attributes.href);
         this.injectSheet(attributes);
     }
 

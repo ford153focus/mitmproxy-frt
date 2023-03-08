@@ -1,5 +1,11 @@
 // noinspection JSUnusedGlobalSymbols
 class Rules {
+    static async evroopt() {
+        if (!window.location.href.startsWith('https://evroopt.by/redprice/')) return;
+
+        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/evroopt.by/js/catalog.js'});
+    }
+
     static async fandom_wiki() {
         if (!window.location.host.endsWith('fandom.com')) return;
 

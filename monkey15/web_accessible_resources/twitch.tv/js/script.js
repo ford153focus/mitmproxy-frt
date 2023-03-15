@@ -1,18 +1,23 @@
 window.___frt = class {
-    static unwantedCats = [
-        'casino',
-        'just chatting',
-        'poker',
-        'slots',
-        'virtual casino',
-        'valorant',
-        'league of legends'
-    ];
+    static highLightedCategories = {
+        'casino': '#c00',
+        'poker': '#c00',
+        'slots': '#c00',
+        'virtual casino': '#c00',
 
-    static unwantedStreamNames = [
-        'казино',
-        'слоты'
-    ];
+        'valorant': '#550',
+        'league of legends': '#550',
+
+        'just chatting': '#555',
+
+        'counter-strike: global offensive': '#030',
+        'dota 2': '#030',
+    };
+
+    static highLightedStreamNames = {
+        'казино': '#c00',
+        'слоты': '#c00',
+    };
 
     static adBlock() {
         window._frt.removeSelectorAll('div[id^="dfp-directory-"]');
@@ -31,6 +36,7 @@ window.___frt = class {
 
     static streamsFilter() {
         let streams = document.querySelectorAll('div.tw-tower > div');
+        /** @type {HTMLElement[]} */
         streams = Array.from(streams);
         streams.shift(); //1st element is not stream
 
@@ -41,11 +47,15 @@ window.___frt = class {
             if (streamName === undefined) continue;
             if (gameName === undefined) continue;
 
-            if (this.unwantedCats.includes(gameName)) stream.remove();
+            for (let [key,value] of Object.entries(this.highLightedStreamNames)) {
+                if (streamName.includes(key)) {
+                    stream.style.backgroundColor = value;
+                }
+            }
 
-            for (const unwantedStreamName of this.unwantedStreamNames) {
-                if (streamName.includes(unwantedStreamName)) {
-                    stream.remove();
+            for (let [key,value] of Object.entries(this.highLightedCategories)) {
+                if (gameName === key) {
+                    stream.style.backgroundColor = value;
                 }
             }
         }

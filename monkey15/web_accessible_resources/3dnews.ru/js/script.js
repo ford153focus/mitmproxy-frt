@@ -7,7 +7,7 @@
 
         document.querySelector('.content-block.relatedbox.rbxglob')?.frtRemove('nullify');
 
-        window._frt.removeSelectorAll('.nomargins.ad');
+        window._frt.utils.removeAllBySelector('.nomargins.ad');
     }
 
     function noComments() {

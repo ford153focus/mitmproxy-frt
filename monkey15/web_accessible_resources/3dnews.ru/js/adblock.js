@@ -5,7 +5,7 @@ function adBlock() {
     document.getElementById('yandex-widget-offers').innerHTML = '';
 
     document.querySelector('.content-block.relatedbox.rbxglob').innerHTML = '';
-    window._frt.removeSelectorAll('.nomargins.ad');
+    window._frt.utils.removeAllBySelector('.nomargins.ad');
 }
 
 function observerCallback() {

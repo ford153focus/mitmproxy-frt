@@ -2,7 +2,7 @@ if (!window._frt) window._frt = {};
 
 // noinspection JSUnusedGlobalSymbols
 window._frt.Utils = class {
-    removeSelectorAll (selector, method='remove') {
+    removeAllBySelector (selector, method='remove') {
         let elements = document.querySelectorAll(selector);
 
         if (method==='nullify')

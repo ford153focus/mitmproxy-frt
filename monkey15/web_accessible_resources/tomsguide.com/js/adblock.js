@@ -6,6 +6,6 @@ setTimeout(() => {
     document.getElementById('rightcol_top_anchor')?.remove();
     document.getElementsByClassName('page-content-rightcol')[0]?.remove();
 
-    window._frt.removeSelectorAll('iframe');
-    window._frt.removeSelectorAll('[data-google-query-id]');
+    window._frt.utils.removeAllBySelector('iframe');
+    window._frt.utils.removeAllBySelector('[data-google-query-id]');
 }, 5);

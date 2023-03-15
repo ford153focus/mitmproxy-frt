@@ -1,1 +1,1 @@
-setTimeout(() => window._frt.removeSelectorAll('[id^="begun_block_"]'), 5);
+setTimeout(() => window._frt.utils.removeAllBySelector('[id^="begun_block_"]'), 5);

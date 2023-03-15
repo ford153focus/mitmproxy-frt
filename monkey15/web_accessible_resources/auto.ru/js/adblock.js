@@ -1,4 +1,4 @@
 setInterval(() => {
-    window._frt.removeSelectorAll('iframe');
-    window._frt.removeSelectorAll('.ListingItem-module__adv');
+    window._frt.utils.removeAllBySelector('iframe');
+    window._frt.utils.removeAllBySelector('.ListingItem-module__adv');
 }, 1530);

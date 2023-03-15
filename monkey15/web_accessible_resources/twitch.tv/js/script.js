@@ -1,26 +1,6 @@
 window.___frt = class {
-    static highLightedCategories = {
-        'casino': '#c00',
-        'poker': '#c00',
-        'slots': '#c00',
-        'virtual casino': '#c00',
-
-        'valorant': '#550',
-        'league of legends': '#550',
-
-        'just chatting': '#555',
-
-        'counter-strike: global offensive': '#030',
-        'dota 2': '#030',
-    };
-
-    static highLightedStreamNames = {
-        'казино': '#c00',
-        'слоты': '#c00',
-    };
-
     static adBlock() {
-        window._frt.removeSelectorAll('div[id^="dfp-directory-"]');
+        window._frt.utils.removeAllBySelector('div[id^="dfp-directory-"]');
     }
 
     static bonusHunter() {
@@ -47,16 +27,33 @@ window.___frt = class {
             if (streamName === undefined) continue;
             if (gameName === undefined) continue;
 
-            for (let [key,value] of Object.entries(this.highLightedStreamNames)) {
-                if (streamName.includes(key)) {
-                    stream.style.backgroundColor = value;
-                }
+            switch (true) {
+                case streamName.includes('казино'):
+                    stream.style.backgroundColor = '#c00';
+                    break;
+                case streamName.includes('слоты'):
+                    stream.style.backgroundColor = '#c00';
+                    break;
             }
 
-            for (let [key,value] of Object.entries(this.highLightedCategories)) {
-                if (gameName === key) {
-                    stream.style.backgroundColor = value;
-                }
+            switch (gameName) {
+                case 'casino':
+                case 'poker':
+                case 'slots':
+                case 'virtual casino':
+                    stream.style.backgroundColor = '#c00';
+                    break;
+                case 'valorant':
+                case 'league of legends':
+                    stream.style.backgroundColor = '#550';
+                    break;
+                case 'just chatting':
+                    stream.style.backgroundColor = '#555';
+                    break;
+                case 'counter-strike: global offensive':
+                case 'dota 2':
+                    stream.style.backgroundColor = '#030';
+                    break;
             }
         }
     }

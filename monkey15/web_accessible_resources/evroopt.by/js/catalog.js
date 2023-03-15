@@ -42,4 +42,5 @@ window.___frt.CatalogItem = class {
     }
 };
 
+window.___frt.Catalog.filter();
 window.___frt.Catalog.reSort();

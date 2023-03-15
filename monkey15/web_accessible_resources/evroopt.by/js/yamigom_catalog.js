@@ -8,8 +8,26 @@ window.___frt.Catalog = class {
                 el.remove();
             }
 
-            if (window.___frt.CatalogItem.getPricePerKg(el) > 15.55) {
-                el.style['background-color'] = 'darkgray';
+            let price = window.___frt.CatalogItem.getPricePerKg(el);
+
+            switch (true) {
+                case price < 3.55:
+                    el.querySelector('a').style.borderColor = 'white'
+                    break;
+                case price < 5.55:
+                    el.querySelector('a').style.borderColor = 'lightgreen'
+                    break;
+                case price < 10.55:
+                    el.querySelector('a').style.borderColor = 'green'
+                    break;
+                case price < 13.55:
+                    el.querySelector('a').style.borderColor = 'yellow'
+                    break;
+                case price < 15.55:
+                    el.querySelector('a').style.borderColor = 'red'
+                    break;
+                default:
+                    el.querySelector('a').style.borderColor = 'black'
             }
         }
     }
@@ -40,7 +58,7 @@ window.___frt.CatalogItem = class {
     static nonKiloUnits = [' г', ' мг', ' мл'];
 
     static getPricePerKg(item) {
-        let price_txt = item.querySelector('strong[class^="Price"]')?.innerText.replace(',','.');
+        let price_txt = item.querySelector('strong[class^="Price"]')?.innerText.replace(',', '.');
         if (typeof price_txt === 'undefined') return 0;
         let price = parseFloat(price_txt);
         if (price_txt.endsWith('кг')) return price;
@@ -51,9 +69,9 @@ window.___frt.CatalogItem = class {
         let weight = parseFloat(weight_txt);
         for (const nonKiloUnit of this.nonKiloUnits)
             if (weight_txt.endsWith(nonKiloUnit))
-                weight = weight/1000;
+                weight = weight / 1000;
 
-        return price/weight;
+        return price / weight;
     }
 }
 

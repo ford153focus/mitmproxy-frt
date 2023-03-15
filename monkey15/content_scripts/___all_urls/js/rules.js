@@ -4,11 +4,15 @@ class Rules {
         if (window.location.href.startsWith('https://evroopt.by/redprice/'))
             _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/evroopt.by/js/catalog.js'});
 
-        if (window.location.href.startsWith('https://yamigom-store.by/category/'))
+        if (window.location.href.startsWith('https://yamigom-store.by/category/')) {
+            await _frt.Injectors.injectInternalHTML('/web_accessible_resources/evroopt.by/html/yamigom_sort_btn.html');
             _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/evroopt.by/js/yamigom_catalog.js'});
+        }
 
-        if (window.location.href === 'https://yamigom-store.by/cart')
+        if (window.location.href === 'https://yamigom-store.by/cart') {
             _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/evroopt.by/js/yamigom_cart.js'});
+        }
+
     }
 
     static async fandom_wiki() {

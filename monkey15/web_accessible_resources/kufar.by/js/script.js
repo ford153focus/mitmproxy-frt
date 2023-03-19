@@ -9,6 +9,7 @@ window.___frt.Kufar = class {
         for (let el of document.querySelectorAll("[alt='placeholder']")) el.parentElement.parentElement.parentElement.frtHide();
 
         for (let el of document.querySelectorAll("img[alt='vip']")) el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.frtHide();
+        for (let el of _frt.utils.getElementsByXPath("//a[contains(@class, 'highlighted')]")) el.parentElement.frtHide();
 
         document.querySelector('[class^="styles_buttons-right__container"] button')?.click();
 

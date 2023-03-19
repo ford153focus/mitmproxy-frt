@@ -19,6 +19,26 @@ window._frt.Utils = class {
     }
 
     /**
+     * Get elements by XPath query
+     *
+     * @param {string} query
+     * @returns {HTMLElement[]}
+     */
+    getElementsByXPath(query) {
+        /** @type {HTMLElement[]} */
+        let result = [];
+
+        /** @type {XPathResult} */
+        let xPathResult = document.evaluate(query, document, null, 7);
+
+        for (let i = 0; i < xPathResult.snapshotLength; i++) {
+            result.push(xPathResult.snapshotItem(i));
+        }
+
+        return result;
+    }
+
+    /**
      * Async sleep implementation in JS
      * @param {number} milliseconds Sleep length
      */

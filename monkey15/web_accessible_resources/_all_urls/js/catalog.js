@@ -1,4 +1,4 @@
-if (!window._frt) window._frt = {};
+if (!window.___frt) window.___frt = {};
 
 /* eslint-disable no-unused-vars */
 window.___frt.Catalog = class {

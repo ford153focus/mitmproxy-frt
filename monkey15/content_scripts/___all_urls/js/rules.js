@@ -70,6 +70,7 @@ class Rules {
         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/play_shortcut.js'});
         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/rate4comments.js'});
         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/script.js'});
+        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/share_buttons.js'});
         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/unhide_comments.js'});
     }
 

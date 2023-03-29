@@ -18,6 +18,7 @@ let completed = [
     "For a Rose's Wellbeing",
     "Fourth's a Deathmatch",
     "Gendou Ringo's Strange Fortune Slips",
+    "Golden Life, From Yesteryear Awoken",
     "Hanayama Kaoru's Flowery Plan",
     "Ipe's Fishing Advice",
     "Ishine Script Deciphering",

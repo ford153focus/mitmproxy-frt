@@ -41,6 +41,13 @@ class Rules {
         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/musicbrainz.org/js/marker.js'});
     }
 
+    static async onliner() {
+        if (window.location.host === 'ab.onliner.by') {
+            _frt.LibraryLoaders.notyf();
+            _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/onliner.by/js/ab.js'});
+        }
+    }
+
     static async OpenNet() {
         if (window.location.host !== 'www.opennet.ru') return;
         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/opennet.ru/js/no_comments.js'});

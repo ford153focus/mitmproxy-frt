@@ -68,11 +68,6 @@ class Rules {
     static async reactor() {
         if (!window.location.host.endsWith('reactor.cc')) return;
 
-        await _frt.Injectors.injectInternalHTML('/web_accessible_resources/joyreactor.cc/html/comment_text_tools.html');
-
-        _frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/joyreactor.cc/css/comment_text_tools.css'});
-        _frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/joyreactor.cc/css/rate4comments.css'});
-
         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/comment_text_tools.js'});
         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/play_shortcut.js'});
         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/rate_highlighted.js'});

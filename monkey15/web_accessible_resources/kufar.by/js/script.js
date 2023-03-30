@@ -1,7 +1,86 @@
 if (!window.___frt) window.___frt = {};
 
-window.___frt.Kufar = class {
-    ad_block () {
+window.___frt.Bans = class {
+    /**
+     * @returns {string[]}
+     */
+    static get () {
+        try {
+            return JSON.parse(localStorage.bans)
+          } catch (exception) {
+            return [];
+        }
+    }
+
+    /**
+     * @param {string[]} bans
+     */
+    static set (bans) {
+        let set = new Set(bans);
+        let array = Array.from(set);
+        localStorage.bans = JSON.stringify(array);
+    }
+
+    /**
+     * @param {string} path
+     */
+    static add (path) {
+        let bans = window.___frt.Bans.get();
+        bans.push(path);
+        this.set(bans);
+        window._frt.utils.notify('забанено');
+    }
+};
+
+window.___frt.Injectors = class {
+    static inject_ban_button_on_details_page () {
+        let buttons=[...document.querySelectorAll('button')];
+        let wr_button = buttons.filter(el => el.innerText === 'Написать').shift();
+        if (wr_button === undefined) return;
+        let clone = wr_button.cloneNode(true);
+        clone.innerHTML='Забанить';
+        clone.style.backgroundColor = 'red';
+
+        clone.onclick = () => {
+            window.___frt.Bans.add(window.location.pathname);
+        };
+
+        wr_button.insertAdjacentElement('afterend', clone);
+    }
+
+    static inject_ban_button_to_listing () {
+        let button = document.createElement("button");
+
+        button.className = 'ban-it';
+        button.innerHTML = 'Скрывать';
+
+        button.style['margin-top']       = ' 1mm';
+        button.style['padding']          = '2mm 0';
+        button.style['background-color'] = ' darkorange';
+        button.style['cursor']           = 'pointer';
+
+        let click = (e) => {
+            e.preventDefault();
+
+            let href= e.target.parentElement.parentElement.href;
+            let url = new URL(href);
+            let path = url.pathname;
+            window.___frt.Bans.add(path);
+            window.___frt.ListingManipulators.hide_banned();
+        }
+
+        for (const el of document.querySelectorAll('[class^="styles_cards"] section [class^="styles_content"]')) {
+            if (el.querySelector('button.ban-it') !== null) continue;
+            let clone = button.cloneNode(true);
+            clone.onclick = click;
+            el.insertAdjacentElement('beforeend', clone);
+        }
+    }
+
+};
+
+window.___frt.ListingManipulators = class {
+    static ad_block () {
         for (let el of document.querySelectorAll("[class^='styles_banner']")) el.frtHide();
         for (let el of document.querySelectorAll("[class^='styles_poleposition']")) el.frtHide();
         for (let el of document.querySelectorAll("[class^='styles_bannerContainer']")) el.frtHide();
@@ -20,70 +99,9 @@ window.___frt.Kufar = class {
         }
     }
 
-    inject_ban_button_on_details_page () {
-        let buttons=[...document.querySelectorAll('button')];
-        let wr_button = buttons.filter(el => el.innerText === 'Написать').shift();
-        if (wr_button === undefined) return;
-        let clone = wr_button.cloneNode(true);
-        clone.innerHTML='Забанить';
-        clone.style.backgroundColor = 'red';
-
-        clone.onclick = () => {
-            this.add_ban(window.location.pathname);
-        };
-
-        wr_button.insertAdjacentElement('afterend', clone);
-    }
-
-    inject_ban_button_to_listing () {
-        let button = document.createElement("button");
-        button.innerHTML = 'Скрывать';
-
-        button.style['margin-top']       = ' 1mm';
-        button.style['padding']          = '2mm 0';
-        button.style['background-color'] = ' darkorange';
-        button.style['cursor']           = 'pointer';
-
-        let click = (e) => {
-            e.preventDefault();
-
-            let href= e.target.parentElement.parentElement.href;
-            let url = new URL(href);
-            let path = url.pathname;
-            this.add_ban(path);
-        }
-
-        for (const el of document.querySelectorAll('[class^="styles_cards"] section [class^="styles_content"]')) {
-            let clone = button.cloneNode(true);
-            clone.onclick = click;
-            el.insertAdjacentElement('beforeend', clone);
-        }
-    }
-
-    get_bans () {
-        try {
-            return JSON.parse(localStorage.bans)
-          } catch (exception) {
-            return [];
-        }
-    }
-
-    set_bans (bans) {
-        let set = new Set(bans);
-        let array = Array.from(set);
-        localStorage.bans = JSON.stringify(array);
-    }
-
-    add_ban (path) {
-        let bans = this.get_bans();
-        bans.push(path);
-        this.set_bans(bans);
-        window._frt.utils.notify('забанено');
-    }
-
-    hide_banned() {
+    static hide_banned() {
         setInterval(() => {
-            let bans = this.get_bans();
+            let bans = window.___frt.Bans.get();
 
             for (const el of document.querySelectorAll('[class^="styles_cards"] section > a')) {
                 let href = el?.href;
@@ -109,7 +127,7 @@ window.___frt.Kufar = class {
         }, 5555);
     }
 
-    mark_broken() {
+    static mark_broken() {
         let headings = document.getElementsByTagName('h3');
 
         let black_list = [
@@ -129,17 +147,44 @@ window.___frt.Kufar = class {
                     el.parentElement.parentElement.parentElement.style.backgroundColor = 'red';
     }
 
+    static highlight_near_districts() {
+        for (const el of document.querySelectorAll('[class^="styles_cards"] section')) {
+            let secondary = el.querySelector('div[class^="styles_secondary__"] > p');
+            let district = secondary.innerText.trim().frtFixSpaces();
+
+            switch (district) {
+                case 'Минск, Фрунзенский':
+                    secondary.style.backgroundColor = '#5f5';
+                    break;
+                case 'Минск, Московский':
+                    secondary.style.backgroundColor = '#5c5';
+                    break;
+            }
+        }
+    }
+};
+
+window.___frt.Kufar = class {
+    observerCallback() {
+        window.___frt.Injectors.inject_ban_button_to_listing();
+
+        window.___frt.ListingManipulators.ad_block();
+        window.___frt.ListingManipulators.hide_banned();
+        window.___frt.ListingManipulators.mark_broken();
+        window.___frt.ListingManipulators.highlight_near_districts();
+    }
+
     constructor() {
         setTimeout(() => {
-            this.ad_block();
+            window.___frt.Injectors.inject_ban_button_on_details_page();
 
-            this.inject_ban_button_on_details_page();
-            this.inject_ban_button_to_listing();
+            this.observer = new MutationObserver(this.observerCallback.bind(this));
+            const config = { attributes: true, childList: true, subtree: true };
+            this.observer.observe(document.body, config);
 
-            this.hide_banned();
-            this.mark_broken();
+            this.observerCallback();
         }, 333);
     }
-}
+};
 
 window.___frt.kufar = new window.___frt.Kufar();

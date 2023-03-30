@@ -17,7 +17,7 @@ class Reactor:
                 "scripts": [
                     {"path": Utils.local_injector_url("joyreactor.cc/js/comment_text_tools.js")},
                     {"path": Utils.local_injector_url("joyreactor.cc/js/play_shortcut.js")},
-                    {"path": Utils.local_injector_url("joyreactor.cc/js/rate4comments.js")},
+                    {"path": Utils.local_injector_url("joyreactor.cc/js/rate_highlighted.js")},
                     {"path": Utils.local_injector_url("joyreactor.cc/js/script.js")},
                     {"path": Utils.local_injector_url("joyreactor.cc/js/unhide_comments.js")},
                 ],

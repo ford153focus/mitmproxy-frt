@@ -21,12 +21,12 @@ class Rules {
         document.querySelector(".top-ads-container").remove();
 
         if (window.location.host.startsWith('genshin-impact')) {
-            if (window.location.pathname === '/wiki/Event') {
-                _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/event_list.js'});
-            }
-            if (window.location.pathname === '/wiki/Hidden_Exploration_Objective') {
-                _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/hidden_exploration_objective.js'});
-            }
+            _frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/fandom.com/genshin-impact/css/styles.css'});
+
+            if (window.location.pathname === '/wiki/Event')                        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/event_list.js'});
+            if (window.location.pathname === '/wiki/Hidden_Exploration_Objective') _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/hidden_exploration_objective.js'});
+            if (window.location.pathname === '/wiki/Wonders_of_the_World')         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/wonders_of_the_world.js'});
+            if (window.location.pathname === '/wiki/World_Quest/List')             _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/quest_list.js'});
         }
     }
 

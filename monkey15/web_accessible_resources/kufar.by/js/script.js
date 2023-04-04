@@ -1,48 +1,16 @@
 if (!window.___frt) window.___frt = {};
 
-window.___frt.Bans = class {
-    /**
-     * @returns {string[]}
-     */
-    static get () {
-        try {
-            return JSON.parse(localStorage.bans)
-          } catch (exception) {
-            return [];
-        }
-    }
-
-    /**
-     * @param {string[]} bans
-     */
-    static set (bans) {
-        let set = new Set(bans);
-        let array = Array.from(set);
-        localStorage.bans = JSON.stringify(array);
-    }
-
-    /**
-     * @param {string} path
-     */
-    static add (path) {
-        let bans = window.___frt.Bans.get();
-        bans.push(path);
-        this.set(bans);
-        window._frt.utils.notify('забанено');
-    }
-};
-
 window.___frt.Injectors = class {
     static inject_ban_button_on_details_page () {
         let buttons=[...document.querySelectorAll('button')];
         let wr_button = buttons.filter(el => el.innerText === 'Написать').shift();
-        if (wr_button === undefined) return;
+        if (!wr_button) return;
         let clone = wr_button.cloneNode(true);
         clone.innerHTML='Забанить';
         clone.style.backgroundColor = 'red';
 
         clone.onclick = () => {
-            window.___frt.Bans.add(window.location.pathname);
+            window._frt.Bans.add(window.location.pathname);
         };
 
         wr_button.insertAdjacentElement('afterend', clone);
@@ -65,7 +33,7 @@ window.___frt.Injectors = class {
             let href= e.target.parentElement.parentElement.href;
             let url = new URL(href);
             let path = url.pathname;
-            window.___frt.Bans.add(path);
+            window._frt.Bans.add(path);
             window.___frt.ListingManipulators.hide_banned();
         }
 
@@ -101,7 +69,7 @@ window.___frt.ListingManipulators = class {
 
     static hide_banned() {
         setInterval(() => {
-            let bans = window.___frt.Bans.get();
+            let bans = window._frt.Bans.get();
 
             for (const el of document.querySelectorAll('[class^="styles_cards"] section > a')) {
                 let href = el?.href;

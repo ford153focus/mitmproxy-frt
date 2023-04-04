@@ -1,5 +1,13 @@
 // noinspection JSUnusedGlobalSymbols
 class Rules {
+    static async eAuction_by() {
+        if (window.location.host === 'e-auction.by') {
+            _frt.LibraryLoaders.notyf();
+            _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
+            _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/e-auction.by/js/script.js'});
+        }
+    }
+
     static async evroopt() {
         if (window.location.href.startsWith('https://evroopt.by/redprice/'))
             _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/evroopt.by/js/catalog.js'});
@@ -12,7 +20,6 @@ class Rules {
         if (window.location.href === 'https://yamigom-store.by/cart') {
             _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/evroopt.by/js/yamigom_cart.js'});
         }
-
     }
 
     static async fandom_wiki() {
@@ -33,6 +40,7 @@ class Rules {
     static async kufar() {
         if (!window.location.host.endsWith('kufar.by')) return;
         _frt.LibraryLoaders.notyf();
+        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/kufar.by/js/script.js'});
     }
 
@@ -44,6 +52,7 @@ class Rules {
     static async onliner() {
         if (window.location.host === 'ab.onliner.by') {
             _frt.LibraryLoaders.notyf();
+            _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
             _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/onliner.by/js/ab.js'});
         }
     }

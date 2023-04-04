@@ -1,31 +1,32 @@
-// eslint-disable-next-line no-unused-vars
-class Monkey15 {
+if (!window.___frt) window.___frt = {};
+
+window.___frt.Auchan = class {
     static getKiloPrice(item) {
         if (item.querySelector("article.hidden") !== null) return Number.MAX_SAFE_INTEGER;
 
-        let weightTxt = item.querySelector('a.linkToPDP')
-        weightTxt = weightTxt.innerText.replaceAll(',', '.').trim();
+        /** @type {HTMLDivElement} */
+        let itemPriceEl = item.querySelector('div.productCardPriceData')
+        let itemTxt = itemPriceEl.innerText
+                                        .replaceAll(',', '.')
+                                        .trim()
+                                        .replaceAll(/(\d)\s(\d)/ig, '$1$2'); // drop the space in price
+        let itemPrice = parseFloat(itemTxt);
+
+        /** @type {HTMLAnchorElement} */
+        let weightEl = item.querySelector('a.linkToPDP')
+        let weightTxt = weightEl.innerText.replaceAll(',', '.').trim();
+
         let weightGram = parseInt(weightTxt.match(/\d+\s*(г|мл)?\.?$/gi)?.shift());
+        if (weightGram) return itemPrice / weightGram * 1000;
+
         let weightKilo = parseFloat(weightTxt.match(/\d+\.?\d*\s*(л|кг|шт)\.?$/gi)?.shift());
+        if (weightKilo) return itemPrice / weightKilo;
 
-        let itemPrice = item.querySelector('div.productCardPriceData')
-        itemPrice = itemPrice.innerText.replaceAll(',', '.').trim();
-        itemPrice = itemPrice.replaceAll(/(\d)\s(\d)/ig, '$1$2'); // drop the space in price
-        itemPrice = parseFloat(itemPrice);
-
-        let kiloPrice = itemPrice; // basic value is price as it
-
-        if (weightKilo) {
-            kiloPrice = itemPrice / weightKilo;
-        } else if (weightGram) {
-            kiloPrice = itemPrice / weightGram * 1000;
-        }
-
-        return kiloPrice;
+        return itemPrice;
     }
 
     static sort() {
-        let items = document.querySelectorAll('div[class="css-n9ebcy-Item"]');
+        let items = document.querySelectorAll('div[class^="css-"][class$="-Item"]');
         [...items]
             .sort((item1, item2) => {
                 return this.getKiloPrice(item1) - this.getKiloPrice(item2);
@@ -45,19 +46,19 @@ class Monkey15 {
         document.querySelector('#m15-price-to span.value').innerHTML = priceTo;
 
         for (const item of document.querySelectorAll('div[class="css-n9ebcy-Item"]')) {
-            let kiloPrice = Monkey15.getKiloPrice(item);
+            let kiloPrice = this.getKiloPrice(item);
             let discount = Math.abs(parseInt(item.querySelector('span.discountValue')?.innerText));
 
-            if (isNaN(discount)) {
-                discount = 0;
-            }
+            if (isNaN(discount)) discount = 0;
 
-            if (discount < discountFrom ||
-                kiloPrice > priceTo ||
-                kiloPrice < priceFrom) {
-                item.style.display='none';
-            } else {
-                item.style.display='block';
+            switch (true) {
+                case (discount < discountFrom):
+                case (kiloPrice > priceTo):
+                case (kiloPrice < priceFrom):
+                    item.style.display='none';
+                    break;
+                default:
+                    item.style.display='block';
             }
         }
     }

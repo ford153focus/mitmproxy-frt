@@ -19,8 +19,10 @@ window.wrapTextAreaSelection = function(textArea, prefix, suffix, defaultText=''
  * @param {Element} element
  */
 window.cttHandler = function(element) {
+    /* eslint-disable indent */
     let textArea = element.tagName === 'LI' ? element.parentElement.nextElementSibling
                                             : element.parentElement.parentElement.nextElementSibling;
+    /* eslint-enable indent */
 
     let tableMarkup ='| head1 | head2 |\n';
     tableMarkup+='|-------|-------|\n';

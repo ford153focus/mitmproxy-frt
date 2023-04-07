@@ -2,18 +2,20 @@ if (!window.___frt) window.___frt = {};
 
 window.___frt.Auchan = class {
     static getKiloPrice(item) {
-        if (item.querySelector("article.hidden") !== null) return Number.MAX_SAFE_INTEGER;
+        if (item.querySelector('article.hidden') !== null) return Number.MAX_SAFE_INTEGER;
 
         /** @type {HTMLDivElement} */
-        let itemPriceEl = item.querySelector('div.productCardPriceData')
+        let itemPriceEl = item.querySelector('div.productCardPriceData');
+
         let itemTxt = itemPriceEl.innerText
-                                        .replaceAll(',', '.')
-                                        .trim()
-                                        .replaceAll(/(\d)\s(\d)/ig, '$1$2'); // drop the space in price
+                                 .replaceAll(',', '.')
+                                 .trim()
+                                 .replaceAll(/(\d)\s(\d)/ig, '$1$2'); // drop the space in price
+
         let itemPrice = parseFloat(itemTxt);
 
         /** @type {HTMLAnchorElement} */
-        let weightEl = item.querySelector('a.linkToPDP')
+        let weightEl = item.querySelector('a.linkToPDP');
         let weightTxt = weightEl.innerText.replaceAll(',', '.').trim();
 
         let weightGram = parseInt(weightTxt.match(/\d+\s*(г|мл)?\.?$/gi)?.shift());
@@ -51,6 +53,7 @@ window.___frt.Auchan = class {
 
             if (isNaN(discount)) discount = 0;
 
+
             switch (true) {
                 case (discount < discountFrom):
                 case (kiloPrice > priceTo):
@@ -60,6 +63,7 @@ window.___frt.Auchan = class {
                 default:
                     item.style.display='block';
             }
+
         }
     }
-}
+};

@@ -12,16 +12,16 @@ class DixyCatalogItem {
 
         let matches;
 
-        matches = title.match(/(\d+)\s*(г|мл|мг)/i)
+        matches = title.match(/(\d+)\s*(г|мл|мг)/i);
         if (matches !== null) return parseFloat(matches[1])/1000;
 
-        matches = title.match(/(\d*\.?\d+)\s*(кг|л)/i)
+        matches = title.match(/(\d*\.?\d+)\s*(кг|л)/i);
         if (matches !== null) return parseFloat(matches[1]);
 
         /**
          * 1 tea packet is 2 gramm usually, so there is 500 packets in 1 kilo
          */
-        matches = title.match(/чай.+(\d+)\s*шт/i)
+        matches = title.match(/чай.+(\d+)\s*шт/i);
         if (matches !== null) return parseFloat(matches[1])/500;
 
         console.warn('failed to get weight: ', title);

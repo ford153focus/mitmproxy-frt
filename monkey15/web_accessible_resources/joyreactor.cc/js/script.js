@@ -19,10 +19,10 @@ window.___frt.ReactorUtils = class {
     }
 
     static downVoteAll(target) {
-        this.rateAllComments(target, 'minus')
+        this.rateAllComments(target, 'minus');
     }
 
     static upVoteAll(target) {
-        this.rateAllComments(target, 'plus')
+        this.rateAllComments(target, 'plus');
     }
-}
+};

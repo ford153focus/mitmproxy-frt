@@ -1,3 +1,3 @@
 setInterval(()=>{
-    document.getElementById("showMoreButton")?.click()
-}, 4444)
+    document.getElementById('showMoreButton')?.click();
+}, 4444);

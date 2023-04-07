@@ -42,7 +42,7 @@ setTimeout(() => {
             upVoteButton.dataset['cid'] = commentId;
             downVoteButton.dataset['cid'] = commentId;
 
-            upVoteButton.addEventListener("click", (event) => {
+            upVoteButton.addEventListener('click', (event) => {
                 let url = `/comment_vote/add/${event.target.dataset.cid}/${event.target.dataset.vote}?token=${window.token}`;
                 let promise = fetch(url);
                 promise.then(async function (response) {
@@ -50,7 +50,7 @@ setTimeout(() => {
                 });
             });
 
-            downVoteButton.addEventListener("click", (event) => {
+            downVoteButton.addEventListener('click', (event) => {
                 let url = `/comment_vote/add/${event.target.dataset.cid}/${event.target.dataset.vote}?token=${window.token}`;
                 let promise = fetch(url);
                 promise.then(async function (response) {

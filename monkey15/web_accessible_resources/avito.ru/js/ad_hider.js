@@ -65,4 +65,4 @@ class AvitoHideUtility {
 setTimeout(() => {
     AvitoHideUtility.hideBanned();
     AvitoHideUtility.drawHideButtons();
-}, 3510)
+}, 3510);

@@ -2,21 +2,21 @@
     let node;
     let res;
 
-    res = document.evaluate("//td[text()='Single']", document);
+    res = document.evaluate('//td[text()=\'Single\']', document);
     while (node = res.iterateNext()) {
-          for (let el of node.parentElement.querySelectorAll('td')) {
-              el.style['background-color'] = '#aca';
-          }
+        for (let el of node.parentElement.querySelectorAll('td')) {
+            el.style['background-color'] = '#aca';
+        }
     }
 
-    res = document.evaluate("//td[text()='EP']", document);
+    res = document.evaluate('//td[text()=\'EP\']', document);
     while (node = res.iterateNext()) {
-          for (let el of node.parentElement.querySelectorAll('td')) {
-              el.style['background-color'] = '#ada';
-          }
+        for (let el of node.parentElement.querySelectorAll('td')) {
+            el.style['background-color'] = '#ada';
+        }
     }
 
-    res = document.evaluate("//td[text()='Album']", document);
+    res = document.evaluate('//td[text()=\'Album\']', document);
     while (node = res.iterateNext()) {
         for (let el of node.parentElement.querySelectorAll('td')) {
             el.style['background-color'] = '#afa';

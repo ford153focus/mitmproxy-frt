@@ -37,4 +37,4 @@ window._frt.Fetchers = class {
         let url = chrome.runtime.getURL(filePath);
         return this.fetchSync(url);
     }
-}
+};

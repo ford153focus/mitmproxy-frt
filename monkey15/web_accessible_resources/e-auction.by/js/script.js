@@ -4,7 +4,7 @@ window.___frt.Injectors = class {
         let el = document.querySelector('.product-item-detail-buy-button');
         if (!el) return;
 
-        let button = document.createElement("button");
+        let button = document.createElement('button');
 
         button.className = 'hide-it';
         button.innerHTML = '❌ Hide';
@@ -22,7 +22,7 @@ window.___frt.Injectors = class {
     }
 
     static inject_ban_button_to_listing () {
-        let button = document.createElement("button");
+        let button = document.createElement('button');
         button.className = 'hide-it';
         button.innerHTML = '❌ Hide';
         button.style.display = 'block';

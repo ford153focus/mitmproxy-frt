@@ -33,7 +33,7 @@ window.___frt.Catalog = class {
         this.settingsSwitcher();
         await this.loadMore();
     }
-}
+};
 
 class CatalogItem {
     static nonKiloUnits = ['г', 'мг', 'мл'];

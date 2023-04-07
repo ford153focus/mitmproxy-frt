@@ -2,13 +2,13 @@ if (!window.___frt) window.___frt = {};
 
 window.___frt.Filters = class {
     static three_gbit_ports(){
-        for (const row of ___frt.Utils.get_rows()) {
+        for (const row of window.___frt.Utils.get_rows()) {
             let ethernet_gbit_ports = parseInt(row.querySelector('td.ethernet_gbit_ports')?.innerText);
             if (ethernet_gbit_ports < 3) row.remove();
         }
     }
     static no_broadcom(){
-        for (const row of ___frt.Utils.get_rows()) {
+        for (const row of window.___frt.Utils.get_rows()) {
             let cpu = row.querySelector('td.cpu').innerText.toLowerCase();
             let wlan = row.querySelector('td.wlan_hardware').innerText.toLowerCase();
 
@@ -20,7 +20,7 @@ window.___frt.Filters = class {
 
 window.___frt.Sorters = class {
     static is_qualcomm() {
-        let rows_array = ___frt.Utils.get_rows();
+        let rows_array = window.___frt.Utils.get_rows();
 
         rows_array
             .sort((row1, row2) => {
@@ -44,7 +44,7 @@ window.___frt.Sorters = class {
     }
 
     static by_cpu_cores() {
-        let rows_array = ___frt.Utils.get_rows();
+        let rows_array = window.___frt.Utils.get_rows();
 
         rows_array
             .sort((row1, row2) => {
@@ -59,7 +59,7 @@ window.___frt.Sorters = class {
     }
 
     static by_cpu_freq() {
-        let rows_array = ___frt.Utils.get_rows();
+        let rows_array = window.___frt.Utils.get_rows();
 
         rows_array
             .sort((row1, row2) => {
@@ -74,7 +74,7 @@ window.___frt.Sorters = class {
     }
 
     static by_ram() {
-        let rows_array = ___frt.Utils.get_rows();
+        let rows_array = window.___frt.Utils.get_rows();
 
         rows_array
             .sort((row1, row2) => {
@@ -89,7 +89,7 @@ window.___frt.Sorters = class {
     }
 
     static by_flash() {
-        let rows_array = ___frt.Utils.get_rows();
+        let rows_array = window.___frt.Utils.get_rows();
 
         rows_array
             .sort((row1, row2) => {

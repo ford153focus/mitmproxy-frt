@@ -27,7 +27,7 @@ window.___frt = class {
             if (streamName === undefined) continue;
             if (gameName === undefined) continue;
 
-            /* eslint-disable indent */
+
             switch (true) {
                 case streamName.includes('казино'):
                     stream.style.backgroundColor = '#c00';
@@ -57,7 +57,7 @@ window.___frt = class {
                     stream.style.backgroundColor = '#030';
                     break;
             }
-            /* eslint-enable indent */
+
         }
     }
 };

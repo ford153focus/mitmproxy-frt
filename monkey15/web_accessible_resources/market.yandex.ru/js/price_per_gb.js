@@ -15,6 +15,8 @@ setTimeout(() => {
 
     // let title = document.querySelector('h1');
     // title.innerHTML += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (${price_per_gb} rub/gb)`;
+    /* eslint-disable indent */
     document.querySelector('[data-apiary-widget-id="/content/reactProductSummary/recommendedOffers/mainDO"] [data-auto="mainPrice"]')
             .insertAdjacentHTML('beforeend', `<span>&nbsp;&nbsp;&nbsp; (${price_per_gb} rub/gb)</span>`);
+    /* eslint-enable indent */
 }, 3510);

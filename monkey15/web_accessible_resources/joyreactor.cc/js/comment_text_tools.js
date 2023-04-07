@@ -70,7 +70,7 @@ window.___frt.TextAreaTools = class {
         let referenceToolbar = document.createElement('ul');
         referenceToolbar.style.display = 'block';
 
-        referenceToolbar.appendChild(this.getActionButton('💬️ Quote',                 'quote',  '<i>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;gt;', '</i>\n\n'));
+        referenceToolbar.appendChild(this.getActionButton('💬️ Quote',                 'quote',  '<i>    >', '</i>\n\n'));
         referenceToolbar.appendChild(this.getActionButton('🅰 &lt;h3&gt;',             'h3',     '<h3>', '</h3>'));
         referenceToolbar.appendChild(this.getActionButton('🅰 &lt;h4&gt;',             'h4',     '<h4>', '</h4>'));
         referenceToolbar.appendChild(this.getActionButton('📑 Paragraph',             'para',   '<p>', '</p>'));

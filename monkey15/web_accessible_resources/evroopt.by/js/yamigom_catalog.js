@@ -12,22 +12,22 @@ window.___frt.Catalog = class {
 
             switch (true) {
                 case price < 3.55:
-                    el.querySelector('a').style.borderColor = 'white'
+                    el.querySelector('a').style.borderColor = 'white';
                     break;
                 case price < 5.55:
-                    el.querySelector('a').style.borderColor = 'lightgreen'
+                    el.querySelector('a').style.borderColor = 'lightgreen';
                     break;
                 case price < 10.55:
-                    el.querySelector('a').style.borderColor = 'green'
+                    el.querySelector('a').style.borderColor = 'green';
                     break;
                 case price < 13.55:
-                    el.querySelector('a').style.borderColor = 'yellow'
+                    el.querySelector('a').style.borderColor = 'yellow';
                     break;
                 case price < 15.55:
-                    el.querySelector('a').style.borderColor = 'red'
+                    el.querySelector('a').style.borderColor = 'red';
                     break;
                 default:
-                    el.querySelector('a').style.borderColor = 'black'
+                    el.querySelector('a').style.borderColor = 'black';
             }
         }
     }
@@ -52,7 +52,7 @@ window.___frt.Catalog = class {
                 });
         }
     }
-}
+};
 
 window.___frt.CatalogItem = class {
     static nonKiloUnits = [' г', ' мг', ' мл'];
@@ -73,7 +73,7 @@ window.___frt.CatalogItem = class {
 
         return price / weight;
     }
-}
+};
 
 window.___frt.Catalog.filter();
 window.___frt.Catalog.reSort();

@@ -18,7 +18,7 @@ window.___frt.Catalog = class {
     }
 
     static filter() {
-        let items = Array.from(document.querySelectorAll(".sku-card-small-container"));
+        let items = Array.from(document.querySelectorAll('.sku-card-small-container'));
 
         items
             .filter(i => i.querySelector('button') === null)
@@ -26,19 +26,19 @@ window.___frt.Catalog = class {
     }
 
     static sort() {
-        let items = Array.from(document.querySelectorAll(".sku-card-small-container"));
+        let items = Array.from(document.querySelectorAll('.sku-card-small-container'));
 
         items
             .sort((item1, item2) => {
-                let price1 = ___frt.CatalogItem.price_per_gram(item1);
-                let price2 = ___frt.CatalogItem.price_per_gram(item2);
+                let price1 = window.___frt.CatalogItem.price_per_gram(item1);
+                let price2 = window.___frt.CatalogItem.price_per_gram(item2);
                 return price1 - price2;
             })
             .map((item) => {
                 items[0].parentElement.appendChild(item);
             });
     }
-}
+};
 
 window.___frt.CatalogItem = class {
     /**
@@ -46,8 +46,8 @@ window.___frt.CatalogItem = class {
      * @returns {number}
      */
     static get_price(item) {
-        let price1 = item.querySelector('.price-label__integer')?.innerText
-        let price2 = item.querySelector('.price-label__fraction')?.innerText
+        let price1 = item.querySelector('.price-label__integer')?.innerText;
+        let price2 = item.querySelector('.price-label__fraction')?.innerText;
 
         if (!price1) return 0;
         if (!price2) price2 = 0;
@@ -60,7 +60,7 @@ window.___frt.CatalogItem = class {
      * @returns {number}
      */
     static get_weight(item) {
-        let sub_title = item.querySelector(".sku-card-small-header__sub-title").innerText.split(',');
+        let sub_title = item.querySelector('.sku-card-small-header__sub-title').innerText.split(',');
 
         if (sub_title.length < 2) {
             sub_title = item.querySelector('.sku-card-small-header__title').innerText.split(',');
@@ -94,4 +94,4 @@ window.___frt.CatalogItem = class {
             return 0;
         }
     }
-}
+};

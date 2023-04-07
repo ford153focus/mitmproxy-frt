@@ -6,8 +6,8 @@ window._frt.Bans = class {
      */
     static get () {
         try {
-            return JSON.parse(localStorage.bans)
-          } catch (exception) {
+            return JSON.parse(localStorage.bans);
+        } catch (exception) {
             return [];
         }
     }

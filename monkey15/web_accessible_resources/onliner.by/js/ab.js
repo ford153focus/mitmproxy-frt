@@ -8,7 +8,7 @@ window.___frt.Injectors = class {
     }
 
     static inject_ban_button_to_listing () {
-        let button = document.createElement("button");
+        let button = document.createElement('button');
         button.className = 'hide-it';
         button.innerHTML = '❌ Hide';
         button.style.margin = '30px 0 0 320px';

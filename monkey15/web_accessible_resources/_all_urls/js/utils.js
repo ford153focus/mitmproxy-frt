@@ -98,13 +98,14 @@ window._frt.Utils = class {
     }
 
     notify(text, type='success') {
+        // eslint-disable-next-line no-undef
         if (typeof window.notyf === 'undefined') window.notyf = new Notyf();
-        notyf[type](text);
+        window.notyf[type](text);
     }
 
     constructor() {
         //
     }
-}
+};
 
 window._frt.utils = new window._frt.Utils();

@@ -34,4 +34,4 @@ window._frt.Injectors = class {
         let markupString = await window._frt.Fetchers.getExtensionFileContent(url);
         target.insertAdjacentHTML(position, markupString);
     }
-}
+};

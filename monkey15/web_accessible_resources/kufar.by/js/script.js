@@ -17,7 +17,7 @@ window.___frt.Injectors = class {
     }
 
     static inject_ban_button_to_listing () {
-        let button = document.createElement("button");
+        let button = document.createElement('button');
 
         button.className = 'ban-it';
         button.innerHTML = 'Скрывать';
@@ -35,7 +35,7 @@ window.___frt.Injectors = class {
             let path = url.pathname;
             window._frt.Bans.add(path);
             window.___frt.ListingManipulators.hide_banned();
-        }
+        };
 
         for (const el of document.querySelectorAll('[class^="styles_cards"] section [class^="styles_content"]')) {
             if (el.querySelector('button.ban-it') !== null) continue;
@@ -49,14 +49,14 @@ window.___frt.Injectors = class {
 
 window.___frt.ListingManipulators = class {
     static ad_block () {
-        for (let el of document.querySelectorAll("[class^='styles_banner']")) el.frtHide();
-        for (let el of document.querySelectorAll("[class^='styles_poleposition']")) el.frtHide();
-        for (let el of document.querySelectorAll("[class^='styles_bannerContainer']")) el.frtHide();
-        for (let el of document.querySelectorAll("[class^='styles_recently-viewed']")) el.frtHide();
-        for (let el of document.querySelectorAll("[alt='placeholder']")) el.parentElement.parentElement.parentElement.frtHide();
+        for (let el of document.querySelectorAll('[class^=\'styles_banner\']')) el.frtHide();
+        for (let el of document.querySelectorAll('[class^=\'styles_poleposition\']')) el.frtHide();
+        for (let el of document.querySelectorAll('[class^=\'styles_bannerContainer\']')) el.frtHide();
+        for (let el of document.querySelectorAll('[class^=\'styles_recently-viewed\']')) el.frtHide();
+        for (let el of document.querySelectorAll('[alt=\'placeholder\']')) el.parentElement.parentElement.parentElement.frtHide();
 
-        for (let el of document.querySelectorAll("img[alt='vip']")) el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.frtHide();
-        for (let el of _frt.utils.getElementsByXPath("//a[contains(@class, 'highlighted')]")) el.parentElement.frtHide();
+        for (let el of document.querySelectorAll('img[alt=\'vip\']')) el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.frtHide();
+        for (let el of window._frt.utils.getElementsByXPath('//a[contains(@class, \'highlighted\')]')) el.parentElement.frtHide();
 
         document.querySelector('[class^="styles_buttons-right__container"] button')?.click();
 

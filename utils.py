@@ -1,22 +1,33 @@
-from bs4 import BeautifulSoup
-from mitmproxy import http
+#!/bin/env python
+# pylint: disable=line-too-long
+# pylint: disable=multiple-statements
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-function-docstring
+
 from urllib.parse import urlparse
 from typing import List
+from bs4 import BeautifulSoup
 import htmlmin
+from mitmproxy import http
+
 
 class Utils:
+    @staticmethod
     def get_host(flow: http.HTTPFlow) -> List[str]:
         host = flow.request.host.split(".")
         host.reverse()
         host += ['']*5
         return host
 
+    @staticmethod
     def get_path(flow: http.HTTPFlow) -> List[str]:
         path = urlparse(flow.request.pretty_url).path.split('/')
         path.pop(0)
         path += ['']*5
         return path
 
+    @staticmethod
     def local_injector_url(path: str) -> str:
         return f"https://example.com/___frt/{path}"
 
@@ -55,7 +66,6 @@ class Utils:
 
         flow.response.content = htmlmin.minify(soup.prettify(), remove_empty_space=True).encode(encoding='utf-8')
 
-
     @staticmethod
     async def inject_bootstrap(flow: http.HTTPFlow) -> None:
         await Utils.inject(
@@ -88,5 +98,5 @@ class Utils:
         return content_type.startswith('text/html')
 
     @staticmethod
-    def nullify_content(self):
+    def nullify_content():
         pass

@@ -1,8 +1,16 @@
+#!/bin/env python
+# pylint: disable=line-too-long
+# pylint: disable=multiple-statements
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-function-docstring
+
 from typing import List
+from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 from mitmproxy import http
-from urllib.parse import urlparse
 import htmlmin
+
 
 class ExtFlow:
     origin: http.HTTPFlow = None
@@ -79,7 +87,7 @@ class ExtFlow:
             self._host.reverse()
             self._host += ['']*5
         return self._host
-    
+
     @property
     def path(self) -> List[str]:
         if self._path is None:
@@ -87,7 +95,7 @@ class ExtFlow:
             self._path.pop(0)
             self._path += ['']*5
         return self._path
-    
+
     @property
     def soup(self) -> BeautifulSoup:
         if self._soup is None:
@@ -95,7 +103,7 @@ class ExtFlow:
                 self._soup = BeautifulSoup(self.origin.response.content, 'lxml')
                 self.inject_script("injections/_all_urls/js/utils.js", defer=False, asynchronous=False)
         return self._soup
-    
+
     @property
     def content_type(self) -> str:
         if self._content_type is None:

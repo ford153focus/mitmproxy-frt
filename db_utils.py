@@ -1,7 +1,15 @@
+#!/bin/env python
+# pylint: disable=line-too-long
+# pylint: disable=multiple-statements
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-function-docstring
+
 import os
 import pathlib
 import mysql.connector
 import dotenv
+
 
 class DataBase:
     def __init__(self) -> None:
@@ -17,5 +25,6 @@ class DataBase:
         )
 
         self.cursor = self.connection.cursor()
+
 
 db = DataBase()

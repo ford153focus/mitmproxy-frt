@@ -2,23 +2,23 @@
 class Rules {
     static async eAuction_by() {
         if (window.location.host === 'e-auction.by') {
-            _frt.LibraryLoaders.notyf();
-            _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
-            _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/e-auction.by/js/script.js'});
+            window._frt.LibraryLoaders.notyf();
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/e-auction.by/js/script.js'});
         }
     }
 
     static async evroopt() {
         if (window.location.href.startsWith('https://evroopt.by/redprice/'))
-            _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/evroopt.by/js/catalog.js'});
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/evroopt.by/js/catalog.js'});
 
         if (window.location.href.startsWith('https://yamigom-store.by/category/')) {
-            await _frt.Injectors.injectInternalHTML('/web_accessible_resources/evroopt.by/html/yamigom_sort_btn.html');
-            _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/evroopt.by/js/yamigom_catalog.js'});
+            await window._frt.Injectors.injectInternalHTML('/web_accessible_resources/evroopt.by/html/yamigom_sort_btn.html');
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/evroopt.by/js/yamigom_catalog.js'});
         }
 
         if (window.location.href === 'https://yamigom-store.by/cart') {
-            _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/evroopt.by/js/yamigom_cart.js'});
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/evroopt.by/js/yamigom_cart.js'});
         }
     }
 
@@ -28,68 +28,68 @@ class Rules {
         document.querySelector(".top-ads-container").remove();
 
         if (window.location.host.startsWith('genshin-impact')) {
-            _frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/fandom.com/genshin-impact/css/styles.css'});
+            window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/fandom.com/genshin-impact/css/styles.css'});
 
-            if (window.location.pathname === '/wiki/Event')                        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/event_list.js'});
-            if (window.location.pathname === '/wiki/Hidden_Exploration_Objective') _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/hidden_exploration_objective.js'});
-            if (window.location.pathname === '/wiki/Wonders_of_the_World')         _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/wonders_of_the_world.js'});
-            if (window.location.pathname === '/wiki/World_Quest/List')             _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/quest_list.js'});
+            if (window.location.pathname === '/wiki/Event')                        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/event_list.js'});
+            if (window.location.pathname === '/wiki/Hidden_Exploration_Objective') window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/hidden_exploration_objective.js'});
+            if (window.location.pathname === '/wiki/Wonders_of_the_World')         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/wonders_of_the_world.js'});
+            if (window.location.pathname === '/wiki/World_Quest/List')             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/quest_list.js'});
         }
     }
 
     static async kufar() {
         if (!window.location.host.endsWith('kufar.by')) return;
-        _frt.LibraryLoaders.notyf();
-        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
-        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/kufar.by/js/script.js'});
+        window._frt.LibraryLoaders.notyf();
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/kufar.by/js/script.js'});
     }
 
     static async musicbrainz() {
         if (!window.location.host.endsWith('musicbrainz.org')) return;
-        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/musicbrainz.org/js/marker.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/musicbrainz.org/js/marker.js'});
     }
 
     static async onliner() {
         if (window.location.host === 'ab.onliner.by') {
-            _frt.LibraryLoaders.notyf();
-            _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
-            _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/onliner.by/js/ab.js'});
+            window._frt.LibraryLoaders.notyf();
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/onliner.by/js/ab.js'});
         }
     }
 
     static async OpenNet() {
         if (window.location.host !== 'www.opennet.ru') return;
-        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/opennet.ru/js/no_comments.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/opennet.ru/js/no_comments.js'});
     }
 
     static async OpenWRT() {
         if (!window.location.href.startsWith('https://openwrt.org/toh/views/toh_available_')) return;
 
-        await _frt.Injectors.injectInternalHTML(
+        await window._frt.Injectors.injectInternalHTML(
             '/web_accessible_resources/openwrt.org/html/toolbar.html',
             document.querySelector(".table-responsive"),
             'beforebegin'
         );
 
-        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/openwrt.org/js/sort.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/openwrt.org/js/sort.js'});
     }
 
     static async reactor() {
         if (!window.location.host.endsWith('reactor.cc')) return;
 
-        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/comment_text_tools.js'});
-        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/play_shortcut.js'});
-        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/rate_highlighted.js'});
-        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/script.js'});
-        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/share_buttons.js'});
-        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/unhide_comments.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/comment_text_tools.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/play_shortcut.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/rate_highlighted.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/script.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/share_buttons.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/unhide_comments.js'});
     }
 
     static async twitch() {
         if (window.location.host !== 'www.twitch.tv') return;
 
-        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/twitch.tv/js/script.js'});
-        _frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/twitch.tv/css/directory.css'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/twitch.tv/js/script.js'});
+        window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/twitch.tv/css/directory.css'});
     }
 
     static async yandex_market() {
@@ -97,7 +97,7 @@ class Rules {
 
         if (window.location.pathname.startsWith('/product--karta-pamiati-') ||
             window.location.pathname.startsWith('/product--tverdotelnyi-nakopitel-')) {
-            _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/market.yandex.ru/js/price_per_gb.js'});
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/market.yandex.ru/js/price_per_gb.js'});
         }
     }
 
@@ -106,28 +106,28 @@ class Rules {
         if (!window.location.host.endsWith('wikia.com')) return;
         if (!window.location.href.startsWith('https://5ka.ru/special_offers')) return;
 
-        await _frt.Injectors.injectInternalHTML('/web_accessible_resources/habr.com/html/fav_table.html');
-        _frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/pixlr.com/css/styles.css'});
-        _frt.Injectors.injectInternalScript({src: '/web_accessible_resources/pixlr.com/js/adblock.js'});
+        await window._frt.Injectors.injectInternalHTML('/web_accessible_resources/habr.com/html/fav_table.html');
+        window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/pixlr.com/css/styles.css'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/pixlr.com/js/adblock.js'});
     }
 
     static async main() {
-        _frt.Injectors.injectInternalScript({
+        window._frt.Injectors.injectInternalScript({
             src: '/web_accessible_resources/_all_urls/js/extensions.js',
             async: true,
         });
 
-        _frt.Injectors.injectInternalScript({
+        window._frt.Injectors.injectInternalScript({
             src: '/web_accessible_resources/_all_urls/js/fetchers.js',
             async: true,
         });
 
-        _frt.Injectors.injectInternalScript({
+        window._frt.Injectors.injectInternalScript({
             src: '/web_accessible_resources/_all_urls/js/injectors.js',
             async: true,
         });
 
-        _frt.Injectors.injectInternalScript({
+        window._frt.Injectors.injectInternalScript({
             src: '/web_accessible_resources/_all_urls/js/utils.js',
             async: true,
         });

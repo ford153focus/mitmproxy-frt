@@ -1,11 +1,16 @@
-class AvitoFilterUtility {
+if (!window.___frt) window.___frt = {};
+
+window.___frt.Filter = class {
     constructor() {
-        this.adverts = document.querySelectorAll('[itemtype="https://schema.org/Product"]');
-
+        this.adverts = document.querySelectorAll('[itemtype="http://schema.org/Product"]');
         this.path = window.location.pathname.split('/');
+    }
 
-        if (this.path.includes('sdam') && (this.path.includes('komnaty') || this.path.includes('kvartiry'))) {
-            this.flatsFilter();
+    run() {
+        if (this.path.includes('sdam')) {
+            if (this.path.includes('komnaty') || this.path.includes('kvartiry')) {
+                this.flatsFilter();
+            }
         } else if (this.path.includes('kvartiry') && this.path.includes('prodam')) {
             //this.badAgencyFilter();
         } else {
@@ -16,13 +21,22 @@ class AvitoFilterUtility {
     filterByTitleAndDesc() {
         /** @var {any[]} */
         let filters = [
-            'запчасти',
-            'не рабо',
-            'нерабо',
+            'запчаст',
+            'з.ч',
+            'з/ч',
+            'зап.ч',
+
+            'нераб',
             'разбит',
             'не включается',
-            'под восстановление'
+            'под восстановление',
+            /не\s*раб/i,
+            /не\s*исправн/i,
         ];
+
+        filters.push('не включается');
+        filters.push('не запускается');
+        filters.push('не загружается');
 
         if (this.path.includes('tovary_dlya_kompyutera') && this.path.includes('klaviatury_i_myshi')) {
             filters.push([/^Наклейка для/i, /^Клавиатур([аы])( для)? (нетбук(а|ов)|ноутбук(а|ов))/i]);
@@ -40,20 +54,20 @@ class AvitoFilterUtility {
             filters.push('запчаст');
             filters.push('на детали');
             filters.push('по частям');
-            filters.push('не включается');
             filters.push('разбор');
-            filters.push('з.ч');
-            filters.push('з/ч');
-            filters.push('зап.ч');
+
         }
 
         if (this.path.includes('planshety_i_elektronnye_knigi')) {
-            filters.push('не загружается');
             filters.push('графически');
         }
 
         if (window.location.pathname.includes('televizor')) {
             filters.push('полос', 'матриц', 'тресну');
+        }
+
+        if (window.location.pathname.includes('materinskie_platy')) {
+            filters.push(/гнут.*нож/i,); // гнутые ножки
         }
 
         for (let advert of this.adverts) {
@@ -64,11 +78,15 @@ class AvitoFilterUtility {
             let advertDescText = advertDesc.innerText.replaceAll('&nbsp;', ' ').trim().toLowerCase();
 
             for (let filter of filters) {
-                if (advertDescText.includes(filter))  advert.remove();
-                if (advertTitleText.includes(filter)) advert.remove();
-
-                if (advertDescText.search(filter) > -1)  advert.remove();
-                if (advertTitleText.search(filter) > -1)  advert.remove();
+                try {
+                    if (advertDescText.includes(filter))  advert.remove();
+                    if (advertTitleText.includes(filter)) advert.remove();
+                } catch (error) {
+                    //
+                } finally {
+                    if (advertDescText.search(filter) > -1)  advert.remove();
+                    if (advertTitleText.search(filter) > -1)  advert.remove();
+                }
             }
         }
     }
@@ -115,15 +133,15 @@ class AvitoFilterUtility {
             })();
         }
     }
-}
+};
 
 setTimeout(() => {
+    window.___frt.filter = new window.___frt.Filter();
+
     let button = document.createElement('button');
     button.type = 'button';
     button.id = 'remove_broken';
     button.innerText = 'Remove broken';
-    button.onclick = () => { window.___frt.filter = new AvitoFilterUtility(); };
+    button.onclick = () => { window.___frt.filter.run(); };
     document.body.insertAdjacentElement('beforeend', button);
 }, 531);
-
-if (!window.___frt) window.___frt = {};

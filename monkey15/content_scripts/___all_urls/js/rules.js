@@ -1,5 +1,19 @@
 // noinspection JSUnusedGlobalSymbols
 class Rules {
+    static async avito() {
+        if (window.location.host !== 'www.avito.ru') return;
+
+        window._frt.LibraryLoaders.notyf();
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
+
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/avito.ru/js/ad_filter.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/avito.ru/js/ad_hider.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/avito.ru/js/adblock.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/avito.ru/js/autosearch_sort.js'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/avito.ru/js/hotkeys.js'});
+        window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/avito.ru/css/styles.css'});
+    }
+
     static async eAuction_by() {
         if (window.location.host === 'e-auction.by') {
             window._frt.LibraryLoaders.notyf();

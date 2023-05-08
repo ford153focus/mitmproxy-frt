@@ -50,6 +50,10 @@ NodeList.prototype.frtToArray = function() {
 
 Array.prototype.frtRemoveDuplicates = function () {
     try {
+        if (this === null) return;
+        if (this === undefined) return;
+        if (typeof this[Symbol.iterator] !== 'function') return;
+
         let set = new Set(this);
         return Array.from(set);
     } catch (error) {

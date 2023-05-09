@@ -39,7 +39,7 @@ class Rules {
     static async fandom_wiki() {
         if (!window.location.host.endsWith('fandom.com')) return;
 
-        document.querySelector(".top-ads-container").remove();
+        document.querySelector('.top-ads-container').remove();
 
         if (window.location.host.startsWith('genshin-impact')) {
             window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/fandom.com/genshin-impact/css/styles.css'});
@@ -63,11 +63,39 @@ class Rules {
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/musicbrainz.org/js/marker.js'});
     }
 
+    static async pepper_ru() {
+        if (window.location.host !== 'www.pepper.ru') return;
+
+        window._frt.LibraryLoaders.fontAwesome();
+
+        await window._frt.Injectors.injectInternalHTML(
+            '/web_accessible_resources/pepper.ru/html/sorting-panel.html',
+            document.querySelector('.subNav .tGrid-cell.width--all-12'),
+            'beforeend'
+        );
+
+        window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/pepper.ru/css/style.css'});
+
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/pepper.ru/js/script.js'});
+
+
+        if (window.location.pathname.startsWith('/groups/ssd') || window.location.pathname.startsWith('/groups/memory-cards')) {
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/pepper.ru/js/ssd.js'});
+        }
+    }
+
     static async onliner() {
         if (window.location.host === 'ab.onliner.by') {
             window._frt.LibraryLoaders.notyf();
             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/onliner.by/js/ab.js'});
+        }
+
+        if (window.location.host === 'catalog.onliner.by') {
+            if (window.location.pathname.startsWith('/ssd') ||
+                window.location.pathname.startsWith('/memcards')) {
+                window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/onliner.by/js/ssd.js'});
+            }
         }
     }
 
@@ -81,7 +109,7 @@ class Rules {
 
         await window._frt.Injectors.injectInternalHTML(
             '/web_accessible_resources/openwrt.org/html/toolbar.html',
-            document.querySelector(".table-responsive"),
+            document.querySelector('.table-responsive'),
             'beforebegin'
         );
 

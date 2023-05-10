@@ -114,3 +114,39 @@ String.prototype.frtHtmlEntitiesEncode2 = function () {
         console.warn(error);
     }
 };
+
+/**
+ * Convert XPathResult to array
+ * @returns HTMLElement[]
+ */
+XPathResult.prototype.frtToArray = function() {
+    let result = null;
+    let results = [];
+
+    switch (this.resultType) {
+        case XPathResult.UNORDERED_NODE_ITERATOR_TYPE:
+        case XPathResult.ORDERED_NODE_ITERATOR_TYPE:
+            while ( (result = this.iterateNext()) != null ) {
+                results.push(result);
+            }
+            return results;
+        case XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE:
+        case XPathResult.ORDERED_NODE_SNAPSHOT_TYPE:
+            for (let i=0; i < this.snapshotLength; i++) {
+                results.push(this.snapshotItem(i));
+            }
+            return results;
+        default:
+            return this.singleNodeValue;
+    }
+};
+
+/**
+ * Query elements by xPath
+ * @param {string} xPathQuery
+ * @returns HTMLElement[]
+ */
+document.frtGetElementsByXPath = function (xPathQuery) {
+    let xPathResult = document.evaluate( xPathQuery, document, null, XPathResult.UNORDERED_NODE_ITERATOR_TYPE, null );
+    return xPathResult.frtToArray();
+};

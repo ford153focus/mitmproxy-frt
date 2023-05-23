@@ -134,6 +134,16 @@ class Rules {
         window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/twitch.tv/css/directory.css'});
     }
 
+    static async sosedi() {
+        if (window.location.href.startsWith('https://sosedi.by/sales/')) {
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/sosedi.by/js/sales.js'});
+        }
+
+        if (window.location.href === "https://sosedi.by/personal/#list") {
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/sosedi.by/js/cart.js'});
+        }
+    }
+
     static async yandex_market() {
         if (window.location.host !== 'market.yandex.ru') return;
 

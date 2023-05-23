@@ -32,6 +32,14 @@ HTMLElement.prototype.frtRemove = function(method='remove') {
     }
 };
 
+HTMLElement.prototype.frtSetStyle = function(key, value) {
+    try {
+        this.style[key] = value;
+    } catch (error) {
+        console.warn(error);
+    }
+};
+
 HTMLElement.prototype.frtHide = function() {
     try {
         this.style.display = 'none';

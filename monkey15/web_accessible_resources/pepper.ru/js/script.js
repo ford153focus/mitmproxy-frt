@@ -1,20 +1,7 @@
-class PepperUtils {
+if (!window.___frt) window.___frt = {};
+window.___frt.PepperUtils = class {
     constructor() {
-        this.injectPanel();
-        this.itemsFilter();
         this.itemsSort();
-    }
-
-    injectPanel() {
-        let url = 'https://example.com/___frt/injections/pepper.ru/sorting-panel.html';
-
-        fetch(url).then(async (response) => {
-            let hyperText = await response.text();
-
-            document
-                .querySelector('.subNav .tGrid-cell.width--all-12')
-                .insertAdjacentHTML('beforeend', hyperText);
-        });
     }
 
     getItems() {
@@ -60,8 +47,10 @@ class PepperUtils {
             return 0;
         }
     }
-}
+};
 
 setTimeout(() => {
-    window.___frt = new PepperUtils();
+    document.querySelector('article[data-t="telegramWidget"]')?.remove();
+
+    window.___frt.pepper = new window.___frt.PepperUtils();
 }, 1530);

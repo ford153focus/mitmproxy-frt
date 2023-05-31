@@ -32,6 +32,14 @@ HTMLElement.prototype.frtRemove = function(method='remove') {
     }
 };
 
+HTMLElement.prototype.frtSetStyle = function(key, value) {
+    try {
+        this.style[key] = value;
+    } catch (error) {
+        console.warn(error);
+    }
+};
+
 HTMLElement.prototype.frtHide = function() {
     try {
         this.style.display = 'none';
@@ -50,6 +58,10 @@ NodeList.prototype.frtToArray = function() {
 
 Array.prototype.frtRemoveDuplicates = function () {
     try {
+        if (this === null) return;
+        if (this === undefined) return;
+        if (typeof this[Symbol.iterator] !== 'function') return;
+
         let set = new Set(this);
         return Array.from(set);
     } catch (error) {
@@ -109,4 +121,40 @@ String.prototype.frtHtmlEntitiesEncode2 = function () {
     } catch (error) {
         console.warn(error);
     }
+};
+
+/**
+ * Convert XPathResult to array
+ * @returns HTMLElement[]
+ */
+XPathResult.prototype.frtToArray = function() {
+    let result = null;
+    let results = [];
+
+    switch (this.resultType) {
+        case XPathResult.UNORDERED_NODE_ITERATOR_TYPE:
+        case XPathResult.ORDERED_NODE_ITERATOR_TYPE:
+            while ( (result = this.iterateNext()) != null ) {
+                results.push(result);
+            }
+            return results;
+        case XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE:
+        case XPathResult.ORDERED_NODE_SNAPSHOT_TYPE:
+            for (let i=0; i < this.snapshotLength; i++) {
+                results.push(this.snapshotItem(i));
+            }
+            return results;
+        default:
+            return this.singleNodeValue;
+    }
+};
+
+/**
+ * Query elements by xPath
+ * @param {string} xPathQuery
+ * @returns HTMLElement[]
+ */
+document.frtGetElementsByXPath = function (xPathQuery) {
+    let xPathResult = document.evaluate( xPathQuery, document, null, XPathResult.UNORDERED_NODE_ITERATOR_TYPE, null );
+    return xPathResult.frtToArray();
 };

@@ -6,16 +6,21 @@ window.___frt.ReactorUtils = class {
      * @usage window.___frt.ReactorUtils.rateAllComments('ford153focus', 'plus')
      */
     static rateAllComments(target, direction) {
-        let i = 1;
-        const comments = document.querySelectorAll('div[id^="comment_txt_"]');
-        for (const comment of comments) {
-            if (comment.querySelector('a[href^="/user/"]')?.innerText !== target) continue; // check username
-            setTimeout(() => {
-                console.log(comment.querySelector('div[id^="comment_txt_"] > *').innerText); // print to console text of comment
-                comment.querySelector(`.vote-${direction}`)?.click();
-            }, 333*i); // delayed voting to avoid ddos protection trigger
-            i++;
-        }
+        let userLinks = document.frtGetElementsByXPath(`//a[text()='${target}']`);
+
+        let interval = setInterval(() => {
+            let userLink = userLinks.pop();
+
+            if (userLink === undefined) {
+                clearInterval(interval);
+                return;
+            }
+
+            let comment = userLink.parentElement.parentElement.parentElement;
+
+            console.log(comment.querySelector('div[id^="comment_txt_"] > *').innerText); // print to console text of comment
+            comment.querySelector(`.vote-${direction}`)?.click();
+        }, 333);
     }
 
     static downVoteAll(target) {

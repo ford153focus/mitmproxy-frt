@@ -96,8 +96,6 @@ window.___frt.ListingManipulators = class {
     }
 
     static mark_broken() {
-        let headings = document.getElementsByTagName('h3');
-
         let black_list = [
             'запчаст',
             'на детали',
@@ -109,16 +107,31 @@ window.___frt.ListingManipulators = class {
             'зап.ч',
         ];
 
-        for (const el of headings)
-            for (let word of black_list)
-                if (el.innerText.toLocaleLowerCase().includes(word))
-                    el.parentElement.parentElement.parentElement.style.backgroundColor = 'red';
+        if (window.location.pathname.endsWith('/kupit/kvartiru')) {
+            black_list.push('продается доля');
+        }
+
+        let h3s = document.getElementsByTagName('h3');
+        let bodies = document.querySelectorAll('[class^="styles_content"] [class^="styles_body"]');
+        let targets = Array.prototype.concat(Array.from(h3s), Array.from(bodies));
+
+        for (const el of targets) {
+            for (let word of black_list) {
+                if (el.innerText.toLocaleLowerCase().includes(word)) {
+                    let section = el.parentElement.parentElement.parentElement;
+                    let wrapper = section.querySelector('[class^="styles_wrapper"]');
+
+                    if (section) section.style.backgroundColor = 'red';
+                    if (wrapper) wrapper.style.backgroundColor = 'red';
+                }
+            }
+        }
     }
 
     static highlight_near_districts() {
         for (const el of document.querySelectorAll('[class^="styles_cards"] section')) {
             let secondary = el.querySelector('div[class^="styles_secondary__"] > p');
-            let district = secondary.innerText.trim().frtFixSpaces();
+            let district = secondary?.innerText?.trim()?.frtFixSpaces();
 
             switch (district) {
                 case 'Минск, Фрунзенский':

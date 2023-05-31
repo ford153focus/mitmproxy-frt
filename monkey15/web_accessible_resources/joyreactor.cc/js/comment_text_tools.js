@@ -91,7 +91,7 @@ window.___frt.TextAreaTools = class {
         document.onclick = this.wrapTextAreaSelection;
         setInterval(this.injectToolbar.bind(this), 1530);
     }
-}
+};
 
 setTimeout(async () => {
     window.___frt.textAreaTools = new window.___frt.TextAreaTools();

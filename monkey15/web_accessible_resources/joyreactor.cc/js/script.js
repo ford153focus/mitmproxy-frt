@@ -26,3 +26,22 @@ window.___frt.ReactorUtils = class {
         this.rateAllComments(target, 'plus');
     }
 };
+
+
+/**
+ * fix vertical video height
+ */
+setTimeout(() => {
+    for (let video of  document.getElementsByTagName('video')) {
+        if (video.height > video.width) {
+            let height = window.innerHeight-150;
+            let width =  height * video.width/video.height;
+
+            video.style['min-height'] = `${window.innerHeight-150}px`;
+            video.style['max-height'] = `${window.innerHeight-130}px`;
+
+            video.width = width;
+            video.height = height;
+        }
+    }
+}, 153);

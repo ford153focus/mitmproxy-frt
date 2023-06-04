@@ -139,7 +139,7 @@ class Rules {
             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/sosedi.by/js/sales.js'});
         }
 
-        if (window.location.href === "https://sosedi.by/personal/#list") {
+        if (window.location.href.startsWith('https://sosedi.by/personal/')) {
             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/sosedi.by/js/cart.js'});
         }
     }

@@ -9,7 +9,7 @@ window.___frt.Catalog = class {
 
             switch (true) {
                 case price < 3.55:
-                    el?.querySelector('.v-card')?.frtSetStyle('border', '1mm solid green');
+                    el?.querySelector('.v-card')?.frtSetStyle('border', '1mm dotted');
                     break;
                 case price < 5.55:
                     el?.querySelector('.v-card')?.frtSetStyle('border', '1mm solid lightgreen');
@@ -26,6 +26,17 @@ window.___frt.Catalog = class {
                 default:
                     el?.querySelector('.v-card')?.frtSetStyle('border', '1mm solid black');
             }
+
+            let span = document.createElement('span');
+            span.innerHTML = price;
+            span.className = 'price-per-kg';
+            span.style.position = 'absolute';
+            span.style.bottom = '10px';
+            span.style.left = '15px';
+
+            el.querySelector('span.price-per-kg')?.remove();
+            el.style.position = 'relative';
+            el.insertAdjacentElement('beforeEnd', span);
         }
     }
 
@@ -80,7 +91,7 @@ window.___frt.CatalogItem = class {
         let price = parseFloat(`${item.querySelector('.price-rub').innerText}.${item.querySelector('.price-coins').innerText}`);
 
 
-        let title_match = item.querySelector('.product-title').innerText.match(/([\d]+[\.\,]?[\d]*)\s?([кгмлКГМЛ]+)/);
+        let title_match = item.querySelector('.product-title').innerText.match(/([\d]+[.,]?[\d]*)\s?([кгмлКГМЛ]+)/);
         if (title_match === null) return price;
 
         let weigth_value = parseFloat(title_match[1].replace(',','.').replace(/^\./, ''));

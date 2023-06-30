@@ -14,6 +14,14 @@ class Rules {
         window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/avito.ru/css/styles.css'});
     }
 
+    static async computerUniverse() {
+        if (window.location.host !== 'www.computeruniverse.net') return;
+
+        if (window.location.pathname.endsWith('/cart')) {
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/computeruniverse.net/js/cart.js'});
+        }
+    }
+
     static async eAuction_by() {
         if (window.location.host === 'e-auction.by') {
             window._frt.LibraryLoaders.notyf();

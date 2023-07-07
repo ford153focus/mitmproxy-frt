@@ -8,8 +8,15 @@ function adBlock() {
     window._frt.utils.removeAllBySelector('.nomargins.ad');
 }
 
+function noComments() {
+    document.querySelector('.commentlinkblock')?.remove();
+    document.querySelector('.comment-warn')?.remove();
+    document.getElementById('mc-container')?.remove();
+}
+
 function observerCallback() {
     adBlock();
+    noComments();
 }
 
 const observer = new MutationObserver(observerCallback);

@@ -9,7 +9,7 @@ class AvitoHideUtility {
     static getAdvertElement(element) {
         // eslint-disable-next-line no-constant-condition
         while (true) {
-            if (element===document) throw 'Can not find the advert element'; // avoid infinite cycle
+            if (element===document.body) throw 'Can not find the advert element'; // avoid infinite cycle
 
             element = element.parentElement;
 

@@ -16,12 +16,12 @@ class TrackerUtils {
      * Ban selected topic
      * @param {MouseEvent} event Click-event of hiding button
      */
-    hideTopic(event) {
+    async hideTopic(event) {
         let row = event.target.parentElement.parentElement;
         let href = row.getElementsByTagName('td')[1].getElementsByTagName('a')[0].href;
         let url = new URL(href);
 
-        window._frt.utilslor.shared.saveBan(url.pathname);
+        await window._frt.utilslor.shared.saveBan(url.pathname);
         row.remove();
     }
 
@@ -55,8 +55,8 @@ class TrackerUtils {
         document.querySelector('nav').appendChild(randomPickButton);
     }
 
-    constructor() {
-        this.hideTopics();
+    async constructor() {
+        await this.hideTopics();
         this.drawButtons();
     }
 }

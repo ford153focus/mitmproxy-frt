@@ -6,7 +6,7 @@ window.___frt.ReactorUtils = class {
      * @usage window.___frt.ReactorUtils.rateAllComments('ford153focus', 'plus')
      */
     static rateAllComments(target, direction) {
-        let userLinks = document.frtGetElementsByXPath(`//a[text()='${target}']`);
+        let userLinks = window._frt.utils.getElementsByXPath(`//a[text()='${target}']`);
 
         let interval = setInterval(() => {
             let userLink = userLinks.pop();

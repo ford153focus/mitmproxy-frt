@@ -33,8 +33,8 @@ class LorTopicUtils {
         window.location.href = goNext ? await this.getRandomTopic() : 'https://www.linux.org.ru/tracker/';
     }
 
-    constructor() {
-        this.drawButtons();
+    async constructor() {
+        await this.drawButtons();
         window._frt.LibraryLoaders.fontAwesome();
     }
 }

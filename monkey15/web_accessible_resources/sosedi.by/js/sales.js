@@ -1,3 +1,4 @@
+Array.prototype.frtRemoveDuplicates = window._frt.ext.Array.frtRemoveDuplicates;
 if (!window.___frt) window.___frt = {};
 
 /* eslint-disable no-unused-vars */
@@ -6,25 +7,32 @@ window.___frt.Catalog = class {
         for (const el of document.querySelectorAll('div.product-item')) {
 
             let price = window.___frt.CatalogItem.getPricePerKg(el);
+            let card;
 
             switch (true) {
                 case price < 3.55:
-                    el?.querySelector('.v-card')?.frtSetStyle('border', '1mm dotted');
+                    card = el?.querySelector('.v-card');
+                    if (card) card.style.border = '1mm dotted';
                     break;
                 case price < 5.55:
-                    el?.querySelector('.v-card')?.frtSetStyle('border', '1mm solid lightgreen');
+                    card = el?.querySelector('.v-card');
+                    if (card) card.style.border = '1mm solid lightgreen';
                     break;
                 case price < 10.55:
-                    el?.querySelector('.v-card')?.frtSetStyle('border', '1mm solid green');
+                    card = el?.querySelector('.v-card');
+                    if (card) card.style.border = '1mm solid green';
                     break;
                 case price < 13.55:
-                    el?.querySelector('.v-card')?.frtSetStyle('border', '1mm solid yellow');
+                    card = el?.querySelector('.v-card');
+                    if (card) card.style.border = '1mm solid yellow';
                     break;
                 case price < 15.55:
-                    el?.querySelector('.v-card')?.frtSetStyle('border', '1mm solid red');
+                    card = el?.querySelector('.v-card');
+                    if (card) card.style.border = '1mm solid red';
                     break;
                 default:
-                    el?.querySelector('.v-card')?.frtSetStyle('border', '1mm solid black');
+                    card = el?.querySelector('.v-card');
+                    if (card) card.style.border = '1mm solid black';
             }
 
             let span = document.createElement('span');
@@ -36,12 +44,15 @@ window.___frt.Catalog = class {
 
             el.querySelector('span.price-per-kg')?.remove();
             el.style.position = 'relative';
-            el.insertAdjacentElement('beforeEnd', span);
+            el.insertAdjacentElement('beforeend', span);
         }
     }
 
     static reSort() {
-        let items = document.querySelectorAll('div.product-item').frtToArray();
+        window.___frt.Cart.reAttachEvent();
+
+        let items = document.querySelectorAll('div.product-item');
+        items = Array.from(items);
         if (items.length === 0) return;
 
         items
@@ -80,7 +91,7 @@ window.___frt.Catalog = class {
 
         sortButton.type = 'button';
 
-        document.body.insertAdjacentElement('beforeEnd', sortButton);
+        document.body.insertAdjacentElement('beforeend', sortButton);
     }
 };
 
@@ -105,6 +116,48 @@ window.___frt.CatalogItem = class {
     }
 };
 
+window.___frt.Cart = class {
+    static drawCartArea() {
+        let cart = document.createElement('textarea');
+        cart.id = '---frt-cart';
+        cart.ariaLabel = '---frt-cart';
+
+        cart.style.width = '100%';
+        cart.style.height = '5cm';
+        cart.style.padding = '3mm';
+        cart.style.border = '1mm solid #555';
+        document.getElementById('footer').insertAdjacentElement('beforeend', cart);
+    }
+
+    static addToCart(event) {
+        let button = event.target;
+        let card = window._frt.utils.findParentByClassName(button, ['product-item']);
+        let price1 = card.querySelector('.price-rub').innerText;
+        let price2 = card.querySelector('.price-coins').innerText;
+        let title = card.querySelector('.product-title').innerText;
+
+        /** @type {string[]} */
+        let items = document.getElementById('---frt-cart').value.split('\n');
+        items.push(`${title} (${price1}.${price2})`);
+        items = items.filter(i => i)
+                     .sort()
+                     .frtRemoveDuplicates();
+
+        /** @type {HTMLTextAreaElement} */
+        let cart = document.getElementById('---frt-cart');
+        cart.value = items.join('\n');
+        cart.style.height = cart.value ? `${cart.scrollHeight + 5}px` : 'auto';
+    }
+
+    static reAttachEvent() {
+        for (const button of document.querySelectorAll('.btn-add-to-card')) {
+            button.onclick = this.addToCart;
+        }
+    }
+};
+
 window.___frt.Catalog.filter();
 window.___frt.Catalog.reSort();
 window.___frt.Catalog.drawButtonOnListing();
+
+window.___frt.Cart.drawCartArea();

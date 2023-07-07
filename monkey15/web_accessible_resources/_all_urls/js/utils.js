@@ -103,6 +103,60 @@ window._frt.Utils = class {
         window.notyf[type](text);
     }
 
+    /**
+     *
+     * @param {HTMLElement} element
+     * @param {string|string[]} classes
+     * @returns {HTMLElement|null}
+     */
+    findParentByClassName(element, classes = null) {
+        if (classes===null) {
+            console.error('set class');
+            return null;
+        }
+
+        if (element===document.body) {
+            console.error('not found');
+            return null;
+        }
+
+        if (classes.constructor.name === 'String') {
+            if (!element.classList.contains(classes)) {
+                return this.findParentByClassName(element.parentElement, classes);
+            }
+            return element;
+        }
+
+        for (const className of classes) {
+            if (!element.classList.contains(className)) {
+                return this.findParentByClassName(element.parentElement, classes);
+            }
+        }
+        return element;
+    }
+
+    /**
+     *
+     * @param {HTMLElement} element
+     * @param {string|null} id
+     * @returns {HTMLElement|null}
+     */
+    findParentById(element, id = null) {
+        if (id===null) {
+            console.error('set id');
+            return null;
+        }
+
+        if (element===document.body) {
+            console.error('not found');
+            return null;
+        }
+
+        if (element.id === id) return element;
+
+        return this.findParentById(element.parentElement, id);
+    }
+
     constructor() {
         //
     }

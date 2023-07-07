@@ -19,7 +19,7 @@ window.___frt.PepperSsd = class {
             let ratio2 = `${ratio1}₽/Gb`;
             let ratio3 = `&nbsp;&nbsp;&nbsp;<span>(${ratio2})</span>`;
 
-            product.querySelector('.overflow--fade .thread-divider').insertAdjacentHTML('beforeBegin', ratio3);
+            product.querySelector('.overflow--fade .thread-divider').insertAdjacentHTML('beforebegin', ratio3);
             product.dataset['price_per_kg'] = ratio1;
         }
     }
@@ -52,7 +52,7 @@ window.___frt.PepperSsd = class {
         sortButton.style['background-color'] = 'darkgrey';
         sortButton.type = 'button';
 
-        document.body.insertAdjacentElement('beforeEnd', sortButton);
+        document.body.insertAdjacentElement('beforeend', sortButton);
     }
 };
 

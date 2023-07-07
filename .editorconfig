@@ -10,3 +10,6 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 max_line_length = 150
+
+[monkey15/web_accessible_resources/opennet.ru/js/no_comments.js]
+charset = koi8-r

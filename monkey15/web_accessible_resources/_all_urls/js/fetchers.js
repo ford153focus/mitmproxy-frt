@@ -7,7 +7,7 @@ window._frt.Fetchers = class {
      * use with await
      * @param {string} url target link
      * @param {boolean} isJson requested data is (not) json
-     * @returns {Promise<any>} decoded json-object
+     * @returns {Promise<string|object>} decoded json-object
      */
     static async fetch (url, isJson=false) {
         const response = await fetch(url);
@@ -28,11 +28,21 @@ window._frt.Fetchers = class {
     }
 
 
+    /**
+     *
+     * @param {string} filePath
+     * @returns {Promise<string>}
+     */
     static async getExtensionFileContent (filePath) {
         let url = chrome.runtime.getURL(filePath);
         return await this.fetch(url);
     }
 
+    /**
+     *
+     * @param {string} filePath
+     * @returns {string}
+     */
     static getExtensionFileContentSync (filePath) {
         let url = chrome.runtime.getURL(filePath);
         return this.fetchSync(url);

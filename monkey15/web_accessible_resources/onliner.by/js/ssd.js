@@ -21,7 +21,7 @@ window.___frt.onliner.PriceDefiner = class {
             div.dataset['value']=ratio1;
 
             product.querySelector('div.price-per-gb')?.remove();
-            product.querySelector('.schema-product__price').insertAdjacentElement('beforeEnd', div);
+            product.querySelector('.schema-product__price').insertAdjacentElement('beforeend', div);
         }
     }
 
@@ -48,8 +48,8 @@ window.___frt.onliner.PriceDefiner = class {
         sortButton.style['z-index'] = '150';
         sortButton.type = 'button';
 
-        document.body.insertAdjacentElement('beforeEnd', calcButton);
-        document.body.insertAdjacentElement('beforeEnd', sortButton);
+        document.body.insertAdjacentElement('beforeend', calcButton);
+        document.body.insertAdjacentElement('beforeend', sortButton);
     }
 
     static sortingOnListing () {
@@ -85,7 +85,7 @@ window.___frt.onliner.PriceDefiner = class {
         div.style['font-size'] = '13px';
         div.innerText = ratio2;
 
-        document.querySelector('.offers-description__price-group').insertAdjacentElement('beforeEnd', div);
+        document.querySelector('.offers-description__price-group').insertAdjacentElement('beforeend', div);
     }
 };
 

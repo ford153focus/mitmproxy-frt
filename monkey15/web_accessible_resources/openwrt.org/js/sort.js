@@ -105,6 +105,9 @@ window.___frt.Sorters = class {
 }
 
 window.___frt.Utils = class {
+    /**
+     * @returns {Element[]}
+     */
     static get_rows(){
         let rows = document.querySelectorAll("table.dataplugin_table tr");
         let rows_array = Array.from(rows);

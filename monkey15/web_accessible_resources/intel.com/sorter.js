@@ -1,3 +1,7 @@
+HTMLCollection.prototype.frtToArray = window._frt.ext.HTMLCollection.frtToArray;
+String.prototype.frtToInt = window._frt.ext.String.frtToInt;
+
+/** @type {HTMLElement[]} */
 let rows = document.querySelectorAll('#product-table tbody tr').frtToArray();
 
 rows

@@ -1,3 +1,8 @@
+HTMLCollection.prototype.frtToArray = window._frt.ext.HTMLCollection.frtToArray;
+String.prototype.frtFixSpaces = window._frt.ext.String.frtFixSpaces;
+String.prototype.frtToFloat = window._frt.ext.String.frtToFloat;
+String.prototype.frtToInt = window._frt.ext.String.frtToInt;
+
 class Catalog {
     static setSorting() {
         document.querySelector('[value="price_promo_min"]')?.click();
@@ -109,5 +114,5 @@ class CatalogItem {
 }
 
 (() => {
-    Catalog.loadMore();
+    Catalog.loadMore().then(() => console.info('Done'));
 })();

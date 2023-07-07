@@ -1,11 +1,14 @@
+// noinspection JSUnusedGlobalSymbols
+HTMLCollection.prototype.frtToArray = window._frt.ext.HTMLCollection.frtToArray;
 if (!window.___frt) window.___frt = {};
 
 /* eslint-disable no-unused-vars */
 window.___frt.Catalog = class {
+    /** @abstract */
     settingsSwitcher() {}
 
     loadMore() {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function(resolve) {
             setInterval(function() {
                 let loadMoreButton = Array.from(document.getElementsByTagName('button')).filter(el => el.innerText?.trim().toLowerCase() === 'загрузить ещё');
                 if (loadMoreButton.length === 0) resolve('Loaded');
@@ -14,6 +17,7 @@ window.___frt.Catalog = class {
         });
     }
 
+    /** @abstract */
     filter() {}
 
     reSort() {
@@ -38,7 +42,10 @@ window.___frt.Catalog = class {
 class CatalogItem {
     static nonKiloUnits = ['г', 'мг', 'мл'];
 
+    /** @abstract */
     getWeight(item) {}
+
+    /** @abstract */
     getPrice(item) {}
 
     getPricePerKg(item) {

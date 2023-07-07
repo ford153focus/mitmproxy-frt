@@ -1,3 +1,5 @@
+HTMLElement.prototype.frtHide = window._frt.ext.HTMLElement.frtHide;
+String.prototype.frtFixSpaces = window._frt.ext.String.frtFixSpaces;
 if (!window.___frt) window.___frt = {};
 
 window.___frt.Injectors = class {

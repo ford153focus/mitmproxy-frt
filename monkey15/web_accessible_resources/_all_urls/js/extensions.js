@@ -1,5 +1,5 @@
 /*
-NodeList.prototype.frtRemoveAll = function(method='remove') {
+window._frt.ext.NodeList.frtRemoveAll = function(method='remove') {
     if (method==='nullify')
         for (let element of this)
             element.innerHTML = '';
@@ -14,7 +14,17 @@ NodeList.prototype.frtRemoveAll = function(method='remove') {
 };
 */
 
-HTMLCollection.prototype.frtToArray = function() {
+if (!window._frt) window._frt = {};
+window._frt.ext = {};
+window._frt.ext.Array = {};
+window._frt.ext.HTMLCollection = {};
+window._frt.ext.HTMLElement = {};
+window._frt.ext.NodeList = {};
+window._frt.ext.String = {};
+window._frt.ext.XPathResult = {};
+
+
+window._frt.ext.HTMLCollection.frtToArray = function() {
     try {
         return Array.from(this);
     } catch (error) {
@@ -22,7 +32,7 @@ HTMLCollection.prototype.frtToArray = function() {
     }
 };
 
-HTMLElement.prototype.frtRemove = function(method='remove') {
+window._frt.ext.HTMLElement.frtRemove = function(method='remove') {
     try {
         if (method==='hide')    this.style.display = 'none';
         if (method==='nullify') this.innerHTML = '';
@@ -32,7 +42,7 @@ HTMLElement.prototype.frtRemove = function(method='remove') {
     }
 };
 
-HTMLElement.prototype.frtSetStyle = function(key, value) {
+window._frt.ext.HTMLElement.frtSetStyle = function(key, value) {
     try {
         this.style[key] = value;
     } catch (error) {
@@ -40,7 +50,7 @@ HTMLElement.prototype.frtSetStyle = function(key, value) {
     }
 };
 
-HTMLElement.prototype.frtHide = function() {
+window._frt.ext.HTMLElement.frtHide = function() {
     try {
         this.style.display = 'none';
     } catch (error) {
@@ -48,7 +58,7 @@ HTMLElement.prototype.frtHide = function() {
     }
 };
 
-NodeList.prototype.frtToArray = function() {
+window._frt.ext.NodeList.frtToArray = function() {
     try {
         return Array.from(this);
     } catch (error) {
@@ -56,20 +66,26 @@ NodeList.prototype.frtToArray = function() {
     }
 };
 
-Array.prototype.frtRemoveDuplicates = function () {
-    try {
-        if (this === null) return;
-        if (this === undefined) return;
-        if (typeof this[Symbol.iterator] !== 'function') return;
+/**
+ * @param {any[]|null} arr
+ * @returns {any[]|void}
+ */
+window._frt.ext.Array.frtRemoveDuplicates = function (arr = null) {
+    if (arr === null) arr = this;
 
-        let set = new Set(this);
+    try {
+        if (arr === null) return;
+        if (arr === undefined) return;
+        if (typeof arr[Symbol.iterator] !== 'function') return;
+
+        let set = new Set(arr);
         return Array.from(set);
     } catch (error) {
         console.warn(error);
     }
 };
 
-String.prototype.frtFixSpaces = function () {
+window._frt.ext.String.frtFixSpaces = function () {
     try {
         return this.replaceAll('&nbsp;', ' ').replaceAll(' ', ' ');
     } catch (error) {
@@ -77,14 +93,14 @@ String.prototype.frtFixSpaces = function () {
     }
 };
 
-String.prototype.frtRemoveSpaces = function () {
+window._frt.ext.String.frtRemoveSpaces = function () {
     return this
         .trim()
         .frtFixSpaces()
         .replaceAll(' ', '');
 };
 
-String.prototype.frtToInt = function () {
+window._frt.ext.String.frtToInt = function () {
     try {
         return parseInt(this);
     } catch (error) {
@@ -92,7 +108,7 @@ String.prototype.frtToInt = function () {
     }
 };
 
-String.prototype.frtToFloat = function () {
+window._frt.ext.String.frtToFloat = function () {
     try {
         return parseFloat(this);
     } catch (error) {
@@ -100,7 +116,7 @@ String.prototype.frtToFloat = function () {
     }
 };
 
-String.prototype.frtHtmlEntitiesEncode = function () {
+window._frt.ext.String.frtHtmlEntitiesEncode = function () {
     try {
         let str = this;
         str = str.replace(/&/g, '&amp;');
@@ -113,7 +129,7 @@ String.prototype.frtHtmlEntitiesEncode = function () {
     }
 };
 
-String.prototype.frtHtmlEntitiesEncode2 = function () {
+window._frt.ext.String.frtHtmlEntitiesEncode2 = function () {
     try {
         let array = Array.from(this);
         array = array.map(c => `&#${c.charCodeAt(0)};`);
@@ -127,7 +143,7 @@ String.prototype.frtHtmlEntitiesEncode2 = function () {
  * Convert XPathResult to array
  * @returns HTMLElement[]
  */
-XPathResult.prototype.frtToArray = function() {
+window._frt.ext.XPathResult.frtToArray = function() {
     let result = null;
     let results = [];
 
@@ -149,12 +165,16 @@ XPathResult.prototype.frtToArray = function() {
     }
 };
 
-/**
- * Query elements by xPath
- * @param {string} xPathQuery
- * @returns HTMLElement[]
- */
-document.frtGetElementsByXPath = function (xPathQuery) {
-    let xPathResult = document.evaluate( xPathQuery, document, null, XPathResult.UNORDERED_NODE_ITERATOR_TYPE, null );
-    return xPathResult.frtToArray();
-};
+// Array.prototype.frtRemoveDuplicates = window._frt.ext.Array.frtRemoveDuplicates;
+// HTMLCollection.prototype.frtToArray = window._frt.ext.HTMLCollection.frtToArray;
+// HTMLElement.prototype.frtHide = window._frt.ext.HTMLElement.frtHide;
+// HTMLElement.prototype.frtRemove = window._frt.ext.HTMLElement.frtRemove;
+// HTMLElement.prototype.frtSetStyle = window._frt.ext.HTMLElement.frtSetStyle;
+// NodeList.prototype.frtToArray = window._frt.ext.NodeList.frtToArray;
+// String.prototype.frtFixSpaces = window._frt.ext.String.frtFixSpaces;
+// String.prototype.frtHtmlEntitiesEncode = window._frt.ext.String.frtHtmlEntitiesEncode;
+// String.prototype.frtHtmlEntitiesEncode2 = window._frt.ext.String.frtHtmlEntitiesEncode2;
+// String.prototype.frtRemoveSpaces = window._frt.ext.String.frtRemoveSpaces;
+// String.prototype.frtToFloat = window._frt.ext.String.frtToFloat;
+// String.prototype.frtToInt = window._frt.ext.String.frtToInt;
+// XPathResult.prototype.frtToArray = window._frt.ext.XPathResult.frtToArray;

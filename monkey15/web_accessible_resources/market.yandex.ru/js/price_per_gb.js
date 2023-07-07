@@ -1,3 +1,6 @@
+HTMLCollection.prototype.frtToArray = window._frt.ext.HTMLCollection.frtToArray;
+String.prototype.frtToInt = window._frt.ext.String.frtToInt;
+
 setTimeout(() => {
     let is_ssd = document.querySelectorAll('[itemprop="name"]').frtToArray().map(i => i.innerText).includes('Внутренние твердотельные накопители (SSD)');
     let is_sd  = document.querySelectorAll('[itemprop="name"]').frtToArray().map(i => i.innerText).includes('Карты флэш-памяти');

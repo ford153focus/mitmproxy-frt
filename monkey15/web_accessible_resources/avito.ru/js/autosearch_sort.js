@@ -1,3 +1,5 @@
+HTMLCollection.prototype.frtToArray = window._frt.ext.HTMLCollection.frtToArray;
+
 setTimeout(() => {
     let items = document.querySelectorAll('[data-marker="favorite-search"]').frtToArray();
 

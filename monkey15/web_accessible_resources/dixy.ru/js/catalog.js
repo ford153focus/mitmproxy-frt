@@ -1,3 +1,5 @@
+String.prototype.frtFixSpaces = window._frt.ext.String.frtFixSpaces;
+String.prototype.frtRemoveSpaces = window._frt.ext.String.frtRemoveSpaces;
 class DixyCatalogItem {
     static getPrice(item) {
         let priceTxt = item.querySelector('.dixyCatalogItemPrice__new').innerText.frtRemoveSpaces();
@@ -94,7 +96,6 @@ class DixyCatalog {
             let discount = items[items.length-1].querySelector('div.dixyCatalogItemPrice__discount').innerText.replaceAll(/\s/g,'');
             // noinspection DynamicallyGeneratedCodeJS
             discount = discount.includes('+') ? 0-100/eval(discount) : parseInt(discount);
-            discount = -31;
             if (discount>-30 || btn===null) { // if discount less than 30% - exit
                 clearInterval(interval);
                 window.___frt.loading = 0;

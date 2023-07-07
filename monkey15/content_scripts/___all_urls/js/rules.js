@@ -147,10 +147,24 @@ class Rules {
     static async yandex_market() {
         if (window.location.host !== 'market.yandex.ru') return;
 
-        if (window.location.pathname.startsWith('/product--karta-pamiati-') ||
-            window.location.pathname.startsWith('/product--tverdotelnyi-nakopitel-')) {
-            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/market.yandex.ru/js/price_per_gb.js'});
-        }
+        (() => {
+            let cats = [
+                'Внутренние твердотельные накопители (SSD)',
+                'Внутренние жесткие диски',
+                'Внешние жесткие диски и SSD',
+                'Карты памяти',
+                'USB флеш-накопители',
+            ];
+
+            for (const cat of cats) {
+                let query = `//span[@itemprop='name'][text()='${cat}']`;
+
+                if (_frt.utils.getElementsByXPath(query).length) {
+                    window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/market.yandex.ru/js/price_per_gb.js'});
+                    return;
+                }
+            }
+        })();
     }
 
     static async example() {

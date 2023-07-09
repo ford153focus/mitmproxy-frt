@@ -1,9 +1,15 @@
+// noinspection SpellCheckingInspection
+
 setTimeout(() => {
     const passed = [
         'A Short Encounter with a Rare Bird',
         'Adventure Takes Courage!',
         'Afratu\'s Dilemma',
+        'An Artist Adrift',
+        'An Introduction to Indoor Archaeology',
         'An Unwavering Culinary Dream',
+        'Awaken the Residual Pari in the Fravashi Trees',
+        'Behold, the Sign Comes Like A Thief...',
         'Blooming Sands',
         'Corps of Thirty Recruitment',
         'Cost-Effective Hook',
@@ -13,6 +19,7 @@ setTimeout(() => {
         'Drusus\' Riddles',
         'Dual Evidence',
         'Even Beasts Stumble',
+        'For Her Judgment Reaches to the Skies...',
         'For a Dream I Tarry',
         'Giving Flowers',
         'Hidden Mercenaries',
@@ -20,12 +27,16 @@ setTimeout(() => {
         'Join the Eremites and Embrace a Wonderful New Life!',
         'Legends of the Stone Lock',
         'Lost in the Sands',
+        'Make Bright the Arrows, Gather the Shields...',
         'Memory\'s Final Chapter',
+        'Monumental Study',
+        'Pale Fire',
         'Soheil\'s Wish',
-        'Static Views, Part 2',
         'Static Views',
+        'Static Views, Part 2',
         'The Exile: Sprouting',
         'The Foolish Fatuus',
+        'The Hymn of Tir Yazad',
         'The Path of Papers',
         'The Price',
         'Until Vana is Healed',
@@ -38,7 +49,12 @@ setTimeout(() => {
     ];
 
     let weekly = [
+        'Amir\'s Raw Meat Commission',
+        'Arayesh\'s Jam',
+        'Arina\'s Nilotpala Lotuses',
+        'Dwarkanath\'s White Iron Chunks',
         'Fatuous Farce',
+        'Fungal Fracas',
         'Hilichurl Hullaballoo',
     ];
 

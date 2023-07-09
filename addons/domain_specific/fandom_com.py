@@ -31,7 +31,7 @@ class Fandom:
                     flow,
                     {
                         "scripts": [
-                            {"path": Utils.local_injector_url("fandom.com/genshin-impact/quest_list.js")},
+                            {"path": Utils.local_injector_url("fandom.com/genshin-impact/world_quests_list.js")},
                         ],
                     }
                 )

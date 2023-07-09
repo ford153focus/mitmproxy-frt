@@ -55,7 +55,7 @@ class Rules {
             if (window.location.pathname === '/wiki/Event')                        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/event_list.js'});
             if (window.location.pathname === '/wiki/Hidden_Exploration_Objective') window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/hidden_exploration_objective.js'});
             if (window.location.pathname === '/wiki/Wonders_of_the_World')         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/wonders_of_the_world.js'});
-            if (window.location.pathname === '/wiki/World_Quest/List')             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/quest_list.js'});
+            if (window.location.pathname === '/wiki/World_Quest/List')             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/fandom.com/genshin-impact/js/world_quests_list.js'});
         }
     }
 

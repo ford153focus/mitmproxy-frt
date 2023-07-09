@@ -1,5 +1,5 @@
-/* eslint-disable quotes */
 // noinspection SpellCheckingInspection
+/* eslint-disable quotes */
 setTimeout(() => {
     let completed = [
         "\"Boatman\"'s Task",

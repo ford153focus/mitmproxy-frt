@@ -98,21 +98,33 @@ window.___frt.Catalog = class {
 window.___frt.CatalogItem = class {
     static nonKiloUnits = ['г', 'мг', 'мл'];
 
+    static getWeight(item) {
+        let matches;
+
+        let titleElement = item.querySelector('.product-title');
+        if (!titleElement) return 1;
+
+        // 8*62.5г || 20х1,8 г
+        matches = titleElement.innerText.match(/(\d+[*xх][\d.,]+)\s*(г)$/ui);
+        if (matches) {
+            let match = matches[1].replace(',','.');
+            match = match.replace('x','*').replace('х','*')
+            return eval(match)/1000;
+        }
+
+        matches = titleElement.innerText.match(/(\d+[.,]?\d*)\s?(г|мг|кг|мл|л)/ui);
+        if (matches === null) return 1;
+        let weight_value = parseFloat(matches[1].replace(',','.').replace(/^\./, ''));
+        let weight_unit = matches[2].toLowerCase();
+
+        if (this.nonKiloUnits.includes(weight_unit)) return weight_value / 1000;
+        return weight_value;
+    }
+
     static getPricePerKg(item) {
         let price = parseFloat(`${item.querySelector('.price-rub').innerText}.${item.querySelector('.price-coins').innerText}`);
 
-
-        let title_match = item.querySelector('.product-title').innerText.match(/([\d]+[.,]?[\d]*)\s?([кгмлКГМЛ]+)/);
-        if (title_match === null) return price;
-
-        let weigth_value = parseFloat(title_match[1].replace(',','.').replace(/^\./, ''));
-        let weigth_unit = title_match[2].toLowerCase();
-
-        if (this.nonKiloUnits.includes(weigth_unit)) {
-            weigth_value = weigth_value / 1000;
-        }
-
-        return price / weigth_value;
+        return price / this.getWeight(item);
     }
 };
 

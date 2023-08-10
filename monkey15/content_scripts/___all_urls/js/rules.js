@@ -1,5 +1,10 @@
 // noinspection JSUnusedGlobalSymbols
 class Rules {
+    static async tenMinutesMail() {
+        if (window.location.host !== '10minutemail.net') return;
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/10minutemail.net/js/extend_timer.js'});
+    }
+
     static async avito() {
         if (window.location.host !== 'www.avito.ru') return;
 

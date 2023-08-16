@@ -2,14 +2,17 @@ HTMLElement.prototype.frtHide = window._frt.ext.HTMLElement.frtHide;
 String.prototype.frtFixSpaces = window._frt.ext.String.frtFixSpaces;
 if (!window.___frt) window.___frt = {};
 
-window.___frt.Injectors = class {
+window.___frt.KufarInjectors = class {
     static inject_ban_button_on_details_page () {
-        let buttons=[...document.querySelectorAll('button')];
-        let wr_button = buttons.filter(el => el.innerText === 'Написать').shift();
+        let wr_button = window._frt.utils.getElementsByXPath("//button[text()='Позвонить']").shift();
+        if (!wr_button) wr_button = window._frt.utils.getElementsByXPath("//button[text()='Пазваніць']").shift();
+        if (!wr_button) wr_button = window._frt.utils.getElementsByXPath("//button[text()='Написать']").shift();
+        if (!wr_button) wr_button = window._frt.utils.getElementsByXPath("//button[text()='Напісаць']").shift();
         if (!wr_button) return;
         let clone = wr_button.cloneNode(true);
-        clone.innerHTML='Забанить';
+        clone.innerHTML='Скрывать это объявление';
         clone.style.backgroundColor = 'red';
+        clone.style.color = 'lightgrey';
 
         clone.onclick = () => {
             window._frt.Bans.add(window.location.pathname);
@@ -36,7 +39,7 @@ window.___frt.Injectors = class {
             let url = new URL(href);
             let path = url.pathname;
             window._frt.Bans.add(path);
-            window.___frt.ListingManipulators.hide_banned();
+            window.___frt.KufarListingManipulators.hide_banned();
         };
 
         for (const el of document.querySelectorAll('[class^="styles_cards"] section [class^="styles_content"]')) {
@@ -49,7 +52,7 @@ window.___frt.Injectors = class {
 
 };
 
-window.___frt.ListingManipulators = class {
+window.___frt.KufarListingManipulators = class {
     static ad_block () {
         for (let el of document.querySelectorAll('[class^=\'styles_banner\']')) el.frtHide();
         for (let el of document.querySelectorAll('[class^=\'styles_poleposition\']')) el.frtHide();
@@ -149,17 +152,17 @@ window.___frt.ListingManipulators = class {
 
 window.___frt.Kufar = class {
     observerCallback() {
-        window.___frt.Injectors.inject_ban_button_to_listing();
+        window.___frt.KufarInjectors.inject_ban_button_to_listing();
 
-        window.___frt.ListingManipulators.ad_block();
-        window.___frt.ListingManipulators.hide_banned();
-        window.___frt.ListingManipulators.mark_broken();
-        window.___frt.ListingManipulators.highlight_near_districts();
+        window.___frt.KufarListingManipulators.ad_block();
+        window.___frt.KufarListingManipulators.hide_banned();
+        window.___frt.KufarListingManipulators.mark_broken();
+        window.___frt.KufarListingManipulators.highlight_near_districts();
     }
 
     constructor() {
         setTimeout(() => {
-            window.___frt.Injectors.inject_ban_button_on_details_page();
+            window.___frt.KufarInjectors.inject_ban_button_on_details_page();
 
             this.observer = new MutationObserver(this.observerCallback.bind(this));
             const config = { attributes: true, childList: true, subtree: true };

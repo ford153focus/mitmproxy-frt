@@ -87,6 +87,8 @@ window.___frt.PlayShortcut = class {
     keyPressListener(event) {
         if (event.code !== 'KeyP') return;
         this.post = document.querySelector('.postContainer .article.post-normal.active');
+        if (!this.post) return; // skip if no video
+        if (document.activeElement.constructor.name==='HTMLTextAreaElement') return; // skip if typing comment
         let status = this.post.getAttribute('data-playing');
         status === 'false' ? this.play() : this.stop();
     }

@@ -148,6 +148,28 @@ window.___frt.KufarListingManipulators = class {
             }
         }
     }
+
+    static photo_required() {
+        let targets = [
+            'Толькі з фота',
+            'Только с фото',
+        ];
+
+        for (const target of targets) {
+            /** @type HTMLLabelElement */
+            let label = document.querySelector(`[data-name="${target}"]`);
+            if (label === null) continue;
+
+            /** @type HTMLInputElement */
+            let checkBox = label.previousSibling;
+            if (checkBox === null) continue;
+            if (checkBox.constructor.name !== 'HTMLInputElement') continue;
+            if (checkBox.checked) continue;
+            label.click();
+
+            document.querySelector('[type="submit"]').click();
+        }
+    }
 };
 
 window.___frt.Kufar = class {
@@ -158,6 +180,7 @@ window.___frt.Kufar = class {
         window.___frt.KufarListingManipulators.hide_banned();
         window.___frt.KufarListingManipulators.mark_broken();
         window.___frt.KufarListingManipulators.highlight_near_districts();
+        window.___frt.KufarListingManipulators.photo_required();
     }
 
     constructor() {

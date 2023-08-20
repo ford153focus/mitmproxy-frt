@@ -69,6 +69,7 @@ class Rules {
         window._frt.LibraryLoaders.notyf();
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/kufar.by/js/script.js'});
+        window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/kufar.by/css/styles.css'});
     }
 
     static async musicbrainz() {

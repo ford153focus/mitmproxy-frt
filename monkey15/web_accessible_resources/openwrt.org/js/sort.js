@@ -2,18 +2,28 @@ if (!window.___frt) window.___frt = {};
 
 window.___frt.Filters = class {
     static three_gbit_ports(){
-        for (const row of window.___frt.Utils.get_rows()) {
-            let ethernet_gbit_ports = parseInt(row.querySelector('td.ethernet_gbit_ports')?.innerText);
-            if (ethernet_gbit_ports < 3) row.remove();
+        for (const cell of document.querySelectorAll('td.ethernet_gbit_ports')) {
+            if (parseInt(cell.innerText) > 3) continue;
+            cell.parentElement.remove();
         }
     }
-    static no_broadcom(){
-        for (const row of window.___frt.Utils.get_rows()) {
-            let cpu = row.querySelector('td.cpu').innerText.toLowerCase();
-            let wlan = row.querySelector('td.wlan_hardware').innerText.toLowerCase();
 
-            if (cpu.includes('broadcom')) row.remove();
-            if (wlan.includes('broadcom')) row.remove();
+    static no_broadcom(){
+        for (const cell of document.querySelectorAll('td.cpu')) {
+            if (!cell.innerText.toLowerCase().includes('broadcom')) continue;
+            cell.parentElement.remove();
+        }
+
+        for (const cell of document.querySelectorAll('td.wlan_hardware')) {
+            if (!cell.innerText.toLowerCase().includes('broadcom')) continue;
+            cell.parentElement.remove();
+        }
+    }
+
+    static usb(){
+        for (const cell of document.querySelectorAll('td.usb_ports')) {
+            if (cell.innerText !== '-') continue;
+            cell.parentElement.remove();
         }
     }
 };
@@ -102,22 +112,22 @@ window.___frt.Sorters = class {
                 rows_array[0].parentElement.appendChild(item);
             });
     }
-}
+};
 
 window.___frt.Utils = class {
     /**
      * @returns {Element[]}
      */
     static get_rows(){
-        let rows = document.querySelectorAll("table.dataplugin_table tr");
+        let rows = document.querySelectorAll('table.dataplugin_table tr');
         let rows_array = Array.from(rows);
         rows_array.shift();
         rows_array.shift();
         return rows_array;
     }
-}
+};
 
-for (const el of document.querySelectorAll("table.dataplugin_table tr")) {
+for (const el of document.querySelectorAll('table.dataplugin_table tr')) {
     el.childNodes[0].style.display = 'none';
     el.childNodes[4].style.display = 'none';
     el.childNodes[5].style.display = 'none';

@@ -180,7 +180,7 @@ window.___frt.Kufar = class {
         window.___frt.KufarListingManipulators.hide_banned();
         window.___frt.KufarListingManipulators.mark_broken();
         window.___frt.KufarListingManipulators.highlight_near_districts();
-        window.___frt.KufarListingManipulators.photo_required();
+        // window.___frt.KufarListingManipulators.photo_required();
     }
 
     constructor() {

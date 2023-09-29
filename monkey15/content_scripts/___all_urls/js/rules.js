@@ -119,12 +119,12 @@ class Rules {
     }
 
     static async OpenWRT() {
-        if (!window.location.href.startsWith('https://openwrt.org/toh/views/toh_available_')) return;
+        if (!window.location.href.startsWith('https://openwrt.org/toh/views/toh_')) return;
 
         await window._frt.Injectors.injectInternalHTML(
             '/web_accessible_resources/openwrt.org/html/toolbar.html',
-            document.querySelector('.table-responsive'),
-            'beforebegin'
+            document.querySelector('.dataaggregation .filter'),
+            'beforeend'
         );
 
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/openwrt.org/js/sort.js'});
@@ -173,7 +173,7 @@ class Rules {
             for (const cat of cats) {
                 let query = `//span[@itemprop='name'][text()='${cat}']`;
 
-                if (_frt.utils.getElementsByXPath(query).length) {
+                if (window._frt.utils.getElementsByXPath(query).length) {
                     window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/market.yandex.ru/js/price_per_gb.js'});
                     return;
                 }

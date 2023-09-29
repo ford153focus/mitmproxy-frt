@@ -4,10 +4,10 @@ if (!window.___frt) window.___frt = {};
 
 window.___frt.KufarInjectors = class {
     static inject_ban_button_on_details_page () {
-        let wr_button = window._frt.utils.getElementsByXPath("//button[text()='Позвонить']").shift();
-        if (!wr_button) wr_button = window._frt.utils.getElementsByXPath("//button[text()='Пазваніць']").shift();
-        if (!wr_button) wr_button = window._frt.utils.getElementsByXPath("//button[text()='Написать']").shift();
-        if (!wr_button) wr_button = window._frt.utils.getElementsByXPath("//button[text()='Напісаць']").shift();
+        let wr_button = window._frt.utils.getElementsByXPath('//button[text()="Позвонить"]').shift();
+        if (!wr_button) wr_button = window._frt.utils.getElementsByXPath('//button[text()="Пазваніць"]').shift();
+        if (!wr_button) wr_button = window._frt.utils.getElementsByXPath('//button[text()="Написать"]').shift();
+        if (!wr_button) wr_button = window._frt.utils.getElementsByXPath('//button[text()="Напісаць"]').shift();
         if (!wr_button) return;
         let clone = wr_button.cloneNode(true);
         clone.innerHTML='Скрывать это объявление';
@@ -54,14 +54,14 @@ window.___frt.KufarInjectors = class {
 
 window.___frt.KufarListingManipulators = class {
     static ad_block () {
-        for (let el of document.querySelectorAll('[class^=\'styles_banner\']')) el.frtHide();
-        for (let el of document.querySelectorAll('[class^=\'styles_poleposition\']')) el.frtHide();
-        for (let el of document.querySelectorAll('[class^=\'styles_bannerContainer\']')) el.frtHide();
-        for (let el of document.querySelectorAll('[class^=\'styles_recently-viewed\']')) el.frtHide();
-        for (let el of document.querySelectorAll('[alt=\'placeholder\']')) el.parentElement.parentElement.parentElement.frtHide();
+        for (let el of document.querySelectorAll('[class^="styles_banner"]')) el.frtHide();
+        for (let el of document.querySelectorAll('[class^="styles_poleposition"]')) el.frtHide();
+        for (let el of document.querySelectorAll('[class^="styles_bannerContainer"]')) el.frtHide();
+        for (let el of document.querySelectorAll('[class^="styles_recently-viewed"]')) el.frtHide();
+        for (let el of document.querySelectorAll('[alt="placeholder"]')) el.parentElement.parentElement.parentElement.frtHide();
 
-        for (let el of document.querySelectorAll('img[alt=\'vip\']')) el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.frtHide();
-        for (let el of window._frt.utils.getElementsByXPath('//a[contains(@class, \'highlighted\')]')) el.parentElement.frtHide();
+        for (let el of document.querySelectorAll('img[alt="vip"]')) el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.frtHide();
+        for (let el of window._frt.utils.getElementsByXPath('//a[contains(@class, "highlighted")]')) el.parentElement.frtHide();
 
         document.querySelector('[class^="styles_buttons-right__container"] button')?.click();
 

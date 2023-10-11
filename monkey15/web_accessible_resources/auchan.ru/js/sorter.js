@@ -53,7 +53,6 @@ window.___frt.Auchan = class {
 
             if (isNaN(discount)) discount = 0;
 
-
             switch (true) {
                 case (discount < discountFrom):
                 case (kiloPrice > priceTo):

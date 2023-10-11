@@ -16,7 +16,6 @@ class LorSharedUtils {
         obsoletionDate = obsoletionDate.getTime() / 1000;
         obsoletionDate = parseInt(obsoletionDate.toString()).toFixed(0);
 
-
         hiddenTopics = JSON.parse(hiddenTopics);
         hiddenTopics = hiddenTopics.filter(topic => topic.date > obsoletionDate);
         hiddenTopics = JSON.stringify(hiddenTopics);

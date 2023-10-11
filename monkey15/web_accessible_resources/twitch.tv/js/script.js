@@ -27,7 +27,6 @@ window.___frt = class {
             if (streamName === undefined) continue;
             if (gameName === undefined) continue;
 
-
             switch (true) {
                 case streamName.includes('казино'):
                     stream.style.backgroundColor = '#c00';

@@ -27,7 +27,6 @@ window._frt.Fetchers = class {
         return isJson ? JSON.parse(xhr.responseText) : xhr.responseText;
     }
 
-
     /**
      *
      * @param {string} filePath

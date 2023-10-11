@@ -14,7 +14,6 @@ class FrtLorFavsUtils {
         let endReached = false;
         let offset = 0;
 
-
         while (!endReached) {
             let data = await window._frt.Fetchers.fetch(`${window.location.href}?offset=${offset}`);
             let htmlDoc = parser.parseFromString(data, 'text/html');

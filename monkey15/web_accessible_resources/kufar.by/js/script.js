@@ -148,7 +148,6 @@ window.___frt.KufarListingManipulators = class {
             }
         }
     }
-
     static photo_required() {
         let targets = [
             'Толькі з фота',
@@ -184,6 +183,8 @@ window.___frt.Kufar = class {
     }
 
     constructor() {
+        this.observerCallback();
+        return;
         setTimeout(() => {
             window.___frt.KufarInjectors.inject_ban_button_on_details_page();
 
@@ -192,7 +193,7 @@ window.___frt.Kufar = class {
             this.observer.observe(document.body, config);
 
             this.observerCallback();
-        }, 333);
+        }, 5310);
     }
 };
 

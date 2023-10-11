@@ -80,10 +80,6 @@ class FrtCatalog {
     }
 }
 
-
-
-
-
 /**
  * Resort items after load
  */

@@ -429,7 +429,6 @@ setTimeout(() => {
         "Burned Yourself, Did You?",
     ];
 
-
     for (const el of document.querySelectorAll('table > tbody > tr')) {
         let name = el.querySelector('td:nth-child(1) a')?.innerText;
         if (completed.includes(name)) el.classList.add('completed');

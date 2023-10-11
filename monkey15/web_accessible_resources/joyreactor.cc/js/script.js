@@ -32,7 +32,6 @@ window.___frt.ReactorUtils = class {
     }
 };
 
-
 /**
  * fix vertical video height
  */
@@ -50,3 +49,7 @@ setTimeout(() => {
         }
     }
 }, 153);
+
+setInterval(() => {
+    window.___frt.ReactorUtils.upVoteAll('yans')
+}, 5310);

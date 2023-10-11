@@ -92,7 +92,6 @@ class Rules {
 
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/pepper.ru/js/script.js'});
 
-
         if (window.location.pathname.startsWith('/groups/ssd') || window.location.pathname.startsWith('/groups/memory-cards')) {
             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/pepper.ru/js/ssd.js'});
         }

@@ -23,7 +23,6 @@ window._frt.ext.NodeList = {};
 window._frt.ext.String = {};
 window._frt.ext.XPathResult = {};
 
-
 window._frt.ext.HTMLCollection.frtToArray = function() {
     try {
         return Array.from(this);

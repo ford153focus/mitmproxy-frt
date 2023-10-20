@@ -1,3 +1,23 @@
 section {
     min-height: 160px;
+
+    & div[class^="styles_top"] {
+        min-height: 55px;
+    }
+
+    & div[class^="styles_bottom"] {
+        min-height: 35px;
+    }
+}
+
+#___frt_filter {
+    background-color: darkgray;
+    border-radius: 0 0 0 3mm;
+    border: 0.75mm solid black;
+    top: 0;
+    display: block;
+    right: 0;
+    padding: 1mm 3mm;
+    position: fixed;
+    z-index: 10;
 }

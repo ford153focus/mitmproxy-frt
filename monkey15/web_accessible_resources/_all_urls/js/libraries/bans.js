@@ -30,4 +30,12 @@ window._frt.Bans = class {
         this.set(bans);
         window._frt?.utils?.notify('Banned');
     }
+
+    /**
+     * @param {string} path
+     */
+    static clear_all (path) {
+        this.set([]);
+        window._frt?.utils?.notify('All bans cleared');
+    }
 };

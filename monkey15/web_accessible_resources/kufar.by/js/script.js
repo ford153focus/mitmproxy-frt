@@ -72,6 +72,22 @@ window.___frt.KufarListingManipulators = class {
         }
     }
 
+    static inject_button() {
+        if (document.getElementById('___frt_filter') !== null) return;
+
+        let button = document.createElement('button');
+        button.id = '___frt_filter';
+        button.innerText = 'Filter';
+
+        button.onclick = (() => {
+            window.___frt.kufar.observerCallback();
+        });
+
+        button.type = 'button';
+
+        document.body.insertAdjacentElement('beforeend', button);
+    }
+
     static hide_banned() {
         setInterval(() => {
             let bans = window._frt.Bans.get();
@@ -183,17 +199,17 @@ window.___frt.Kufar = class {
     }
 
     constructor() {
-        this.observerCallback();
-        return;
         setTimeout(() => {
             window.___frt.KufarInjectors.inject_ban_button_on_details_page();
+            document.querySelector('[data-testid="realty-map-hide-button"]')?.click();
+            this.observerCallback();
+        }, 1530);
 
+        /*setTimeout(() => {
             this.observer = new MutationObserver(this.observerCallback.bind(this));
             const config = { attributes: true, childList: true, subtree: true };
             this.observer.observe(document.body, config);
-
-            this.observerCallback();
-        }, 5310);
+        }, 15310);*/
     }
 };
 

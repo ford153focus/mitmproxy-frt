@@ -3,7 +3,7 @@ class FrtLorFavsUtils {
         let el = document.getElementById('bd');
         el.innerHTML = '';
         await window._frt.Injectors.injectInternalHTML('/web_accessible_resources/linux.org.ru/html/favs_table.html', el, 'afterbegin');
-        window._frt.LibraryLoaders.fontAwesome();
+        window._frt.Injectors.injectInternalStyleSheet({href: '/node_modules/@fortawesome/fontawesome-free/css/all.css'});
     }
 
     static async fillTable() {

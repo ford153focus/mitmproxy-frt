@@ -5,10 +5,22 @@ class Rules {
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/10minutemail.net/js/extend_timer.js'});
     }
 
+    static async almi() {
+        if (window.location.href.startsWith('https://almi-dostavka.by/catalog/')) {
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/almi-dostavka.by/js/catalog.js'});
+            await window._frt.Injectors.injectInternalHTML('/web_accessible_resources/almi-dostavka.by/html/sort-button.html');
+        }
+
+        if (window.location.href.startsWith('https://almi-dostavka.by/basket/')) {
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/almi-dostavka.by/js/cart.js'});
+        }
+    }
+
     static async avito() {
         if (window.location.host !== 'www.avito.ru') return;
 
-        window._frt.LibraryLoaders.notyf();
+        window._frt.Injectors.injectInternalStyleSheet({href: '/node_modules/notyf/notyf.min.css'});
+        window._frt.Injectors.injectInternalScript(    {src:  '/node_modules/notyf/notyf.min.js'});
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
 
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/avito.ru/js/ad_filter.js'});
@@ -29,7 +41,8 @@ class Rules {
 
     static async eAuction_by() {
         if (window.location.host === 'e-auction.by') {
-            window._frt.LibraryLoaders.notyf();
+            window._frt.Injectors.injectInternalStyleSheet({href: '/node_modules/notyf/notyf.min.css'});
+            window._frt.Injectors.injectInternalScript(    {src:  '/node_modules/notyf/notyf.min.js'});
             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/e-auction.by/js/script.js'});
         }
@@ -66,7 +79,11 @@ class Rules {
 
     static async kufar() {
         if (!window.location.host.endsWith('kufar.by')) return;
-        window._frt.LibraryLoaders.notyf();
+
+        window._frt.Injectors.injectInternalStyleSheet({href: '/node_modules/notyf/notyf.min.css'});
+        window._frt.Injectors.injectInternalScript(    {src:  '/node_modules/notyf/notyf.min.js'});
+        window._frt.Injectors.injectInternalScript(    {src:  '/node_modules/js-cookie/dist/js.cookie.min.js'});
+
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/kufar.by/js/script.js'});
         window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/kufar.by/css/styles.css'});
@@ -81,7 +98,7 @@ class Rules {
     static async pepper_ru() {
         if (window.location.host !== 'www.pepper.ru') return;
 
-        window._frt.LibraryLoaders.fontAwesome();
+        window._frt.Injectors.injectInternalStyleSheet({href: '/node_modules/@fortawesome/fontawesome-free/css/all.css'});
 
         await window._frt.Injectors.injectInternalHTML(
             '/web_accessible_resources/pepper.ru/html/sorting-panel.html',
@@ -100,7 +117,9 @@ class Rules {
 
     static async onliner() {
         if (window.location.host === 'ab.onliner.by') {
-            window._frt.LibraryLoaders.notyf();
+            window._frt.Injectors.injectInternalStyleSheet({href: '/node_modules/notyf/notyf.min.css'});
+            window._frt.Injectors.injectInternalScript(    {src:  '/node_modules/notyf/notyf.min.js'});
+
             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/_all_urls/js/libraries/bans.js'});
             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/onliner.by/js/ab.js'});
         }

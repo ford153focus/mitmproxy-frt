@@ -132,8 +132,10 @@ window.___frt.cls = class {
     }
 
     constructor() {
-        window._frt.LibraryLoaders.bootStrap();
-        window._frt.LibraryLoaders.fontAwesome();
+        window._frt.Injectors.injectInternalStyleSheet({href: '/node_modules/bootstrap/dist/css/bootstrap.css'});
+        window._frt.Injectors.injectInternalScript(    {src:  '/node_modules/bootstrap/dist/js/bootstrap.bundle.js'});
+        window._frt.Injectors.injectInternalStyleSheet({href: '/node_modules/bootstrap/dist/css/bootstrap.css'});
+        window._frt.Injectors.injectInternalStyleSheet({href: '/node_modules/@fortawesome/fontawesome-free/css/all.css'});
 
         let table = document.getElementById('fav_table');
         let bookmarks = this.grabBookmarks();

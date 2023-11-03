@@ -26,6 +26,7 @@ let manifest = {
     'web_accessible_resources': [
         {
             'resources': [
+                'node_modules/*',
                 'web_accessible_resources/*',
                 'lib/*'
             ],

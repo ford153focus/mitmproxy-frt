@@ -11,10 +11,10 @@ module.exports = {
         allowImportExportEverywhere: true
     },
     'rules': {
-        'indent':          ['error', 4, {"SwitchCase": 1}],
-        'linebreak-style': ['error', 'unix'],
+        'indent':          ['warn', 4, {'SwitchCase': 1}],
+        'linebreak-style': ['warn', 'unix'],
         'quotes':          ['warn',  'single'],
-        'semi':            ['error', 'always'],
+        'semi':            ['warn', 'always'],
         'no-unused-vars':  ['warn']
     }
 };

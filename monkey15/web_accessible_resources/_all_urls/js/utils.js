@@ -157,6 +157,20 @@ window._frt.Utils = class {
         return this.findParentById(element.parentElement, id);
     }
 
+    /**
+     *
+     * @param {string} text
+     */
+    copyToClipboard(text) {
+        navigator.clipboard.writeText(text)
+            .then(function() {
+                window._frt?.utils?.notify('copied');
+            })
+            .catch(function(err) {
+                console.error("Failed to copy text: ", err);
+            });
+    }
+
     constructor() {
         //
     }

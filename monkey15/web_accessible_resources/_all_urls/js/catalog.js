@@ -21,15 +21,16 @@ window.___frt.Catalog = class {
     filter() {}
 
     reSort() {
-        let items = document.querySelectorAll('selector').frtToArray();
-        if (items.length === 0) return;
+        let itemsList = document.querySelectorAll('selector');
+        let itemsArray = Array.from(itemsList);
+        if (itemsArray.length === 0) return;
 
-        items
+        itemsArray
             .sort((item1, item2) => {
                 return CatalogItem.getPricePerKg(item1) - CatalogItem.getPricePerKg(item2);
             })
             .map((item) => {
-                items[0].parentElement.appendChild(item);
+                itemsArray[0].parentElement.appendChild(item);
             });
     }
 

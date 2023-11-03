@@ -5,9 +5,9 @@ google-chrome 'https://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml' # windows only 
 python -m pip install --user pipx
 python -m pipx install mitmproxy
 
-cd ~/.mitmproxy
+cd ~/.mitmproxy || exit
 certutil -addstore root mitmproxy-ca-cert.cer
 
-cd ___project
+cd ___project || exit
 mitmproxy --scripts main.py --listen-host 0.0.0.0 --listen-port 51080 # prod
 python3 run.py # dev

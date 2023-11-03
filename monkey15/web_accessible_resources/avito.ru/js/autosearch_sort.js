@@ -1,9 +1,8 @@
-HTMLCollection.prototype.frtToArray = window._frt.ext.HTMLCollection.frtToArray;
-
 setTimeout(() => {
-    let items = document.querySelectorAll('[data-marker="favorite-search"]').frtToArray();
+    let itemsList = document.querySelectorAll('[data-marker="favorite-search"]');
+    let itemsArray = Array.from(itemsList);
 
-    items
+    itemsArray
         .sort((item1, item2) => {
             let cat1 = item1.querySelector('[data-marker="favorite-search/title"] a').innerText;
             let title1 = item1.querySelector('[data-marker="favorite-search/title"]').innerText;
@@ -20,6 +19,6 @@ setTimeout(() => {
             return newAdsIndicator2-newAdsIndicator1;
         })
         .map((item) => {
-            items[0].parentElement.appendChild(item);
+            itemsArray[0].parentElement.appendChild(item);
         });
 }, 531);

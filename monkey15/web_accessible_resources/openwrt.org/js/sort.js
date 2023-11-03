@@ -135,7 +135,7 @@ window.___frt.Utils = class {
 };
 
 for (const el of document.querySelectorAll('table.dataplugin_table tr')) {
-    el.childNodes[0].style.display = 'none';
+    el.children[0].style.display = 'none';
     // el.childNodes[4].style.display = 'none';
     // el.childNodes[5].style.display = 'none';
     // el.childNodes[6].style.display = 'none';

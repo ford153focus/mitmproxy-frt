@@ -4,12 +4,10 @@ if (!window.___frt) window.___frt = {};
 
 window.___frt.KufarInjectors = class {
     static inject_ban_button_on_details_page () {
-        let wr_button = window._frt.utils.getElementsByXPath('//button[text()="Позвонить"]').shift();
-        if (!wr_button) wr_button = window._frt.utils.getElementsByXPath('//button[text()="Пазваніць"]').shift();
-        if (!wr_button) wr_button = window._frt.utils.getElementsByXPath('//button[text()="Написать"]').shift();
-        if (!wr_button) wr_button = window._frt.utils.getElementsByXPath('//button[text()="Напісаць"]').shift();
-        if (!wr_button) return;
-        let clone = wr_button.cloneNode(true);
+        let button = document.querySelector('#sidebar-buttons button:last-child');
+        if (!button) return;
+
+        let clone = button.cloneNode(true);
         clone.innerHTML='Скрывать это объявление';
         clone.style.backgroundColor = 'red';
         clone.style.color = 'lightgrey';
@@ -18,7 +16,7 @@ window.___frt.KufarInjectors = class {
             window._frt.Bans.add(window.location.pathname);
         };
 
-        wr_button.insertAdjacentElement('afterend', clone);
+        button.insertAdjacentElement('afterend', clone);
     }
 
     static inject_ban_button_to_listing () {
@@ -49,7 +47,6 @@ window.___frt.KufarInjectors = class {
             el.insertAdjacentElement('beforeend', clone);
         }
     }
-
 };
 
 window.___frt.KufarListingManipulators = class {
@@ -164,6 +161,7 @@ window.___frt.KufarListingManipulators = class {
             }
         }
     }
+
     static photo_required() {
         let targets = [
             'Толькі з фота',

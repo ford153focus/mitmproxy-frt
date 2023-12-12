@@ -16,17 +16,6 @@ class Rules {
         }
     }
 
-    static async edostavka_by() {
-        if (window.location.href.startsWith('https://edostavka.by/category/')) {
-            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/edostavka.by/js/catalog.js'});
-            await window._frt.Injectors.injectInternalHTML('/web_accessible_resources/almi-dostavka.by/html/sort-button.html');
-        }
-
-        // if (window.location.href.startsWith('https://almi-dostavka.by/basket/')) {
-        //     window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/almi-dostavka.by/js/cart.js'});
-        // }
-    }
-
     static async avito() {
         if (window.location.host !== 'www.avito.ru') return;
 
@@ -70,6 +59,22 @@ class Rules {
 
         if (window.location.href === 'https://yamigom-store.by/cart') {
             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/evroopt.by/js/yamigom_cart.js'});
+        }
+    }
+
+    static async edostavka_by() {
+        if (window.location.href.startsWith('https://edostavka.by/category/')) {
+            await window._frt.Injectors.injectInternalHTML('/web_accessible_resources/almi-dostavka.by/html/sort-button.html');
+
+            window._frt.Injectors.injectInternalScript({
+                src: '/web_accessible_resources/edostavka.by/js/catalog.js'}
+            );
+        }
+
+        if (window.location.href.startsWith('https://edostavka.by/cart')) {
+            window._frt.Injectors.injectInternalScript({
+                src: '/web_accessible_resources/edostavka.by/js/cart.js'}
+            );
         }
     }
 

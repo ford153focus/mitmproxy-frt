@@ -52,6 +52,7 @@ window.___frt = class {
                     break;
                 case 'counter-strike: global offensive':
                 case 'counter-strike 2':
+                case 'counter-strike':
                 case 'dota 2':
                     stream.style.backgroundColor = '#030';
                     break;

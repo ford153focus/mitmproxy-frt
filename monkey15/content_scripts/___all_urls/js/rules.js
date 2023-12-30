@@ -111,26 +111,6 @@ class Rules {
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/musicbrainz.org/js/marker.js'});
     }
 
-    static async pepper_ru() {
-        if (window.location.host !== 'www.pepper.ru') return;
-
-        window._frt.Injectors.injectInternalStyleSheet({href: '/node_modules/@fortawesome/fontawesome-free/css/all.css'});
-
-        await window._frt.Injectors.injectInternalHTML(
-            '/web_accessible_resources/pepper.ru/html/sorting-panel.html',
-            document.querySelector('.subNav .tGrid-cell.width--all-12'),
-            'beforeend'
-        );
-
-        window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/pepper.ru/css/style.css'});
-
-        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/pepper.ru/js/script.js'});
-
-        if (window.location.pathname.startsWith('/groups/ssd') || window.location.pathname.startsWith('/groups/memory-cards')) {
-            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/pepper.ru/js/ssd.js'});
-        }
-    }
-
     static async onliner() {
         if (window.location.host === 'ab.onliner.by') {
             window._frt.Injectors.injectInternalStyleSheet({href: '/node_modules/notyf/notyf.min.css'});
@@ -165,7 +145,27 @@ class Rules {
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/openwrt.org/js/sort.js'});
     }
 
-    static async reactor() {
+    static async pepper_ru() {
+        if (window.location.host !== 'www.pepper.ru') return;
+
+        window._frt.Injectors.injectInternalStyleSheet({href: '/node_modules/@fortawesome/fontawesome-free/css/all.css'});
+
+        await window._frt.Injectors.injectInternalHTML(
+            '/web_accessible_resources/pepper.ru/html/sorting-panel.html',
+            document.querySelector('.subNav .tGrid-cell.width--all-12'),
+            'beforeend'
+        );
+
+        window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/pepper.ru/css/style.css'});
+
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/pepper.ru/js/script.js'});
+
+        if (window.location.pathname.startsWith('/groups/ssd') || window.location.pathname.startsWith('/groups/memory-cards')) {
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/pepper.ru/js/ssd.js'});
+        }
+    }
+
+    static async reactor_cc() {
         if (!window.location.host.endsWith('reactor.cc')) return;
 
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/comment_text_tools.js'});
@@ -176,14 +176,14 @@ class Rules {
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/joyreactor.cc/js/unhide_comments.js'});
     }
 
-    static async twitch() {
-        if (window.location.host !== 'www.twitch.tv') return;
+    static async reddit() {
+        let comments_url_pattern = new window.URLPattern('/r/*/comments/*/*/', 'https://www.reddit.com');
+        if (!comments_url_pattern.test(window.location.href)) return;
 
-        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/twitch.tv/js/script.js'});
-        window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/twitch.tv/css/directory.css'});
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/reddit.com/show_all_comments.js'});
     }
 
-    static async sosedi() {
+    static async sosedi_by() {
         if (window.location.href.startsWith('https://sosedi.by/sales/')) {
             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/sosedi.by/js/sales.js'});
         }
@@ -191,6 +191,13 @@ class Rules {
         if (window.location.href.startsWith('https://sosedi.by/personal/')) {
             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/sosedi.by/js/cart.js'});
         }
+    }
+
+    static async twitch() {
+        if (window.location.host !== 'www.twitch.tv') return;
+
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/twitch.tv/js/script.js'});
+        window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/twitch.tv/css/directory.css'});
     }
 
     static async yandex_market() {

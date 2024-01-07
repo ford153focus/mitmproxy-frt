@@ -67,6 +67,13 @@ window.___frt.KufarListingManipulators = class {
                 h3.parentElement.frtHide();
             }
         }
+
+        for (const el of document.getElementsByTagName('div')) {
+            if (el.attributes['data-testid'] === undefined) continue;
+            if (el.attributes['id'] === undefined) continue;
+            if (el.attributes['class'] === undefined) continue;
+            el.frtHide();
+        }
     }
 
     static inject_button() {

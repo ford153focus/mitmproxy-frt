@@ -1,40 +1,95 @@
-HTMLCollection.prototype.frtToArray = window._frt.ext.HTMLCollection.frtToArray;
-String.prototype.frtToInt = window._frt.ext.String.frtToInt;
+if (!window.___frt) window.___frt = {};
 
-/** @type {HTMLElement[]} */
-let rows = document.querySelectorAll('#product-table tbody tr').frtToArray();
+window.___frt.Sorter = class {
+    draw_sort_button() {
+        let sortButton = document.createElement('button');
+        sortButton.id = '___frt_sorter';
+        sortButton.innerText = 'Sort';
 
-rows
-    .sort((a,b) => {
-        let q1 = a.querySelector('td:nth-child(3)').innerText.split('\'')[0].replace(/\D/, '');
-        let q2 = b.querySelector('td:nth-child(3)').innerText.split('\'')[0].replace(/\D/, '');
-        return q1-q2;
-    })
-    .sort((a,b) => {
-        let year1 = a.querySelector('td:nth-child(3)').innerText.split('\'')[1];
-        let year2 = b.querySelector('td:nth-child(3)').innerText.split('\'')[1];
-        return year1-year2;
-    })
-    .sort((a,b) => {
-        let cache1 = parseFloat(a.querySelector('td:nth-child(7)').innerText);
-        let cache2 = parseFloat(b.querySelector('td:nth-child(7)').innerText);
-        return cache1-cache2;
-    })
-    .sort((a,b) => {
-        let turbo_freq_1 = a.querySelector('td:nth-child(5)').innerText.includes(',') ? parseFloat(a.querySelector('td:nth-child(5)').innerText.replace(',','.'))*1000 : parseInt(a.querySelector('td:nth-child(5)').innerText);
-        let turbo_freq_2 = b.querySelector('td:nth-child(5)').innerText.includes(',') ? parseFloat(b.querySelector('td:nth-child(5)').innerText.replace(',','.'))*1000 : parseInt(b.querySelector('td:nth-child(5)').innerText);
-        return turbo_freq_1-turbo_freq_2;
-    })
-    .sort((a,b) => {
-        let base_freq_1 = a.querySelector('td:nth-child(6)').innerText.includes(',') ? parseFloat(a.querySelector('td:nth-child(6)').innerText.replace(',','.'))*1000 : parseInt(a.querySelector('td:nth-child(6)').innerText);
-        let base_freq_2 = b.querySelector('td:nth-child(6)').innerText.includes(',') ? parseFloat(b.querySelector('td:nth-child(6)').innerText.replace(',','.'))*1000 : parseInt(b.querySelector('td:nth-child(6)').innerText);
-        return base_freq_1-base_freq_2;
-    })
-    .sort((a,b) => {
-        let cores1 = a.querySelector('td:nth-child(4)').innerText;
-        let cores2 = b.querySelector('td:nth-child(4)').innerText;
-        return cores1-cores2;
-    })
-    .map((row) => {
-        rows[0].parentElement.appendChild(row);
-    });
+        sortButton.onclick = (() => {
+            this.reSort();
+        }).bind(this);
+
+        sortButton.style['background-color'] = 'darkgray';
+        sortButton.style['border-radius'] = '3mm';
+        sortButton.style['border'] = '1mm solid black';
+        sortButton.style['bottom'] = '15mm';
+        sortButton.style['display'] = 'block';
+        sortButton.style['left'] = '-5mm';
+        sortButton.style['padding'] = '1mm 3mm';
+        sortButton.style['position'] = 'fixed';
+        sortButton.style['transform'] = 'rotate(90deg)';
+        sortButton.style['z-index'] = '10';
+
+        sortButton.type = 'button';
+
+        document.body.insertAdjacentElement('beforeend', sortButton);
+    }
+
+    reSort() {
+        HTMLCollection.prototype.frtToArray = window._frt.ext.HTMLCollection.frtToArray;
+        NodeList.prototype.frtToArray = window._frt.ext.NodeList.frtToArray;
+        String.prototype.frtToInt = window._frt.ext.String.frtToInt;
+
+        let launch_date_column_num = document.getElementsByTagName('th').frtToArray().filter(el => el.innerText === 'Launch Date'             ).pop().dataset['column'].frtToInt();
+        let total_cores_column_num = document.getElementsByTagName('th').frtToArray().filter(el => el.innerText === 'Total Cores'             ).pop().dataset['column'].frtToInt();
+        let turbo_freq_column_num  = document.getElementsByTagName('th').frtToArray().filter(el => el.innerText === 'Max Turbo Frequency'     ).pop().dataset['column'].frtToInt();
+        let base_freq_column_num   = document.getElementsByTagName('th').frtToArray().filter(el => el.innerText === 'Processor Base Frequency').pop().dataset['column'].frtToInt();
+        let cache_column_num       = document.getElementsByTagName('th').frtToArray().filter(el => el.innerText === 'Cache'                   ).pop().dataset['column'].frtToInt();
+        let tdp_column_num         = document.getElementsByTagName('th').frtToArray().filter(el => el.innerText === 'TDP'                     ).pop().dataset['column'].frtToInt();
+
+        let rows = document.querySelectorAll('#product-table tbody tr').frtToArray();
+
+        rows
+            .sort((a,b) => {
+                let value1 = parseInt(a.querySelectorAll('td')[tdp_column_num].dataset['value']);
+                let value2 = parseInt(b.querySelectorAll('td')[tdp_column_num].dataset['value']);
+                return value2-value1;
+            })
+            .sort((a,b) => {
+                let value1 = Date.parse(a.querySelectorAll('td')[launch_date_column_num].dataset['value']);
+                let value2 = Date.parse(b.querySelectorAll('td')[launch_date_column_num].dataset['value']);
+                return value2-value1;
+            })
+            .sort((a,b) => {
+                let value1 = parseInt(a.querySelectorAll('td')[turbo_freq_column_num].dataset['value']);
+                let value2 = parseInt(b.querySelectorAll('td')[turbo_freq_column_num].dataset['value']);
+                return value2-value1;
+            })
+            .sort((a,b) => {
+                let value1 = parseInt(a.querySelectorAll('td')[base_freq_column_num].dataset['value']);
+                let value2 = parseInt(b.querySelectorAll('td')[base_freq_column_num].dataset['value']);
+                return value2-value1;
+            })
+            .sort((a,b) => {
+                let value1 = parseInt(a.querySelectorAll('td')[total_cores_column_num].dataset['value']);
+                let value2 = parseInt(b.querySelectorAll('td')[total_cores_column_num].dataset['value']);
+                return value2-value1;
+            })
+            .sort((a,b) => {
+                let value1 = parseInt(a.querySelectorAll('td')[cache_column_num].dataset['value']);
+                let value2 = parseInt(b.querySelectorAll('td')[cache_column_num].dataset['value']);
+                return value2-value1;
+            })
+            .map((row) => {
+                rows[0].parentElement.appendChild(row);
+            });
+    }
+
+    load_more() {
+        const loadMoreInterval = setInterval(() => {
+            let button = document.getElementById('seeall');
+
+            if (button === null) {
+                clearInterval(loadMoreInterval);
+                return;
+            }
+
+            button.click();
+        }, 5310);
+    }
+};
+
+window.___frt.sorter = new window.___frt.Sorter();
+window.___frt.sorter.draw_sort_button();
+window.___frt.sorter.load_more();

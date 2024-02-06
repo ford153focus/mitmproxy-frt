@@ -93,6 +93,16 @@ class Rules {
         }
     }
 
+    static async intel() {
+        if (window.location.host !== 'ark.intel.com') return;
+        if (!window.location.pathname.endsWith('featurefilter.html')) return;
+        if ((new URLSearchParams(window.location.search)).get('productType') !== '873') return;
+
+        window._frt.Injectors.injectInternalScript({
+            src: '/web_accessible_resources/intel.com/sorter.js'}
+        );
+    }
+
     static async kufar() {
         if (!window.location.host.endsWith('kufar.by')) return;
 

@@ -28,7 +28,6 @@ let manifest = {
             'resources': [
                 'node_modules/*',
                 'web_accessible_resources/*',
-                'lib/*'
             ],
             'matches': [
                 '<all_urls>'

@@ -27,7 +27,10 @@ function sort() {
                 return get_kilo_price(product1) - get_kilo_price(product2);
 
             }).forEach(el => {
-                section.querySelector('[class^=ProductCardList_root]').insertAdjacentElement('beforeEnd', el);
+                if (section.querySelector('[class^=ProductCardList_root]')) {
+                    section.querySelector('[class^=ProductCardList_root]').insertAdjacentElement('beforeEnd', el);
+                }
+                
             });
         }
     }, 1530);

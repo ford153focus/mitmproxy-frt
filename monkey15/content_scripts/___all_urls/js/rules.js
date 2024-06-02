@@ -1,5 +1,11 @@
 // noinspection JSUnusedGlobalSymbols
 class Rules {
+    static async four_pda() {
+        if (window.location.host !== '4pda.to') return;
+
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/4pda/js/news.js'});
+    }
+
     static async tenMinutesMail() {
         if (window.location.host !== '10minutemail.net') return;
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/10minutemail.net/js/extend_timer.js'});

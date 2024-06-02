@@ -121,6 +121,11 @@ class Rules {
         window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/musicbrainz.org/js/marker.js'});
     }
 
+    static async liquipedia() {
+        if (!window.location.host === 'liquipedia.net') return;
+        window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/liquipedia/js/tournaments_sorter.js'});
+    }
+
     static async onliner() {
         if (window.location.host === 'ab.onliner.by') {
             window._frt.Injectors.injectInternalStyleSheet({href: '/node_modules/notyf/notyf.min.css'});

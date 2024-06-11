@@ -15,6 +15,9 @@ import sqlite3InitModule from '/node_modules/@sqlite.org/sqlite-wasm/index.mjs';
     }
 })();
 
+/**
+ * @see https://sqlite.org/wasm/doc/trunk/index.md
+ */
 class Example {
     /**
      * to use this library - add to rules.js next code

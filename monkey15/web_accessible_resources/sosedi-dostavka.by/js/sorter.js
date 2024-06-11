@@ -16,21 +16,19 @@ function sort() {
 
         for (let section of sections) {
             let products = section.querySelectorAll('div[class^=ProductCardList_root] > div[class^=ProductCard_root]');
+            let items = Array.from(products);
 
-            Array.from(products).forEach(product => {
-                let price = get_kilo_price(product);
+            for (const item of items) {
+                let price = get_kilo_price(item);
                 let html = `<p style="font-size: x-small;">(${price} byn/kg)</p>`;
-                product.querySelector('p[class^=ProductCard_priceCurrent]').insertAdjacentHTML('afterEnd', html);
-            });
+                item.querySelector('p[class^=ProductCard_priceCurrent]').insertAdjacentHTML('afterEnd', html);
+            }
 
-            Array.from(products).sort((product1,product2) => {
+            items.sort((product1,product2) => {
                 return get_kilo_price(product1) - get_kilo_price(product2);
-
             }).forEach(el => {
-                if (section.querySelector('[class^=ProductCardList_root]')) {
-                    section.querySelector('[class^=ProductCardList_root]').insertAdjacentElement('beforeEnd', el);
-                }
-                
+                if (!section.querySelector('[class^=ProductCardList_root]')) return;
+                section.querySelector('[class^=ProductCardList_root]').insertAdjacentElement('beforeEnd', el);
             });
         }
     }, 1530);
@@ -38,7 +36,7 @@ function sort() {
 
 setTimeout(() => {
     for (const cat_button of document.querySelectorAll('[class^=CategoriesPanel_listItem]')) {
-        cat_button.addEventListener('click', (event) => {
+        cat_button.addEventListener('click', () => {
             sort();
         });
     }

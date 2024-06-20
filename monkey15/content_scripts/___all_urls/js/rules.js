@@ -253,6 +253,12 @@ class Rules {
         })();
     }
 
+    static async youtube() {
+        if (window.location.href === 'https://www.youtube.com/feed/history') {
+            window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/youtube.com/js/sync_watched.js'});
+        }
+    }
+
     static async example() {
         if (window.location.host !== 'market.yandex.ru') return;
         if (!window.location.host.endsWith('wikia.com')) return;

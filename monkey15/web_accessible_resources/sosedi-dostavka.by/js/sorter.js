@@ -34,7 +34,33 @@ function sort() {
     }, 1530);
 }
 
+function draw_button() {
+    let sortButton = document.createElement('button');
+    sortButton.id = '___frt_sorter';
+    sortButton.innerText = 'Sort';
+
+    sortButton.onclick = (() => {
+        sort();
+    });
+
+    sortButton.style['background-color'] = 'darkgray';
+    sortButton.style['border-radius'] = '3mm';
+    sortButton.style['border'] = '1mm solid black';
+    sortButton.style['bottom'] = '3mm';
+    sortButton.style['display'] = 'block';
+    sortButton.style['left'] = '3mm';
+    sortButton.style['padding'] = '1mm 3mm';
+    sortButton.style['position'] = 'fixed';
+    sortButton.style['z-index'] = '10';
+
+    sortButton.type = 'button';
+
+    document.body.insertAdjacentElement('beforeend', sortButton);
+}
+
 setTimeout(() => {
+    draw_button();
+
     for (const cat_button of document.querySelectorAll('[class^=CategoriesPanel_listItem]')) {
         cat_button.addEventListener('click', () => {
             sort();

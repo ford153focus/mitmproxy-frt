@@ -215,7 +215,8 @@ class Rules {
     }
 
     static async sosedi_dostavka_by() {
-        if (window.location.href.startsWith('https://sosedi-dostavka.by/ru/categories/')) {
+        if (window.location.host === 'sosedi-dostavka.by') {
+        // if (window.location.href.startsWith('https://sosedi-dostavka.by/ru/categories/')) {
             window._frt.Injectors.injectInternalStyleSheet({href: '/web_accessible_resources/sosedi-dostavka.by/css/styles.css'});
 
             window._frt.Injectors.injectInternalScript({src: '/web_accessible_resources/sosedi-dostavka.by/js/sorter.js'});
